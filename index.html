@@ -57,6 +57,25 @@
   opacity: 1;
 }
 
+.myslideshow {
+  position: relative; /* make it a container for the overlay */
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5); /* semi-transparent black */
+  z-index: 1; /* behind slides */
+}
+
+.slideshow-container {
+  position: relative;
+  z-index: 2; /* above overlay */
+}
+
 
 /* Consistent spacing for card, inputs, buttons */
 .card {
@@ -66,6 +85,15 @@
 input[type="text"], select {
   margin-bottom: 16px;
 }
+
+.card {
+  position: relative;
+  z-index: 10; /* ensure card is on top */
+}
+#confetti-canvas {
+  pointer-events: none; /* already done */
+}
+
 
 .btn {
   margin: 1rem auto;
@@ -134,6 +162,10 @@ input[type="text"], select {
   background: rgba(255,215,0,0.15);
 }
 
+.logo {
+  width: 80px; /* smaller size */
+  height: auto; /* keeps proportion */
+}
 
     .back-btn {
       background:transparent;
@@ -145,6 +177,29 @@ input[type="text"], select {
       font-family: 'Fredoka One', cursive;
       display:inline-block;
     }
+
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out; /* smooth fade */
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
 
     .question { font-family: 'Fredoka One', cursive; font-size:1.15rem; margin:10px 0; }
     .scripture { font-style:italic; opacity:0.85; margin-bottom:8px; }
@@ -222,7 +277,7 @@ body {
   <div class="logo-center">
     <img src="https://kharis.org/wp-content/uploads/2022/08/Logo_transparent_noText.png" 
          alt="Kharis Church Logo" 
-         style="max-width:100px; display:block; margin:0 auto 16px auto;">
+         style="max-width:80px; display:block; margin:0 auto 16px auto;">
   </div>
 
     <h1 id="pageTitle">Discover Your Kharis Department</h1>
@@ -288,7 +343,7 @@ const bgImages = [
 'https://store.khar.is/cdn/shop/files/67200988_2450803551632597_4416726294536912896_n_142db4d4-d790-4773-9f17-1714e2b327a4.jpg?v=1626368354',
 'https://tse3.mm.bing.net/th/id/OIP.AL51FSg14qDBFABIsxuprwHaE8?rs=1&pid=ImgDetMain&o=7&rm=3',
 'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-09-30-17-34-12-Copy-2.jpg',
-'https://i1.sndcdn.com/artworks-000157048936-ahr5ei-t500x500.jpg',
+'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-09-30-17-34-12-Copy.jpg',
 'https://tse3.mm.bing.net/th/id/OIP.80wbWy7NCUhItVRpHtU25wHaE8?rs=1&pid=ImgDetMain&o=7&rm=3',
 'https://tse1.mm.bing.net/th/id/OIP.Jf6cwDusA7BPJ1jgs9i0tAHaE8?rs=1&pid=ImgDetMain&o=7&rm=3',
 'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-09-30-17-33-42-Copy-10.jpg',
@@ -296,20 +351,32 @@ const bgImages = [
 'https://kharis.org/wp-content/uploads/2023/10/IMG_5389-scaled.jpeg',
 'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-09-30-17-33-41-Copy-2.jpg',
 'https://kharis.org/wp-content/uploads/2024/06/IMG-20240615-WA0033.jpg',
-'https://kharis.org/wp-content/uploads/2022/11/271239127_4868436629869265_1030465267411614205_n.jpg',
+'https://kharis.org/wp-content/uploads/2024/05/601A6563-scaled.jpg',
 'https://kharis.org/wp-content/uploads/2023/10/PHOTO-2023-10-18-15-59-596.jpg',
-'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-10-13-12-43-50.jpg',
+'https://kharis.org/wp-content/uploads/2024/05/601A9547-scaled.jpg',
 
   // ... up to 20-30 images
 ];
 
+let slides = document.querySelectorAll('.slide');
+    let currentIndex = 0;
+
+    function showNextSlide() {
+      slides[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex + 1) % slides.length;
+      slides[currentIndex].classList.add('active');
+    }
+// 1️⃣ Define the function
 function cycleBackground() {
   const randomIndex = Math.floor(Math.random() * bgImages.length);
-  document.body.style.background = `url('${bgImages[randomIndex]}') center/cover no-repeat fixed`;
+  document.body.style.setProperty('--bg-img', `url('${bgImages[randomIndex]}')`);
 }
 
-setInterval(cycleBackground, 5000); // change every 5 seconds
+// 2️⃣ Set initial background
+cycleBackground();
 
+// 3️⃣ Keep cycling every 5 seconds
+setInterval(cycleBackground, 5000);
     /* ----------------- Helpers ----------------- */
     function escapeHtml(str){
       if(!str && str !== 0) return '';
@@ -783,16 +850,24 @@ document.getElementById('back-to-result').addEventListener('click', () => {
     function restart() { restartWithoutReload(); }
 
     /* --------------- Start quiz handler ------------------ */
-    document.getElementById('start-kharis').addEventListener('click', ()=>{
-      username = (usernameInput.value || "Friend").trim();
-      branch = (branchSelect.value || "").trim();
-      if(!branch){ alert("Please select your branch."); return; }
-      currentQuiz = "kharis";
-      currentQ = 0;
-      initScores();
-      showQuestion();
-    });
+   document.getElementById('start-kharis').addEventListener('click', () => {
+  username = (usernameInput.value || '').trim();
+  branch = (branchSelect.value || '').trim();
+  
+  if(!username){
+    alert("Please enter your full name 😊");
+    return;
+  }
+  if(!branch){
+    alert("Please select your branch 😊");
+    return;
+  }
 
+  currentQuiz = 'kharis';
+  currentQ = 0;
+  initScores();
+  showQuestion();
+});
     /* --------------- Light/Dark toggle ------------------ */
     modeBtn.addEventListener('click', ()=>{
       document.body.classList.toggle('light');
@@ -808,13 +883,15 @@ document.getElementById('back-to-result').addEventListener('click', () => {
     resizeConfettiCanvas();
 
     /* --------------- Accessibility: Enter key moves next ------------------ */
-    // We'll let the input's Enter trigger the Next button by delegation
-    quizEl.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter' && document.getElementById('nextBtn')) {
-        e.preventDefault();
-        document.getElementById('nextBtn').click();
-      }
-    });
+    // Delegated event listener for dynamic buttons
+quizEl.addEventListener('click', (e) => {
+  if(e.target && e.target.id === 'nextBtn') nextQuestion();
+});
+resultEl.addEventListener('click', (e) => {
+  if(e.target && e.target.id === 'restart-btn') restartWithoutReload();
+  if(e.target && e.target.id === 'explore-all-btn') renderExploreList();
+});
+
 
     /* --------------- Initial focus --------------- */
     usernameInput.focus();
