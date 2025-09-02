@@ -278,6 +278,37 @@ body {
 
   <script>
   (function(){
+const bgImages = [
+  'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-10-11-00-55-32-Copy-2.jpg',
+  'https://kharis.org/wp-content/uploads/2022/11/260807749_4700323106680619_8475937483849630905_n.jpg',
+  'https://kharis.org/wp-content/uploads/2024/06/IMG-20240615-WA0032.jpg',
+'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-10-13-12-43-46.jpg',
+'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-10-13-12-43-59.jpg',
+'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-10-13-12-43-50.jpg',
+'https://store.khar.is/cdn/shop/files/67200988_2450803551632597_4416726294536912896_n_142db4d4-d790-4773-9f17-1714e2b327a4.jpg?v=1626368354',
+'https://tse3.mm.bing.net/th/id/OIP.AL51FSg14qDBFABIsxuprwHaE8?rs=1&pid=ImgDetMain&o=7&rm=3',
+'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-09-30-17-34-12-Copy-2.jpg',
+'https://i1.sndcdn.com/artworks-000157048936-ahr5ei-t500x500.jpg',
+'https://tse3.mm.bing.net/th/id/OIP.80wbWy7NCUhItVRpHtU25wHaE8?rs=1&pid=ImgDetMain&o=7&rm=3',
+'https://tse1.mm.bing.net/th/id/OIP.Jf6cwDusA7BPJ1jgs9i0tAHaE8?rs=1&pid=ImgDetMain&o=7&rm=3',
+'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-09-30-17-33-42-Copy-10.jpg',
+'https://kharis.org/wp-content/uploads/2024/06/IMG-20240615-WA0036.jpg',
+'https://kharis.org/wp-content/uploads/2023/10/IMG_5389-scaled.jpeg',
+'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-09-30-17-33-41-Copy-2.jpg',
+'https://kharis.org/wp-content/uploads/2024/06/IMG-20240615-WA0033.jpg',
+'https://kharis.org/wp-content/uploads/2022/11/271239127_4868436629869265_1030465267411614205_n.jpg',
+'https://kharis.org/wp-content/uploads/2023/10/PHOTO-2023-10-18-15-59-596.jpg',
+'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-10-13-12-43-50.jpg',
+
+  // ... up to 20-30 images
+];
+
+function cycleBackground() {
+  const randomIndex = Math.floor(Math.random() * bgImages.length);
+  document.body.style.background = `url('${bgImages[randomIndex]}') center/cover no-repeat fixed`;
+}
+
+setInterval(cycleBackground, 5000); // change every 5 seconds
 
     /* ----------------- Helpers ----------------- */
     function escapeHtml(str){
@@ -807,4 +838,3 @@ document.addEventListener('keydown', e => {
   </script>
 </body>
 </html> 
-
