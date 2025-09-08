@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+v<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -639,27 +639,40 @@ const traitMapping = {
 
 
     /* --------------- Next / Back logic ------------------ */
-    function nextQuestion(){
-      const inputEl = document.getElementById('answer');
-      const value = inputEl ? inputEl.value.trim() : '';
-     if(!value){
-  document.getElementById('error-msg').textContent = "Please type something so we can figure this out 😊";
-  return;
+    function nextQuestion(selectedValue = null){
+  // If user clicked a button, selectedValue will be passed in
+  let value = '';
+
+  if (selectedValue) {
+    value = selectedValue.trim();
+  } else {
+    const inputEl = document.getElementById('answer');
+    value = inputEl ? inputEl.value.trim() : '';
+  }
+
+  if (!value) {
+    document.getElementById('error-msg').textContent = "Please type something so we can figure this out 😊";
+    return;
+  }
+
+  // save snapshot for back
+  questionHistory.push({ 
+    q: currentQ, 
+    deptScores: JSON.parse(JSON.stringify(deptScores)), 
+    traits: JSON.parse(JSON.stringify(traits)), 
+    answersGiven: JSON.parse(JSON.stringify(answersGiven)) 
+  });
+
+  scoreAnswer(value);
+  currentQ++;
+
+  if (currentQ < quizzes[currentQuiz].length) {
+    showQuestion();
+  } else {
+    showResult();
+  }
 }
 
-
-      // save snapshot for back
-      questionHistory.push({ q: currentQ, deptScores: JSON.parse(JSON.stringify(deptScores)), traits: JSON.parse(JSON.stringify(traits)), answersGiven: JSON.parse(JSON.stringify(answersGiven)) });
-
-      scoreAnswer(value);
-      currentQ++;
-
-      if(currentQ < quizzes[currentQuiz].length){
-        showQuestion();
-      } else {
-        showResult();
-      }
-    }
 
     backBtn.addEventListener('click', ()=>{
       if(questionHistory.length === 0) return;
@@ -915,4 +928,3 @@ document.addEventListener('keydown', e => {
   </script>
 </body>
 </html> 
-
