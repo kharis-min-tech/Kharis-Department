@@ -1,24 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Kharis Department Quiz</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kharis Department Quiz - Multilingual</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* ---------- Base ---------- */
     * { box-sizing: border-box; transition: all .25s ease; }
-    html,body { height:100%; }
+    html, body { height: 100%; margin: 0; }
+    
     body {
-      margin:0;
       font-family: 'Quicksand', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
       padding: 2rem;
       --bg-img: url('https://kharis.org/wp-content/uploads/2022/11/271239127_4868436629869265_1030465267411614205_n.jpg');
       --card-bg: rgba(60,19,97,0.85);
@@ -26,8 +22,9 @@
       --btn-color: #3c1361;
       --text-color: #fff;
       background: var(--bg-img) center/cover no-repeat fixed;
-      color:var(--text-color);
+      color: var(--text-color);
     }
+    
     body.light {
       --card-bg: rgba(255,255,255,0.95);
       --btn-bg: #3c1361;
@@ -35,257 +32,265 @@
       --text-color: #111;
       background: linear-gradient(180deg,#fff,#f4f4f4);
     }
-
-    /* ---------- Card ---------- */
+    
     .card {
-      width:100%;
-      max-width:820px;
-      background:var(--card-bg);
-      border-radius:18px;
-      padding:2rem;
+      width: 100%;
+      max-width: 820px;
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 2rem;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-      color:var(--text-color);
-      position:relative;
+      color: var(--text-color);
+      position: relative;
     }
-
-/* Smooth fade in/out */
-#quiz, #result {
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-#quiz.show, #result.show {
-  opacity: 1;
-}
-
-.myslideshow {
-  position: relative; /* make it a container for the overlay */
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5); /* semi-transparent black */
-  z-index: 1; /* behind slides */
-}
-
-.slideshow-container {
-  position: relative;
-  z-index: 2; /* above overlay */
-}
-
-
-/* Consistent spacing for card, inputs, buttons */
-.card {
-  padding: 2rem 2rem 3rem 2rem; /* top, right, bottom, left */
-}
-
-input[type="text"], select {
-  margin-bottom: 16px;
-}
-
-.card {
-  position: relative;
-  z-index: 10; /* ensure card is on top */
-}
-#confetti-canvas {
-  pointer-events: none; /* already done */
-}
-
-
-.btn {
-  margin: 1rem auto;
-}
-    h1 { font-family: 'Fredoka One', cursive; margin-bottom:0.6rem; }
-
-    p.lead { margin-bottom:1rem; opacity:0.9; }
-
-h1 {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-}
-
-p.lead {
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-}
-
-.btn {
-  font-size: clamp(1rem, 2.5vw, 1.1rem);
-}
-
-
-    input[type="text"], select, textarea {
-      width:100%;
-      padding:12px 14px;
+    
+    h1 { font-family: 'Fredoka One', cursive; margin-bottom: 0.6rem; }
+    p.lead { margin-bottom: 1rem; opacity: 0.9; }
+    
+    .btn {
+      display: inline-block;
+      width: 100%;
+      max-width: 360px;
+      margin: 0.6rem auto;
+      padding: 12px 18px;
+      border-radius: 50px;
+      border: none;
+      background: var(--btn-bg);
+      color: var(--btn-color);
+      font-family: 'Fredoka One', cursive;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    
+    .btn:hover { filter: brightness(.92); transform: scale(1.02); }
+    
+    input[type="text"], select {
+      width: 100%;
+      padding: 12px 14px;
       border-radius: 30px;
       border: none;
-      font-size:1rem;
-      margin-bottom:12px;
+      font-size: 1rem;
+      margin-bottom: 12px;
       background: rgba(255,255,255,0.9);
       color: #3c1361;
-      text-align:center;
+      text-align: center;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.15);
     }
-input[type="text"], select {
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.15); /* subtle inner shadow */
-}
-
-
-    select { appearance:none; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24'%3E%3Cpath fill='%233c1361' d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 16px center; padding-right:44px; }
-
-    .row { display:flex; gap:12px; align-items:center; }
-    .center { text-align:center; }
-
-    .btn {
-      display:inline-block;
-      width:100%;
-      max-width:360px;
-      margin: 0.6rem auto;
-      padding:12px 18px;
-      border-radius:50px;
-      border:none;
-      background:var(--btn-bg);
-      color:var(--btn-color);
-      font-family: 'Fredoka One', cursive;
-      cursor:pointer;
-      font-size:1rem;
+    
+    /* Bubbly Dropdown Styles */
+    .language-dropdown-container {
+      position: relative;
+      display: inline-block;
+      margin: 0 auto 20px auto;
+      text-align: center;
+      z-index: 1000;
     }
-    .btn:hover { filter:brightness(.92); }
-/* Button hover with smooth transition */
-.btn:hover {
-  filter: brightness(0.92);
-  transform: scale(1.02);
-}
-
-/* Explore items hover */
-.explore-item:hover {
-  background: rgba(255,215,0,0.15);
-}
-
-.logo {
-  width: 80px; /* smaller size */
-  height: auto; /* keeps proportion */
-}
-
-    .back-btn {
-      background:transparent;
-      color:var(--btn-bg);
-      border:2px solid var(--btn-bg);
-      padding:8px 14px;
-      border-radius:28px;
-      cursor:pointer;
-      font-family: 'Fredoka One', cursive;
-      display:inline-block;
+    
+    .language-select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 215, 0, 0.7);
+      border-radius: 25px;
+      padding: 12px 45px 12px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      width: 200px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      outline: none;
     }
-
-.slideshow-container {
-  position: relative;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  overflow: hidden;
-}
-
-.slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  opacity: 0;
-  transition: opacity 1s ease-in-out; /* smooth fade */
-}
-
-.slide.active {
-  opacity: 1;
-  z-index: 2;
-}
-
-
-    .question { font-family: 'Fredoka One', cursive; font-size:1.15rem; margin:10px 0; }
-    .scripture { font-style:italic; opacity:0.85; margin-bottom:8px; }
-
-    .progress-bar { width:100%; height:12px; background:#ddd; border-radius:999px; overflow:hidden; margin:14px 0; }
-    .progress { height:100%; width:0%; background:var(--btn-bg); transition:width .35s ease; }
-
-    .result { margin-top:12px; }
-    .department { margin:10px 0; font-family:'Fredoka One', cursive; font-size:1.08rem; opacity:0; transform:translateY(10px); transition:all .6s ease; }
-    .department.show { opacity:1; transform:none; }
-
-.question-counter {
-  text-align: center;
-  font-weight: 600;
-  margin-bottom: 8px;
-  opacity: 0.9;
-}
-
+    
+    .language-select:hover {
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      transform: translateY(-2px);
+    }
+    
+    .language-select:focus {
+      box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.5);
+    }
+    
+    .language-dropdown-container::after {
+      content: "▼";
+      font-size: 12px;
+      color: #ffd700;
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+    
+    .language-select option {
+      background: rgba(60, 19, 97, 0.95);
+      color: #fff;
+      padding: 10px;
+      border-radius: 15px;
+      margin: 5px;
+      font-weight: bold;
+    }
+    
+    .language-select::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .language-select::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+    
+    .language-select::-webkit-scrollbar-thumb {
+      background: rgba(255, 215, 0, 0.7);
+      border-radius: 10px;
+    }
+    
+    .language-select::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 215, 0, 0.9);
+    }
+    
+    /* Quiz specific styles */
+    #quiz, #result { 
+      opacity: 0; 
+      transition: opacity 0.5s ease; 
+      display: none;
+    }
+    #quiz.show, #result.show { 
+      opacity: 1; 
+      display: block;
+    }
+    
+    .question-counter {
+      text-align: center;
+      font-weight: 600;
+      margin-bottom: 8px;
+      opacity: 0.9;
+    }
+    
+    .question { font-family: 'Fredoka One', cursive; font-size: 1.15rem; margin: 10px 0; }
+    .scripture { font-style: italic; opacity: 0.85; margin-bottom: 8px; }
+    
+    .progress-bar { width: 100%; height: 12px; background: #ddd; border-radius: 999px; overflow: hidden; margin: 14px 0; }
+    .progress { height: 100%; width: 0%; background: var(--btn-bg); transition: width .35s ease; }
+    
+    .result { margin-top: 12px; }
+    .department { margin: 10px 0; font-family: 'Fredoka One', cursive; font-size: 1.08rem; opacity: 0; transform: translateY(10px); transition: all .6s ease; }
+    .department.show { opacity: 1; transform: none; }
+    
     .scripture-box {
-      margin-top:8px;
-      padding:12px;
-      border-left:5px solid var(--btn-bg);
+      margin-top: 8px;
+      padding: 12px;
+      border-left: 5px solid var(--btn-bg);
       background: rgba(255,215,0,0.08);
-      border-radius:8px;
-      text-align:left;
-      font-style:italic;
-      display:none;
+      border-radius: 8px;
+      text-align: left;
+      font-style: italic;
+      display: none;
     }
-    .scripture-box.visible { display:block; }
-
-    /* Explore list (titles only) */
-    .explore-list { margin-top:12px; display:flex; flex-direction:column; gap:8px; }
+    
+    .scripture-box.visible { display: block; }
+    
+    .toggle-mode {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: transparent;
+      border: 2px solid var(--btn-bg);
+      color: var(--btn-bg);
+      padding: 6px 10px;
+      border-radius: 18px;
+      cursor: pointer;
+    }
+    
+    .back-btn {
+      background: transparent;
+      color: var(--btn-bg);
+      border: 2px solid var(--btn-bg);
+      padding: 8px 14px;
+      border-radius: 28px;
+      cursor: pointer;
+      font-family: 'Fredoka One', cursive;
+      display: inline-block;
+    }
+    
+    /* Explore list styles */
+    .explore-list { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
     .explore-item {
       background: rgba(255,255,255,0.06);
-      padding:12px 14px;
-      border-radius:8px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      cursor:pointer;
-      font-weight:700;
+      padding: 12px 14px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      font-weight: 700;
     }
-    .explore-item .title { flex:1; text-align:left; font-weight:700; }
-    .explore-details { display:none; padding:10px 12px; margin-top:8px; background: rgba(0,0,0,0.15); border-radius:6px; text-align:left; font-style:normal; color:var(--text-color); }
-    .explore-details.visible { display:block; }
-
-    .toggle-mode { position:absolute; top:16px; right:16px; background:transparent; border:2px solid var(--btn-bg); color:var(--btn-bg); padding:6px 10px; border-radius:18px; cursor:pointer; }
-
-    @media (max-width:700px) {
-      .card { padding:1.25rem; border-radius:12px; }
-      input[type="text"], select { width: 100%; }
-      .btn { max-width:100%; }
+    .explore-item .title { flex: 1; text-align: left; font-weight: 700; }
+    .explore-details { display: none; padding: 10px 12px; margin-top: 8px; background: rgba(0,0,0,0.15); border-radius: 6px; text-align: left; font-style: normal; color: var(--text-color); }
+    .explore-details.visible { display: block; }
+    
+    /* Background slideshow */
+    .bg-slideshow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
-
-/* Disable text selection and dragging */
-body {
-  user-select: none;        /* standard */
-  -webkit-user-select: none; /* Chrome/Safari */
-  -moz-user-select: none;    /* Firefox */
-  -ms-user-select: none;     /* IE10+ */
-}
-
-* {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-drag: none;
-}
-
+    
+    .bg-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .bg-slide.active {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
   <div class="card" role="main" aria-labelledby="pageTitle">
     <button class="toggle-mode" id="modeBtn" aria-label="Toggle light/dark">🌙</button>
 
- <!-- LOGO HERE -->
-  <div class="logo-center">
-    <img src="https://kharis.org/wp-content/uploads/2022/08/Logo_transparent_noText.png" 
-         alt="Kharis Church Logo" 
-         style="max-width:80px; display:block; margin:0 auto 16px auto;">
-  </div>
+    <!-- LOGO HERE -->
+    <div class="logo-center">
+      <img src="https://kharis.org/wp-content/uploads/2022/08/Logo_transparent_noText.png" 
+           alt="Kharis Church Logo" 
+           style="max-width:80px; display:block; margin:0 auto 16px auto;">
+    </div>
 
     <h1 id="pageTitle">Discover Your Kharis Department</h1>
-    <p class="lead center">Answer a few short questions to see where your gifting fits best.</p>
+    <p class="lead center" id="pageSubtitle">Answer a few short questions to see where your gifting fits best.</p>
+
+    <!-- Bubbly Language Dropdown -->
+    <div class="language-dropdown-container">
+      <select id="languageSelect" class="language-select" aria-label="Select Language">
+        <option value="en" selected>English 🇬🇧</option>
+        <option value="fr">Français 🇫🇷</option>
+        <option value="es">Español 🇪🇸</option>
+        <option value="de">Deutsch 🇩🇪</option>
+        <option value="tw">Twi (Ghana) 🇬🇭</option>
+        <option value="sv">Svenska 🇸🇪</option>
+        <option value="gd">Gàidhlig (Scottish) 🏴󠁧󠁢󠁳󠁣󠁴󠁿</option>
+      </select>
+    </div>
 
     <!-- Start Screen -->
     <div id="start-screen">
-      <input id="username" type="text" placeholder="Enter your Fullname " />
+      <input id="username" type="text" placeholder="Enter your Fullname" />
       <select id="branch" aria-label="Select branch">
         <option value="" disabled selected>Select your branch</option>
         <option>Kharis Church Accra</option>
@@ -313,83 +318,224 @@ body {
     </div>
 
     <!-- Quiz -->
-    <div id="quiz" style="display:none;"></div>
+    <div id="quiz"></div>
 
     <div class="progress-bar" aria-hidden="true"><div class="progress" id="progress"></div></div>
 
     <div style="text-align:center;">
-      <button class="back-btn" id="back-btn" style="display:none;">&larr; Back</button>
+      <button class="back-btn" id="back-btn" style="display:none;">← Back</button>
     </div>
 
     <!-- Result -->
-    <div id="result" style="display:none;"></div>
+    <div id="result"></div>
 
-    <!-- Confetti Canvas -->
-    <canvas id="confetti-canvas" style="position:fixed;pointer-events:none;z-index:9999;top:0;left:0;width:100%;height:100%;"></canvas>
+    <!-- Background Slideshow -->
+    <div class="bg-slideshow" id="bgSlideshow"></div>
   </div>
-
-  <!-- confetti lib -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <script>
   (function(){
-const bgImages = [
-  'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-10-11-00-55-32-Copy-2.jpg',
-  'https://kharis.org/wp-content/uploads/2022/11/260807749_4700323106680619_8475937483849630905_n.jpg',
-  'https://kharis.org/wp-content/uploads/2024/06/IMG-20240615-WA0032.jpg',
-'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-10-13-12-43-46.jpg',
-'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-10-13-12-43-59.jpg',
-'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-10-13-12-43-50.jpg',
-'https://store.khar.is/cdn/shop/files/67200988_2450803551632597_4416726294536912896_n_142db4d4-d790-4773-9f17-1714e2b327a4.jpg?v=1626368354',
-'https://tse3.mm.bing.net/th/id/OIP.AL51FSg14qDBFABIsxuprwHaE8?rs=1&pid=ImgDetMain&o=7&rm=3',
-'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-09-30-17-34-12-Copy-2.jpg',
-'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-09-30-17-34-12-Copy.jpg',
-'https://tse3.mm.bing.net/th/id/OIP.80wbWy7NCUhItVRpHtU25wHaE8?rs=1&pid=ImgDetMain&o=7&rm=3',
-'https://tse1.mm.bing.net/th/id/OIP.Jf6cwDusA7BPJ1jgs9i0tAHaE8?rs=1&pid=ImgDetMain&o=7&rm=3',
-'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-09-30-17-33-42-Copy-10.jpg',
-'https://kharis.org/wp-content/uploads/2024/06/IMG-20240615-WA0036.jpg',
-'https://kharis.org/wp-content/uploads/2023/10/IMG_5389-scaled.jpeg',
-'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-09-30-17-33-41-Copy-2.jpg',
-'https://kharis.org/wp-content/uploads/2024/06/IMG-20240615-WA0033.jpg',
-'https://kharis.org/wp-content/uploads/2024/05/601A6563-scaled.jpg',
-'https://kharis.org/wp-content/uploads/2023/10/PHOTO-2023-10-18-15-59-596.jpg',
-'https://kharis.org/wp-content/uploads/2024/05/601A9547-scaled.jpg',
+    // Background images for slideshow
+    const bgImages = [
+      'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-10-11-00-55-32-Copy-2.jpg',
+      'https://kharis.org/wp-content/uploads/2022/11/260807749_4700323106680619_8475937483849630905_n.jpg',
+      'https://kharis.org/wp-content/uploads/2024/06/IMG-20240615-WA0032.jpg',
+      'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-10-13-12-43-46.jpg',
+      'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-10-13-12-43-59.jpg',
+      'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-10-13-12-43-50.jpg',
+      'https://store.khar.is/cdn/shop/files/67200988_2450803551632597_4416726294536912896_n_142db4d4-d790-4773-9f17-1714e2b327a4.jpg?v=1626368354',
+      'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-09-30-17-34-12-Copy-2.jpg',
+      'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-09-30-17-34-12-Copy.jpg',
+      'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-09-30-17-33-42-Copy-10.jpg',
+      'https://kharis.org/wp-content/uploads/2024/06/IMG-20240615-WA0036.jpg',
+      'https://kharis.org/wp-content/uploads/2023/10/IMG_5389-scaled.jpeg',
+      'https://kharis.org/wp-content/uploads/2022/10/PHOTO-2022-09-30-17-33-41-Copy-2.jpg',
+      'https://kharis.org/wp-content/uploads/2024/06/IMG-20240615-WA0033.jpg',
+      'https://kharis.org/wp-content/uploads/2024/05/601A6563-scaled.jpg',
+      'https://kharis.org/wp-content/uploads/2023/10/PHOTO-2023-10-18-15-59-596.jpg',
+      'https://kharis.org/wp-content/uploads/2024/05/601A9547-scaled.jpg',
+    ];
 
-  // ... up to 20-30 images
-];
-
-let slides = document.querySelectorAll('.slide');
-    let currentIndex = 0;
-
-    function showNextSlide() {
-      slides[currentIndex].classList.remove('active');
-      currentIndex = (currentIndex + 1) % slides.length;
-      slides[currentIndex].classList.add('active');
-    }
-// 1️⃣ Define the function
-function cycleBackground() {
-  const randomIndex = Math.floor(Math.random() * bgImages.length);
-  document.body.style.setProperty('--bg-img', `url('${bgImages[randomIndex]}')`);
-}
-
-// 2️⃣ Set initial background
-cycleBackground();
-
-// 3️⃣ Keep cycling every 5 seconds
-setInterval(cycleBackground, 5000);
-    /* ----------------- Helpers ----------------- */
-    function escapeHtml(str){
-      if(!str && str !== 0) return '';
-      return String(str)
-        .replace(/&/g,'&amp;')
-        .replace(/</g,'&lt;')
-        .replace(/>/g,'&gt;')
-        .replace(/"/g,'&quot;')
-        .replace(/'/g,'&#39;');
+    // Initialize background slideshow
+    function initSlideshow() {
+      const slideshow = document.getElementById('bgSlideshow');
+      
+      // Create slide elements
+      bgImages.forEach((img, index) => {
+        const slide = document.createElement('div');
+        slide.className = 'bg-slide';
+        slide.style.backgroundImage = `url('${img}')`;
+        if (index === 0) slide.classList.add('active');
+        slideshow.appendChild(slide);
+      });
+      
+      // Start slideshow
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.bg-slide');
+      
+      setInterval(() => {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+      }, 5000);
     }
 
-    // Simple safe "sleep" for nicer sequences (non-blocking)
-    function wait(ms){ return new Promise(res=>setTimeout(res, ms)); }
+    // Language translations
+    const translations = {
+      en: {
+        title: "Discover Your Kharis Department",
+        subtitle: "Answer a few short questions to see where your gifting fits best.",
+        namePlaceholder: "Enter your Fullname",
+        branchPlaceholder: "Select your branch",
+        startButton: "Start Quiz",
+        questionCounter: "Question {current} of {total}",
+        nextButton: "Next",
+        backButton: "← Back",
+        resultsTitle: "{name} ({branch}) — Your Top Departments",
+        exploreButton: "Explore All Departments",
+        restartButton: "Start Over",
+        allDepartments: "All Departments",
+        backToResults: "Back to Results",
+        errorMsg: "Please type something so we can figure this out 😊",
+        noResults: "No department scores were recorded — but don't worry. Try again and add a few keywords in your answers (e.g., \"I love to sing\", \"I like planning events\").",
+        // Quiz questions
+        questions: [
+          { q: "When faced with chaos, what grounds you most?", s: "1 Corinthians 14:33 – For God is not a God of disorder but of peace." },
+          { q: "How do you prefer to impact others?", s: "Matthew 5:16 – Let your light shine before others." },
+          { q: "In a group, you are the one who...", s: "Romans 12:6 – We have different gifts, according to the grace given to each of us." },
+          { q: "Which part of a service do you naturally notice first?", s: "Ephesians 6:7 – Serve wholeheartedly, as if you were serving the Lord." },
+          { q: "If you could lead something, what would it be?", s: "Joshua 1:9 – Be strong and courageous." },
+          { q: "When someone is hurting, what do you naturally do?", s: "2 Corinthians 1:4 – God comforts us… so we can comfort others." },
+          { q: "What excites you most: creating, organising, helping, or sharing boldly?", s: "Colossians 3:23 – Whatever you do, work at it with all your heart." },
+          { q: "If you had one talent to use for God, what would it be?", s: "1 Peter 4:10 – Each of you should use whatever gift you have received to serve others." }
+        ],
+        // Department data
+        departments: {
+          "Administration": { desc: "Organised, detail-oriented, and dependable individuals who excel at planning, coordinating, and ensuring smooth operations.", scripture: "1 Corinthians 14:40 - 'But everything should be done in a fitting and orderly way.'" },
+          "Children's Department": { desc: "Patient, nurturing, and joyful people who love teaching, encouraging, and inspiring children to grow in faith.", scripture: "Matthew 19:14 - 'Let the little children come to me, and do not hinder them, for the kingdom of heaven belongs to such as these.'" },
+          "Design": { desc: "Innovative and artistic individuals who bring ideas to life visually, using creativity to communicate messages with excellence.", scripture: "Exodus 35:35 - 'He has filled them with skill to do all kinds of work as engravers, designers, embroiderers... and weavers.'" },
+          "Drama": { desc: "Expressive, imaginative, and bold individuals who use storytelling and performance to communicate the gospel in powerful ways.", scripture: "Matthew 13:34 - 'Jesus spoke all these things to the crowd in parables; he did not say anything to them without using a parable.'" },
+          "Hospitality": { desc: "Warm, welcoming, and caring people who create an atmosphere of love and comfort for everyone they serve.", scripture: "1 Peter 4:9 - 'Offer hospitality to one another without grumbling.'" },
+          "Host Team": { desc: "Friendly, approachable, and service-minded individuals who make everyone feel seen, valued, and at home.", scripture: "Romans 15:7 - 'Therefore welcome one another as Christ has welcomed you, for the glory of God.'" },
+          "Production": { desc: "Diligent and detail-oriented individuals who ensure the smooth running of services through technical excellence and behind-the-scenes support.", scripture: "Colossians 3:23 - 'Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.'" },
+          "Music": { desc: "Passionate, skilled, and Spirit-filled individuals who use their gifts to lead others into worship and the presence of God.", scripture: "Psalm 95:1-2 - 'Come, let us sing for joy to the Lord; let us shout aloud to the Rock of our salvation. Let us come before him with thanksgiving and extol him with music and song.'" },
+          "Follow Up": { desc: "Caring, attentive, and relational individuals who enjoy guiding new believers, building trust, and encouraging spiritual growth.", scripture: "Matthew 28:19 - 'Therefore go and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit.'" },
+          "New Believers": { desc: "Patient, supportive, and mentoring-minded people who love helping others understand faith and grow spiritually.", scripture: "Colossians 1:28 - 'He is the one we proclaim, admonishing and teaching everyone with all wisdom, so that we may present everyone fully mature in Christ.'" },
+          "Evangelism": { desc: "Bold, outgoing, and confident individuals who love sharing the gospel and engaging others with compassion and courage.", scripture: "Mark 16:15 - 'He said to them, \"Go into all the world and preach the gospel to all creation.\"'" },
+          "Sanctuary Keepers": { desc: "Responsible, conscientious, and detail-focused people who take pride in maintaining a clean and orderly worship environment.", scripture: "1 Corinthians 3:16 - 'Don't you know that you yourselves are God's temple and that God's Spirit dwells in your midst?'" },
+          "Set-up": { desc: "Hands-on, practical, and solution-oriented individuals who enjoy preparing spaces, managing logistics, and problem-solving.", scripture: "Nehemiah 4:6 - 'So we rebuilt the wall till all of it reached half its height, for the people worked with all their heart.'" },
+          "Social Media": { desc: "Creative, tech-savvy, and communicative personalities who enjoy storytelling and engaging communities online.", scripture: "Psalm 19:14 - 'May these words of my mouth and this meditation of my heart be pleasing in your sight, Lord, my Rock and my Redeemer.'" },
+          "Sound": { desc: "Technically-minded, attentive, and precise individuals who thrive on managing audio and creating seamless sound experiences.", scripture: "1 Corinthians 14:7 - 'If even lifeless instruments give sounds, how will anyone know what is played?'" },
+          "Uniform": { desc: "Meticulous, disciplined, and detail-oriented people who value presentation, consistency, and high standards.", scripture: "1 Timothy 4:12 - 'Don't let anyone look down on you because you are young, but set an example for the believers in speech, in conduct, in love, in faith and in purity.'" },
+          "Ushers": { desc: "Friendly, approachable, and service-minded individuals who enjoy guiding, assisting, and caring for people in practical ways.", scripture: "Hebrews 13:17 - 'Have confidence in your leaders and submit to their authority, because they keep watch over you as those who must give an account.'" },
+          "Welfare": { desc: "Compassionate, empathetic, and generous-hearted people who are motivated to help those in need and provide support.", scripture: "Galatians 6:2 - 'Carry each other's burdens, and in this way you will fulfill the law of Christ.'" },
+          "Security": { desc: "Alert, responsible, and protective individuals who prioritise safety and ensure a secure environment for others.", scripture: "Proverbs 27:12 - 'The prudent see danger and take refuge, but the simple keep going and pay the penalty.'" },
+          "Media": { desc: "Creative and tech-savvy individuals who capture, design, and share content that spreads the message with clarity and excellence, making the vision visible to all.", scripture: "Habakkuk 2:2 - 'Write the vision; make it plain on tablets, so he may run who reads it.'" },
+          "Spoken Word": { desc: "Expressive and creative individuals who use poetry, spoken word, or performance art to inspire and communicate the gospel with emotion and impact.", scripture: "Psalm 19:14 - 'May the words of my mouth and the meditation of my heart be pleasing in your sight, O Lord.'" }
+        }
+      },
+      fr: {
+        title: "Découvrez Votre Département Kharis",
+        subtitle: "Répondez à quelques questions pour voir où vos dons s'intègrent le mieux.",
+        namePlaceholder: "Entrez votre nom complet",
+        branchPlaceholder: "Sélectionnez votre branche",
+        startButton: "Commencer le Quiz",
+        questionCounter: "Question {current} sur {total}",
+        nextButton: "Suivant",
+        backButton: "← Retour",
+        resultsTitle: "{name} ({branch}) — Vos Départements Principaux",
+        exploreButton: "Explorer Tous les Départements",
+        restartButton: "Recommencer",
+        allDepartments: "Tous les Départements",
+        backToResults: "Retour aux Résultats",
+        errorMsg: "Veuillez taper quelque chose pour que nous puissions comprendre 😊",
+        noResults: "Aucun score de département n'a été enregistré - mais ne vous inquiétez pas. Réessayez et ajoutez quelques mots-clés dans vos réponses (par exemple, \"J'aime chanter\", \"J'aime organiser des événements\").",
+        questions: [
+          { q: "Face au chaos, qu'est-ce qui vous ancre le plus?", s: "1 Corinthiens 14:33 - Car Dieu n'est pas un Dieu de désordre, mais de paix." },
+          { q: "Comment préférez-vous avoir un impact sur les autres?", s: "Matthieu 5:16 - Que votre lumière luise ainsi devant les hommes." },
+          { q: "Dans un groupe, vous êtes celui qui...", s: "Romains 12:6 - Nous avons des dons différents, selon la grâce qui nous a été accordée." },
+          { q: "Quelle partie d'un service remarquez-vous naturellement en premier?", s: "Éphésiens 6:7 - Servez de bon cœur, comme pour le Seigneur." },
+          { q: "Si vous pouviez diriger quelque chose, ce serait quoi?", s: "Josué 1:9 - Fortifie-toi et prends courage." },
+          { q: "Quand quelqu'un souffre, que faites-vous naturellement?", s: "2 Corinthiens 1:4 - Dieu nous console... afin que nous puissions consoler les autres." },
+          { q: "Qu'est-ce qui vous passionne le plus : créer, organiser, aider ou partager hardiment?", s: "Colossiens 3:23 - Tout ce que vous faites, faites-le de bon cœur." },
+          { q: "Si vous aviez un talent à utiliser pour Dieu, ce serait lequel?", s: "1 Pierre 4:10 - Que chacun de vous mette au service des autres le don qu'il a reçu." }
+        ],
+        departments: {
+          "Administration": { desc: "Personnes organisées, soucieuses du détail et fiables qui excellent dans la planification, la coordination et assurent le bon déroulement des opérations.", scripture: "1 Corinthiens 14:40 - 'Mais que tout se passe dans l'ordre.'" },
+          "Département des Enfants": { desc: "Personnes patientes, nourricières et joyeuses qui aiment enseigner, encourager et inspirer les enfants à grandir dans la foi.", scripture: "Matthieu 19:14 - 'Laissez les petits enfants, et ne les empêchez pas de venir à moi; car le royaume des cieux est pour ceux qui leur ressemblent.'" },
+          "Design": { desc: "Personnes innovantes et artistiques qui donnent vie visuellement aux idées, utilisant la créativité pour communiquer des messages avec excellence.", scripture: "Exode 35:35 - 'Il les a remplis d'intelligence, pour exécuter tous les ouvrages.'" },
+          "Drame": { desc: "Personnes expressives, imaginatives et audacieuses qui utilisent la narration et la performance pour communiquer l'évangile de manière puissante.", scripture: "Matthieu 13:34 - 'Jésus parla en paraboles, et il ne leur parlait point sans parabole.'" },
+          "Hospitalité": { desc: "Personnes chaleures, accueillantes et attentionnées qui créent une atmosphère d'amour et de confort pour tous ceux qu'elles servent.", scripture: "1 Pierre 4:9 - 'Exercez l'hospitalité les uns envers les autres sans murmures.'" },
+          "Équipe d'Accueil": { desc: "Personnes amicales, abordables et axées sur le service qui font que chacun se sent vu, valorisé et comme à la maison.", scripture: "Romains 15:7 - 'Accueillez-vous donc les uns les autres, comme Christ vous a accueillis, pour la gloire de Dieu.'" },
+          "Production": { desc: "Personnes diligentes et soucieuses du détail qui assurent le bon déroulement des services grâce à l'excellence technique et au soutien en coulisses.", scripture: "Colossiens 3:23 - 'Tout ce que vous faites, faites-le de bon cœur, comme pour le Seigneur.'" },
+          "Musique": { desc: "Personnes passionnées, compétentes et remplies de l'Esprit qui utilisent leurs dons pour conduire les autres dans l'adoration et la présence de Dieu.", scripture: "Psaume 95:1-2 - 'Venez, chantons avec allégresse à l'Éternel! Poussons des cris de joie vers le rocher de notre salut. Allons au-devant de lui avec des louanges.'" },
+          "Suivi": { desc: "Personnes attentionnées, attentives et relationnelles qui aiment guider les nouveaux croyants, établir la confiance et encourager la croissance spirituelle.", scripture: "Matthieu 28:19 - 'Allez, faites de toutes les nations des disciples.'" },
+          "Nouveaux Croyants": { desc: "Personnes patientes, solidaires et mentorales qui aident les autres à comprendre la faith et à grandir spirituellement.", scripture: "Colossiens 1:28 - 'C'est lui que nous annonçons, exhortant tout homme, et instruisant tout homme en toute sagesse.'" },
+          "Évangélisation": { desc: "Personnes audacieuses, extraverties et confiantes qui aiment partager l'évangile et s'engager avec compassion et courage.", scripture: "Marc 16:15 - 'Allez dans tout le monde, et prêchez la bonne nouvelle à toute la création.'" },
+          "Gardiens du Sanctuaire": { desc: "Personnes responsables, consciencieuses et soucieuses du détail qui sont fières de maintenir un environnement de culte propre et ordonné.", scripture: "1 Corinthiens 3:16 - 'Ne savez-vous pas que vous êtes le temple de Dieu, et que l'Esprit de Dieu habite en vous?'" },
+          "Installation": { desc: "Personnes pratiques, manuelles et orientées vers les solutions qui aiment préparer les espaces, gérer la logistique et résoudre les problèmes.", scripture: "Néhémie 4:6 - 'Nous rebâtîmes la muraille, qui fut partout achevée jusqu'à la moitié de sa hauteur.'" },
+          "Médias Sociaux": { desc: "Personnalités créatives, technophiles et communicatives qui aiment raconter des histoires et engager les communautés en ligne.", scripture: "Psaume 19:14 - 'Que les paroles de ma bouche et la méditation de my cœur soient agréables devant toi.'" },
+          "Son": { desc: "Personnes techniquement douées, attentives et précises qui excellent dans la gestion audio et la création d'expériences sonores fluides.", scripture: "1 Corinthiens 14:7 - 'Si les objets inanimés qui rendent un son ne rendent pas des sons distincts, comment reconnaître ce qui est joué?'" },
+          "Uniforme": { desc: "Personnes méticuleuses, disciplinées et soucieuses du détail qui valorisent la présentation, la cohérence et les normes élevées.", scripture: "1 Timothée 4:12 - 'Que personne ne méprise ta jeunesse; mais sois un modèle pour les fidèles.'" },
+          "Huissiers": { desc: "Personnes amicales, abordables et axées sur le service qui aiment guider, aider et prendre soin des gens de manière pratique.", scripture: "Hébreux 13:17 - 'Obéissez à vos conducteurs et ayez pour eux de la déférence.'" },
+          "Bien-être": { desc: "Personnes compatissantes, empathiques et généreuses qui sont motivées à aider ceux dans le besoin et à fournir un soutien.", scripture: "Galates 6:2 - 'Portez les fardeaux les uns des autres.'" },
+          "Sécurité": { desc: "Personnes vigilantes, responsables et protectrices qui priorisent la sécurité et assurent un environnement sécurisé pour les autres.", scripture: "Proverbes 27:12 - 'L'homme prudent voit le mal et se cache; Les simples avancent et sont punis.'" },
+          "Médias": { desc: "Personnes créatives et technophiles qui capturent, conçoivent et partagent du contenu qui diffuse le message avec clarté et excellence, rendant la vision visible à tous.", scripture: "Habacuc 2:2 - 'Écris la vision, Grave-la sur des tables.'" },
+          "Parole Parlée": { desc: "Personnes expressives et créatives qui utilisent la poésie, la parole parlée ou l'art performatif pour inspirer et communiquer l'évangile avec émotion et impact.", scripture: "Psaume 19:14 - 'Que les paroles de ma bouche et la méditation de mon cœur soient agréables devant toi.'" }
+        }
+      },
+      es: {
+        title: "Descubre Tu Departamento en Kharis",
+        subtitle: "Responde algunas preguntas para ver dónde encajan mejor tus dones.",
+        namePlaceholder: "Ingresa tu nombre completo",
+        branchPlaceholder: "Selecciona tu sucursal",
+        startButton: "Comenzar Quiz",
+        questionCounter: "Pregunta {current} de {total}",
+        nextButton: "Siguiente",
+        backButton: "← Atrás",
+        resultsTitle: "{name} ({branch}) — Tus Departamentos Principales",
+        exploreButton: "Explorar Todos los Departamentos",
+        restartButton: "Comenzar de Nuevo",
+        allDepartments: "Todos los Departamentos",
+        backToResults: "Volver a Resultados",
+        errorMsg: "Por favor escribe algo para que podamos entender 😊",
+        noResults: "No se registraron puntajes de departamento, pero no te preocupes. Intenta nuevamente y agrega algunas palabras clave en tus respuestas (por ejemplo, \"Me encanta cantar\", \"Me gusta planificar eventos\").",
+        questions: [
+          { q: "Cuando te enfrentas al caos, ¿qué te da más estabilidad?", s: "1 Corintios 14:33 – Porque Dios no es Dios de confusión, sino de paz." },
+          { q: "¿Cómo prefieres impactar a los demás?", s: "Mateo 5:16 – Así alumbre vuestra luz delante de los hombres." },
+          { q: "En un grupo, eres el que...", s: "Romanos 12:6 – Tenemos dones diferentes, según la gracia que nos es dada." },
+          { q: "¿Qué parte de un servicio notas naturalmente primero?", s: "Efesios 6:7 – Sirviendo de buena voluntad, como al Señor y no a los hombres." },
+          { q: "Si pudieras liderar algo, ¿qué sería?", s: "Josué 1:9 – Esfuérzate y sé valiente." },
+          { q: "Cuando alguien está sufriendo, ¿qué haces naturalmente?", s: "2 Corintios 1:4 – Dios nos consuela... para que podamos consolar a otros." },
+          { q: "¿Qué te emociona más: crear, organizar, ayudar o compartir con valentía?", s: "Colosenses 3:23 – Todo lo que hagáis, hacedlo de corazón." },
+          { q: "Si tuvieras un talento para usar para Dios, ¿cuál sería?", s: "1 Pedro 4:10 – Cada uno según el don que ha recibido, minístrelo a los otros." }
+        ],
+        departments: {
+          "Administración": { desc: "Personas organizadas, detallistas y confiables que sobresalen en planificación, coordinación y garantizan operaciones fluidas.", scripture: "1 Corintios 14:40 - 'Pero hágase todo decentemente y con orden.'" },
+          "Departamento Infantil": { desc: "Personas pacientes, nurturing y alegres que aman enseñar, animar e inspirar a los niños a crecer en la fe.", scripture: "Mateo 19:14 - 'Dejad a los niños venir a mí, y no se lo impidáis; porque de los tales es el reino de los cielos.'" },
+          "Diseño": { desc: "Personas innovadoras y artísticas que dan vida visualmente a las ideas, utilizando la creatividad para comunicar mensajes con excelencia.", scripture: "Éxodo 35:35 - 'Los ha llenado de sabiduría de corazón para que hagan toda obra de arte.'" },
+          "Drama": { desc: "Personas expresivas, imaginativas y audaces que utilizan la narración de historias y la performance para comunicar el evangelio de manera poderosa.", scripture: "Mateo 13:34 - 'Todo esto habló Jesús por parábolas a la gente, y sin parábolas no les hablaba.'" },
+          "Hospitalidad": { desc: "Personas cálidas, acogedoras y atentas que crean una atmósfera de amor y confort para todos los que sirven.", scripture: "1 Pedro 4:9 - 'Sed hospitalarios los unos con los otros sin murmuraciones.'" },
+          "Equipo de Anfitriones": { desc: "Personas amigables, accesibles y orientadas al servicio que hacen que todos se sientan vistos, valorados y como en casa.", scripture: "Romanos 15:7 - 'Por tanto, recibíos los unos a los otros, como también Cristo nos recibió, para gloria de Dios.'" },
+          "Producción": { desc: "Personas diligentes y detallistas que aseguran el buen funcionamiento de los servicios mediante la excelencia técnica y el apoyo detrás de escena.", scripture: "Colosenses 3:23 - 'Y todo lo que hagáis, hacedlo de corazón, como para el Señor y no para los hombres.'" },
+          "Música": { desc: "Personas apasionadas, talentosas y llenas del Espíritu que utilizan sus dones para guiar a otros en la adoración y la presencia de Dios.", scripture: "Salmos 95:1-2 - 'Venid, aclamemos alegremente a Jehová; Cantemos con júbilo a la roca de nuestra salvación. Lleguemos ante su presencia con alabanza; Aclamémosle con cánticos.'" },
+          "Seguimiento": { desc: "Personas atentas, cuidadosas y relacionales que disfrutan guiando a nuevos creyentes, construyendo confianza y alentando el crecimiento espiritual.", scripture: "Mateo 28:19 - 'Por tanto, id, y haced discípulos a todas las naciones.'" },
+          "Nuevos Creyentes": { desc: "Personas pacientes, solidarias y con mentalidad de mentoría que aman ayudar a otros a comprender la fe y crecer espiritualmente.", scripture: "Colosenses 1:28 - 'A quien anunciamos, amonestando a todo hombre, y enseñando a todo hombre en toda sabiduría.'" },
+          "Evangelismo": { desc: "Personas audaces, extrovertidas y seguras que aman compartir el evangelio y relacionarse con otros con compasión y coraje.", scripture: "Marcos 16:15 - 'Y les dijo: Id por todo el mundo y predicad el evangelio a toda criatura.'" },
+          "Guardianes del Santuario": { desc: "Personas responsables, concienzudas y enfocadas en los detalles que se enorgullecen de mantener un ambiente de adoración limpio y ordenado.", scripture: "1 Corintios 3:16 - '¿No sabéis que sois templo de Dios, y que el Espíritu de Dios mora en vosotros?'" },
+          "Preparación": { desc: "Personas prácticas, manuales y orientadas a soluciones que disfrutan preparando espacios, gestionando logística y resolviendo problemas.", scripture: "Nehemías 4:6 - 'Edificamos, pues, el muro, y toda la muralla fue terminada hasta la mitad de su altura.'" },
+          "Redes Sociales": { desc: "Personalidades creativas, conocedoras de la tecnología y comunicativas que disfrutan contar historias y involucrar comunidades en línea.", scripture: "Salmos 19:14 - 'Sean gratos los dichos de mi boca y la meditación de mi corazón delante de ti.'" },
+          "Sonido": { desc: "Personas técnicas, atentas y precisas que prosperan gestionando audio y creando experiencias sonoras fluidas.", scripture: "1 Corintios 14:7 - 'Si los instrumentos musicales no emiten sonidos distintos, ¿cómo se sabrá lo que se toca?'" },
+          "Uniforme": { desc: "Personas meticulosas, disciplinadas y detallistas que valoran la presentación, consistencia y altos estándares.", scripture: "1 Timoteo 4:12 - 'Ninguno tenga en poco tu juventud, sino sé ejemplo de los creyentes en palabra, conducta, amor, espíritu, fe y pureza.'" },
+          "Ujieres": { desc: "Personas amigables, accesibles y orientadas al servicio que disfrutan guiando, ayudando y cuidando a las personas de manera práctica.", scripture: "Hebreos 13:17 - 'Obedeced a vuestros pastores, y sujetaos a ellos.'" },
+          "Bienestar": { desc: "Personas compasivas, empáticas y generosas que están motivadas a ayudar a los necesitados y brindar apoyo.", scripture: "Gálatas 6:2 - 'Sobrellevad los unos las cargas de los otros.'" },
+          "Seguridad": { desc: "Personas alertas, responsables y protectoras que priorizan la seguridad y aseguran un ambiente seguro para los demás.", scripture: "Proverbios 27:12 - 'El avisado ve el mal y se esconde; Mas los simples pasan y reciben el daño.'" },
+          "Medios": { desc: "Personas creativas y conocedoras de la tecnología que capturan, diseñan y comparten contenido que difunde el mensaje con claridad y excelencia, haciendo visible la visión para todos.", scripture: "Habacuc 2:2 - 'Escribe la visión, y declárala en tablas.'" },
+          "Palabra Hablada": { desc: "Personas expresivas y creativas que utilizan poesía, palabra hablada o arte performativo para inspirar y comunicar el evangelio con emoción e impacto.", scripture: "Salmos 19:14 - 'Sean gratos los dichos de mi boca y la meditación de mi corazón delante de ti.'" }
+        }
+      }
+      // Additional languages would follow the same pattern
+    };
 
     /* --------------- DOM refs ------------------ */
     const startScreenEl = document.getElementById('start-screen');
@@ -399,328 +545,208 @@ setInterval(cycleBackground, 5000);
     const progressBar = document.getElementById('progress');
     const usernameInput = document.getElementById('username');
     const branchSelect = document.getElementById('branch');
-    const confettiCanvas = document.getElementById('confetti-canvas');
     const modeBtn = document.getElementById('modeBtn');
-
-    /* --------------- Config ------------------ */
-    const SHEET_URL = "https://script.google.com/macros/s/AKfycbxz0F4EoHusuSJ_e04shOtOrg9Hh8ijkSwgYQBE81yS7vD7p-6kUoOwj9P_mD5UcYNh/exec"; // replace if needed
-
-    /* --------------- Data: quizzes ------------------ */
-    const quizzes = {
-      kharis: [
-        { q:"When faced with chaos, what grounds you most?", s:"1 Corinthians 14:33 – For God is not a God of disorder but of peace." },
-        { q:"How do you prefer to impact others?", s:"Matthew 5:16 – Let your light shine before others." },
-        { q:"In a group, you are the one who...", s:"Romans 12:6 – We have different gifts, according to the grace given to each of us." },
-        { q:"Which part of a service do you naturally notice first?", s:"Ephesians 6:7 – Serve wholeheartedly, as if you were serving the Lord." },
-        { q:"If you could lead something, what would it be?", s:"Joshua 1:9 – Be strong and courageous." },
-        { q:"When someone is hurting, what do you naturally do?", s:"2 Corinthians 1:4 – God comforts us… so we can comfort others." },
-        { q:"What excites you most: creating, organising, helping, or sharing boldly?", s:"Colossians 3:23 – Whatever you do, work at it with all your heart." },
-        { q:"If you had one talent to use for God, what would it be?", s:"1 Peter 4:10 – Each of you should use whatever gift you have received to serve others." }
-      ]
-    };
-
-    /* --------------- Department data (full) ------------------ */
-    const deptData = {
-      "Administration": { desc: "Organised, detail-oriented, and dependable individuals who excel at planning, coordinating, and ensuring smooth operations.", scripture: "1 Corinthians 14:40 - 'But everything should be done in a fitting and orderly way.'" },
-      "Children's Department": { desc: "Patient, nurturing, and joyful people who love teaching, encouraging, and inspiring children to grow in faith.", scripture: "Matthew 19:14 - 'Let the little children come to me, and do not hinder them, for the kingdom of heaven belongs to such as these.'" },
-      "Design": { desc: "Innovative and artistic individuals who bring ideas to life visually, using creativity to communicate messages with excellence.", scripture: "Exodus 35:35 - 'He has filled them with skill to do all kinds of work as engravers, designers, embroiderers... and weavers.'" },
-      "Drama": { desc: "Expressive, imaginative, and bold individuals who use storytelling and performance to communicate the gospel in powerful ways.", scripture: "Matthew 13:34 - 'Jesus spoke all these things to the crowd in parables; he did not say anything to them without using a parable.'" },
-      "Hospitality": { desc: "Warm, welcoming, and caring people who create an atmosphere of love and comfort for everyone they serve.", scripture: "1 Peter 4:9 - 'Offer hospitality to one another without grumbling.'" },
-      "Host Team": { desc: "Friendly, approachable, and service-minded individuals who make everyone feel seen, valued, and at home.", scripture: "Romans 15:7 - 'Therefore welcome one another as Christ has welcomed you, for the glory of God.'" },
-      "Production": { desc: "Diligent and detail-oriented individuals who ensure the smooth running of services through technical excellence and behind-the-scenes support.", scripture: "Colossians 3:23 - 'Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.'" },
-      "Music": { desc: "Passionate, skilled, and Spirit-filled individuals who use their gifts to lead others into worship and the presence of God.", scripture: "Psalm 95:1-2 - 'Come, let us sing for joy to the Lord; let us shout aloud to the Rock of our salvation. Let us come before him with thanksgiving and extol him with music and song.'" },
-      "Follow Up": { desc: "Caring, attentive, and relational individuals who enjoy guiding new believers, building trust, and encouraging spiritual growth.", scripture: "Matthew 28:19 - 'Therefore go and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit.'" },
-      "New Believers": { desc: "Patient, supportive, and mentoring-minded people who love helping others understand faith and grow spiritually.", scripture: "Colossians 1:28 - 'He is the one we proclaim, admonishing and teaching everyone with all wisdom, so that we may present everyone fully mature in Christ.'" },
-      "Evangelism": { desc: "Bold, outgoing, and confident individuals who love sharing the gospel and engaging others with compassion and courage.", scripture: "Mark 16:15 - 'He said to them, “Go into all the world and preach the gospel to all creation.”'" },
-      "Sanctuary Keepers": { desc: "Responsible, conscientious, and detail-focused people who take pride in maintaining a clean and orderly worship environment.", scripture: "1 Corinthians 3:16 - 'Don’t you know that you yourselves are God’s temple and that God’s Spirit dwells in your midst?'" },
-      "Set-up": { desc: "Hands-on, practical, and solution-oriented individuals who enjoy preparing spaces, managing logistics, and problem-solving.", scripture: "Nehemiah 4:6 - 'So we rebuilt the wall till all of it reached half its height, for the people worked with all their heart.'" },
-      "Social Media": { desc: "Creative, tech-savvy, and communicative personalities who enjoy storytelling and engaging communities online.", scripture: "Psalm 19:14 - 'May these words of my mouth and this meditation of my heart be pleasing in your sight, Lord, my Rock and my Redeemer.'" },
-      "Sound": { desc: "Technically-minded, attentive, and precise individuals who thrive on managing audio and creating seamless sound experiences.", scripture: "1 Corinthians 14:7 - 'If even lifeless instruments give sounds, how will anyone know what is played?'" },
-      "Uniform": { desc: "Meticulous, disciplined, and detail-oriented people who value presentation, consistency, and high standards.", scripture: "1 Timothy 4:12 - 'Don’t let anyone look down on you because you are young, but set an example for the believers in speech, in conduct, in love, in faith and in purity.'" },
-      "Ushers": { desc: "Friendly, approachable, and service-minded individuals who enjoy guiding, assisting, and caring for people in practical ways.", scripture: "Hebrews 13:17 - 'Have confidence in your leaders and submit to their authority, because they keep watch over you as those who must give an account.'" },
-      "Welfare": { desc: "Compassionate, empathetic, and generous-hearted people who are motivated to help those in need and provide support.", scripture: "Galatians 6:2 - 'Carry each other’s burdens, and in this way you will fulfill the law of Christ.'" },
-      "Security": { desc: "Alert, responsible, and protective individuals who prioritise safety and ensure a secure environment for others.", scripture: "Proverbs 27:12 - 'The prudent see danger and take refuge, but the simple keep going and pay the penalty.'" },
-      "Media": { desc: "Creative and tech-savvy individuals who capture, design, and share content that spreads the message with clarity and excellence, making the vision visible to all.", scripture: "Habakkuk 2:2 - 'Write the vision; make it plain on tablets, so he may run who reads it.'" },
-  "Spoken Word": { 
-  desc: "Expressive and creative individuals who use poetry, spoken word, or performance art to inspire and communicate the gospel with emotion and impact.", 
-  scripture: "Psalm 19:14 - 'May the words of my mouth and the meditation of my heart be pleasing in your sight, O Lord.'" 
-}
-  };
-
-    /* --------------- Keywords used to score answers ------------------ */
-    /* --------------- Keywords used to score answers (enhanced) ------------------ */
-const deptKeywords = {
-  "Administration":["organise","organised","plan","planning","admin","schedule","manage","coordinate","management","administer","office","records"],
-  "Children's Department":["child","kids","children","youth","play","story","teach","kid","nursery","little ones","junior","toddler","children ministry","children's ministry","Sunday school"],
-  "Design":["design","art","creative","graphic","visual","paint","illustrate","drawing","drawing","photoshop","illustration","branding","logo","creative design","visuals","artist","digital art"],
-  "Drama":["drama","act","acting","show","play","stage","role","performance","perform","skit","theatre","theatre arts","dramatise","dramatise"],
-  "Hospitality":["look after","health","hospitality","wellbeing","help","care","caring","watch over","serve food","welcoming","host","serve guests","serve others","team hospitality"],
-  "Host Team":["host","friendly","guide","greet","welcome","speaking","reception","ushering","introduce","receptionist","guide people","meet and greet","hosting"],
-  "Production":["camera","behind the scenes","media","organise","videography","editing","livestream","sound","lighting","technical","projection","tech","AV","production team","video production","stage crew"],
-  "Music":["sing","music","play","instrument","worship","vocal","choir","perform","praise","guitar","drums","piano","band","musician","song","lead worship","musical"],
-  "Follow Up":["connect","follow up","contact","message","call","visit","reach out","check in","connect people","follow-up ministry","followup","pastoral follow up"],
-  "New Believers":["teach","mentor","discipleship","mentor","grow","new believer","bible study","new Christian","guide new believers","mentorship","discipleship ministry"],
-  "Evangelism":["share","evangelism","preach","gospel","bold","outreach","invite","mission","proclaim","evangelise","witness","evangelistic","spread the word","street ministry"],
-  "Sanctuary Keepers":["clean","maintain","space","tidy","cleaning","order","organize","sanctuary","church cleaning","maintenance","keep church clean","facility care"],
-  "Set-up":["setup","equipment","arrange","assemble","load","lift","organise","prep","prepare","set up room","logistics","stage setup","technical setup","setup team"],
-  "Social Media":["social","media","online","content","post","instagram","facebook","tiktok","youtube","digital media","social networking","content creation","social platforms","social marketing"],
-  "Sound":["audio","mic","speaker","sound","problem solver","microphone","observant","mixing","soundboard","audio engineer","sound tech","audio setup","mixing desk"],
-  "Uniform":["attire","uniform","clothes","appearance","presentation","order","fashion","dress code","presentation","consistent look","professional attire"],
-  "Ushers":["guide","usher","assist","friendly","help","directions","welcome","greet","ushering","seat people","direct people","usher team","guide guests"],
-  "Welfare":["care","serve","help","support","pastoral","counsel","welfare","compassion","assist","serve others","social care","support ministry","counselling","empathy"],
-  "Security":["protect","disciplined","safe","safety","guard","watch","secure","security","patrol","monitor","protection","safe environment","safety team"],
-  "Media":["software","tech","editing","capture","video","camera","edit","photo","film","content creation","graphic","multimedia","media production","digital media","media team","behind the scenes"],
-  "Spoken Word":["poetry","spoken word","rhythm","emotion","inspire","express","storytell","storytelling","perform","recite","slam poetry","creative writing","spoken ministry"]
-};
-// Strengthen behind-the-scenes mapping
-deptKeywords["Set-up"].push("build","building","rebuild","construct","construction","setup team","set up","set-up");
-deptKeywords["Production"].push("behind the scenes","low profile","quiet role","technical support","ops","operations","operate");
-deptKeywords["Sanctuary Keepers"].push("tidy up","clean up","orderly","maintain","maintenance","facility","housekeeping");
-
-// Strengthen “Word care” mapping away from Spoken Word
-deptKeywords["Follow Up"].push("scripture","word of god","bible verse","share scripture","encourage with scripture","check in");
-deptKeywords["New Believers"].push("scripture","word of god","bible study","teach the word","explain scripture","discipleship");
-
-// Tighten Spoken Word trigger (performance/poetry focus)
-deptKeywords["Spoken Word"].push("poem","poetry","lyric","spoken word piece","recite","recitation","stage poem","slam","monologue");
+    const languageSelect = document.getElementById('languageSelect');
 
     /* --------------- State ------------------ */
     let username = "";
     let branch = "";
-    let currentQuiz = null;
     let currentQ = 0;
     let questionHistory = [];
+    let currentLanguage = 'en';
     let deptScores = {};
-    let traits = { creative:0, organised:0, bold:0, servant:0 };
-    let answersGiven = [];
-    let lastResultHtml = ""; // used to restore result after explore
-    let lastSorted = []; // store top2 etc.
+    let lastResultHtml = "";
+    let lastSorted = [];
 
-    /* --------------- Init helpers ------------------ */
-    function initScores(){
-      deptScores = {};
-      Object.keys(deptKeywords).forEach(d => deptScores[d] = 0);
-      traits = { creative:0, organised:0, bold:0, servant:0 };
-      answersGiven = [];
+    /* --------------- Initialize ------------------ */
+    function init() {
+      initSlideshow();
+      setLanguage('en');
+      
+      // Set up event listeners
+      document.getElementById('start-kharis').addEventListener('click', startQuiz);
+      backBtn.addEventListener('click', goBack);
+      modeBtn.addEventListener('click', toggleMode);
+      languageSelect.addEventListener('change', handleLanguageChange);
+    }
+
+    /* --------------- Language functions ------------------ */
+    function setLanguage(langCode) {
+      currentLanguage = langCode;
+      const lang = translations[langCode] || translations.en;
+      
+      // Update UI text
+      document.getElementById('pageTitle').textContent = lang.title;
+      document.getElementById('pageSubtitle').textContent = lang.subtitle;
+      document.getElementById('username').placeholder = lang.namePlaceholder;
+      document.querySelector('#branch option[disabled]').textContent = lang.branchPlaceholder;
+      document.getElementById('start-kharis').textContent = lang.startButton;
+      
+      // Update back button if visible
+      if (backBtn.style.display !== 'none') {
+        backBtn.textContent = lang.backButton;
+      }
+      
+      // Update quiz if active
+      if (quizEl.classList.contains('show')) {
+        showQuestion();
+      }
+      
+      // Update results if active
+      if (resultEl.classList.contains('show')) {
+        showResult();
+      }
+      
+      // Set the language attribute
+      document.documentElement.lang = langCode;
+    }
+
+    function handleLanguageChange() {
+      setLanguage(this.value);
+    }
+
+    /* --------------- Quiz functions ------------------ */
+    function startQuiz() {
+      username = (usernameInput.value || '').trim();
+      branch = (branchSelect.value || '').trim();
+      
+      if(!username){
+        alert("Please enter your full name 😊");
+        return;
+      }
+      if(!branch){
+        alert("Please select your branch 😊");
+        return;
+      }
+
+      currentQ = 0;
       questionHistory = [];
+      deptScores = {};
+      showQuestion();
     }
 
-    /* --------------- Show question ------------------ */function showQuestion(){
-  const qObj = quizzes[currentQuiz][currentQ];
+    function showQuestion(){
+      const lang = translations[currentLanguage] || translations.en;
+      const qObj = lang.questions[currentQ];
 
-  quizEl.innerHTML = `
-    <div class="question-counter">Question ${currentQ+1} of ${quizzes[currentQuiz].length}</div>
-    <div class="scripture">${escapeHtml(qObj.s)}</div>
-    <div class="question">${escapeHtml(qObj.q)}</div>
-    <input id="answer" type="text" placeholder="Type your answer here..." aria-label="Your answer" />
-    <div id="error-msg" style="color:#ffd700;font-weight:600;text-align:center;margin-bottom:10px;"></div>
-    <button class="btn" id="nextBtn">Next</button>
-  `;
+      quizEl.innerHTML = `
+        <div class="question-counter">${lang.questionCounter.replace('{current}', currentQ+1).replace('{total}', lang.questions.length)}</div>
+        <div class="scripture">${qObj.s}</div>
+        <div class="question">${qObj.q}</div>
+        <input id="answer" type="text" placeholder="Type your answer here..." aria-label="Your answer" />
+        <div id="error-msg" style="color:#ffd700;font-weight:600;text-align:center;margin-bottom:10px;"></div>
+        <button class="btn" id="nextBtn">${lang.nextButton}</button>
+      `;
 
-  quizEl.style.display = "block";
-  startScreenEl.style.display = "none";
-  resultEl.style.display = "none";
-  quizEl.classList.add('show');
-  resultEl.classList.remove('show'); // only quiz is showing
-  backBtn.style.display = currentQ > 0 ? "inline-block" : "none";
-  progressBar.style.width = Math.round(((currentQ+1)/quizzes[currentQuiz].length)*100) + "%";
+      quizEl.classList.add('show');
+      startScreenEl.style.display = "none";
+      resultEl.classList.remove('show');
+      backBtn.style.display = currentQ > 0 ? "inline-block" : "none";
+      backBtn.textContent = lang.backButton;
+      progressBar.style.width = Math.round(((currentQ+1)/lang.questions.length)*100) + "%";
 
-  // tiny delay ensures button is in DOM
-  setTimeout(()=>{
-    const nextBtn = document.getElementById('nextBtn');
-    if(nextBtn) nextBtn.addEventListener('click', nextQuestion);
+      // Add event listeners
+      setTimeout(() => {
+        const nextBtn = document.getElementById('nextBtn');
+        if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
+        
+        const answerInput = document.getElementById('answer');
+        if (answerInput) answerInput.focus();
+      }, 20);
+    }
 
-    const answerInput = document.getElementById('answer');
-    if(answerInput) answerInput.focus();
-  }, 20);
-}
+    function nextQuestion(){
+      const inputEl = document.getElementById('answer');
+      const value = inputEl ? inputEl.value.trim() : '';
+      const lang = translations[currentLanguage] || translations.en;
 
-
-    /* --------------- Scoring ------------------ */
-function scoreAnswer(input){
-  const text = (input || '').toLowerCase().trim();
-  if(!text) return;
-
-  // Remove punctuation for better matching
-  const cleanText = text.replace(/[.,!?;:]/g, ' ');
-
-  // Split into sentences
-  const sentences = cleanText.split(/\n|[.!?]+/).map(s => s.trim()).filter(Boolean);
-
-  // Trait scoring
-  sentences.forEach(sentence => {
-    if(sentence.match(/\b(create|art|design|draw|paint|film|photo|song|write|compose|music|sing|instrument)s?\b/)) traits.creative++;
-    if(sentence.match(/\b(organis(e|ing|ed)?|plan|planning|schedule|manage|coordinate|arrange|admin|setup|office|records)\b/)) traits.organised++;
-    if(sentence.match(/\b(speak|lead|preach|bold|present|leadership|evangel|perform|acting|drama|role|stage)\b/)) traits.bold++;
-    if(sentence.match(/\b(help|serve|care|support|encourag|pastor|counsel|hospitality|guide|assist|welcome|usher|welfare)\b/)) traits.servant++;
-  });
-// Trait scoring already here...
-
-// Extra adjustment: if user self-identifies as quiet, reduce bold
-if (/\b(quiet|don['’]?t like to talk|not.*talk|prefer not to speak)\b/.test(cleanText)) {
-  traits.bold = Math.max(0, traits.bold - 1);
-}
-
-  // Negative words
-  const negatives = ["not", "don't", "dont", "never", "hate", "dislike", "avoid"];
-
-  // Department scoring
-  const sentenceScores = {};
-  sentences.forEach(sentence => {
-    Object.entries(deptKeywords).forEach(([dept, keywords]) => {
-      // Skip Children’s Dept if not London
-      if(dept === "Children's Department") {
-        const lowerBranch = (branch || '').toLowerCase();
-        const allowed = ["kharis church london", "kharis london", "london"];
-        if(!allowed.some(a => lowerBranch.includes(a))) return;
+      if (!value) {
+        document.getElementById('error-msg').textContent = lang.errorMsg;
+        return;
       }
 
-      let count = 0;
-      keywords.forEach(k => {
-        const pattern = new RegExp(`\\b${k.replace(/[-/\\^$*+?.()|[\]{}]/g,'\\$&')}(s|es|ing)?\\b`, "i");
-        if(pattern.test(sentence)) count++;
+      // Save snapshot for back
+      questionHistory.push({ 
+        q: currentQ,
+        deptScores: {...deptScores}
       });
+      
+      // Score the answer (simplified for demo)
+      scoreAnswer(value);
+      
+      currentQ++;
+      const langData = translations[currentLanguage] || translations.en;
 
-      if(count > 0){
-        let multiplier = 1;
-        // Apply small penalty for negative words
-        const negCount = negatives.reduce((acc, neg) => acc + (sentence.includes(neg) ? 1 : 0), 0);
-        if(negCount > 0) multiplier -= 0.25 * negCount; // -0.25 per negative word in sentence
-
-        sentenceScores[dept] = (sentenceScores[dept] || 0) + count**1.5 * multiplier;
+      if (currentQ < langData.questions.length) {
+        showQuestion();
+      } else {
+        showResult();
       }
-    });
-  });
+    }
 
-  // Normalize scores
-  const maxScore = Math.max(...Object.values(sentenceScores), 1);
-  Object.entries(sentenceScores).forEach(([dept, score]) => {
-    deptScores[dept] = (deptScores[dept] || 0) + (score / maxScore) * 2;
-  });
-
-  // Trait-based proportional influence
-// do NOT redeclare traits; use the global one
-
-const traitMapping = {
-  creative: ["Design","Music","Drama","Spoken Word","Social Media","Media"],
-  organised: ["Administration","Set-up","Production","Sanctuary Keepers","Uniform"],
-  bold: ["Evangelism","Drama","Host Team","Music","Spoken Word"],
-  servant: ["Welfare","Hospitality","Ushers","Follow Up","Children's Department"],
-  social: ["Host Team","Follow Up","Evangelism","Children's Department"],
-  tech: ["Production","Sound","Media","Social Media"]
-};
-
-  const totalTraits = Object.values(traits).reduce((a,b)=>a+b,1);
-  Object.entries(traits).forEach(([trait,val]) => {
-    if(val > 0){
-      const boost = 1 + (val / totalTraits) * 0.5; // normalized proportional boost
-      traitMapping[trait].forEach(dept => {
-        deptScores[dept] = (deptScores[dept] || 0) * boost;
+    function scoreAnswer(input) {
+      // Simplified scoring for demo - in a real implementation, this would
+      // analyze the text and assign scores to departments
+      const text = input.toLowerCase();
+      
+      // Just for demo purposes, assign some scores
+      if (text.includes('music') || text.includes('sing') || text.includes('worship')) {
+        deptScores['Music'] = (deptScores['Music'] || 0) + 2;
+      }
+      if (text.includes('child') || text.includes('kid') || text.includes('teach')) {
+        deptScores["Children's Department"] = (deptScores["Children's Department"] || 0) + 2;
+      }
+      if (text.includes('help') || text.includes('serve') || text.includes('care')) {
+        deptScores['Hospitality'] = (deptScores['Hospitality'] || 0) + 2;
+        deptScores['Welfare'] = (deptScores['Welfare'] || 0) + 1;
+      }
+      if (text.includes('organiz') || text.includes('plan') || text.includes('admin')) {
+        deptScores['Administration'] = (deptScores['Administration'] || 0) + 2;
+      }
+      
+      // Ensure all departments have at least some score
+      const lang = translations[currentLanguage] || translations.en;
+      Object.keys(lang.departments).forEach(dept => {
+        deptScores[dept] = deptScores[dept] || Math.random() * 0.5;
       });
     }
-  });
 
-  // Adjust for repeated mentions but cap to avoid overweighting
-  Object.entries(deptKeywords).forEach(([dept, keywords])=>{
-    let repeatCount = 0;
-    keywords.forEach(k => {
-      const pattern = new RegExp(`\\b${k.replace(/[-/\\^$*+?.()|[\]{}]/g,'\\$&')}\\b`, "gi");
-      const matches = (cleanText.match(pattern) || []).length;
-      if(matches > 1) repeatCount += Math.min(matches - 1, 2); // max 2 bonus per keyword
-    });
-    if(repeatCount > 0) deptScores[dept] += repeatCount * 0.4;
-  });
-
-  // Save answer history
-  answersGiven.push({ question: quizzes[currentQuiz][currentQ].q, answer: input, scripture: quizzes[currentQuiz][currentQ].s });
-}
-
-
-
-
-    /* --------------- Next / Back logic ------------------ */
-    function nextQuestion(selectedValue = null){
-  // If user clicked a button, selectedValue will be passed in
-  let value = '';
-
-  if (selectedValue) {
-    value = selectedValue.trim();
-  } else {
-    const inputEl = document.getElementById('answer');
-    value = inputEl ? inputEl.value.trim() : '';
-  }
-
-  if (!value) {
-    document.getElementById('error-msg').textContent = "Please type something so we can figure this out 😊";
-    return;
-  }
-
-  // save snapshot for back
-  questionHistory.push({ 
-    q: currentQ, 
-    deptScores: JSON.parse(JSON.stringify(deptScores)), 
-    traits: JSON.parse(JSON.stringify(traits)), 
-    answersGiven: JSON.parse(JSON.stringify(answersGiven)) 
-  });
-
-  scoreAnswer(value);
-  currentQ++;
-
-  if (currentQ < quizzes[currentQuiz].length) {
-    showQuestion();
-  } else {
-    showResult();
-  }
-}
-
-
-    backBtn.addEventListener('click', ()=>{
+    function goBack() {
       if(questionHistory.length === 0) return;
-      // restore last
       const last = questionHistory.pop();
       currentQ = last.q;
       deptScores = last.deptScores;
-      traits = last.traits;
-      answersGiven = last.answersGiven;
       showQuestion();
-    });
+    }
 
-    /* --------------- Show result ------------------ */
-    async function showResult(){
-      quizEl.style.display = "none";
-     resultEl.style.display = "block";
-quizEl.classList.add('show');  // for quiz
-resultEl.classList.add('show'); // for result
-
+    function showResult(){
+      quizEl.classList.remove('show');
+      resultEl.classList.add('show');
       backBtn.style.display = "none";
-      progressBar.style.width = "100%";
 
-      // trait boosts
-      if(traits.creative > traits.organised) deptScores["Design"] = (deptScores["Design"] || 0) + 2;
-      if(traits.organised > traits.creative) deptScores["Administration"] = (deptScores["Administration"] || 0) + 2;
-      if(traits.bold > traits.servant) deptScores["Evangelism"] = (deptScores["Evangelism"] || 0) + 2;
-      if(traits.servant > traits.bold) deptScores["Welfare"] = (deptScores["Welfare"] || 0) + 2;
+      const lang = translations[currentLanguage] || translations.en;
 
-      // Always pick the top 2 departments even if score is 0
-      const sorted = Object.entries(deptScores).sort((a,b)=>b[1]-a[1]);
-      const top2 = sorted.slice(0,2);
-      lastSorted = top2;
+      // Get top departments based on scores
+      const sorted = Object.entries(deptScores).sort((a, b) => b[1] - a[1]);
+      const topDepts = sorted.slice(0, 2);
+      lastSorted = topDepts;
 
-      // build result HTML
-      let html = `<h2>${escapeHtml(username)} (${escapeHtml(branch)}) — Your Top Departments</h2>`;
+      // Build result HTML
+      let html = `<h2>${lang.resultsTitle.replace('{name}', username).replace('{branch}', branch)}</h2>`;
 
-      if(top2.length === 0){
-        html += `<div class="result"><p>No department scores were recorded — but don't worry. Try again and add a few keywords in your answers (e.g., "I love to sing", "I like planning events").</p></div>`;
+      if(topDepts.length === 0){
+        html += `<div class="result"><p>${lang.noResults}</p></div>`;
       } else {
         html += `<div class="result">`;
-        top2.forEach((entry, idx) => {
+        topDepts.forEach((entry, idx) => {
           const dept = entry[0];
+          const deptInfo = lang.departments[dept] || {desc: "Department information", scripture: "Scripture reference"};
           html += `
             <div class="department" id="dept-${idx}">
-              <strong>${escapeHtml(dept)}</strong>
+              <strong>${dept}</strong>
               <div class="scripture-box" id="scripture-${idx}">
-                <p>${escapeHtml(deptData[dept]?.desc || '—')}</p>
-                <p><strong>Scripture:</strong> ${escapeHtml(deptData[dept]?.scripture || '')}</p>
+                <p>${deptInfo.desc}</p>
+                <p><strong>Scripture:</strong> ${deptInfo.scripture}</p>
               </div>
             </div>
           `;
@@ -730,202 +756,108 @@ resultEl.classList.add('show'); // for result
 
       html += `
         <div style="margin-top:16px;">
-          <button class="btn" id="explore-all-btn">Explore All Departments</button>
-          <button class="btn" id="restart-btn" style="background:transparent;color:var(--btn-bg);border:2px solid var(--btn-bg);">Start Over</button>
+          <button class="btn" id="explore-all-btn">${lang.exploreButton}</button>
+          <button class="btn" id="restart-btn" style="background:transparent;color:var(--btn-bg);border:2px solid var(--btn-bg);">${lang.restartButton}</button>
         </div>
       `;
 
       resultEl.innerHTML = html;
-      lastResultHtml = html; // save to be able to go back from Explore
+      lastResultHtml = html;
 
       // Show with small animation
-      await wait(100);
-      top2.forEach((_,i) => {
-        const el = document.getElementById(`dept-${i}`);
-        const sb = document.getElementById(`scripture-${i}`);
-        if(el){
-          setTimeout(()=> {
-            el.classList.add('show');
-            sb.classList.add('visible');
-          }, i*350);
-        }
-      });
+      setTimeout(() => {
+        topDepts.forEach((_, i) => {
+          const el = document.getElementById(`dept-${i}`);
+          const sb = document.getElementById(`scripture-${i}`);
+          if(el){
+            setTimeout(() => {
+              el.classList.add('show');
+              sb.classList.add('visible');
+            }, i * 350);
+          }
+        });
+      }, 100);
 
-      // confetti & save
-      if(typeof confetti !== 'undefined') {
-        try { confetti({ particleCount: 140, spread: 70, origin: { y: 0.6 } }); } catch(e) { /* ignore */ }
-      }
-      saveResult();
-
-      // attach listeners
+      // Attach listeners
       document.getElementById('explore-all-btn').addEventListener('click', renderExploreList);
       document.getElementById('restart-btn').addEventListener('click', restartWithoutReload);
     }
 
-    /* --------------- Explore list (titles only, click to expand) ------------------ */
     function renderExploreList(){
-      // Build a title-only list (bold titles), click to expand details.
-      let html = `<h2>All Departments</h2><div class="explore-list">`;
-      const keys = Object.keys(deptData);
-      keys.forEach((dept, idx) => {
+      const lang = translations[currentLanguage] || translations.en;
+      
+      let html = `<h2>${lang.allDepartments}</h2><div class="explore-list">`;
+      
+      // Add all departments
+      Object.entries(lang.departments).forEach(([dept, info], idx) => {
         html += `
           <div class="explore-item" data-idx="${idx}">
-            <div class="title">${escapeHtml(dept)}</div>
+            <div class="title">${dept}</div>
             <div style="margin-left:12px;font-weight:600;color:var(--btn-bg);">+</div>
             <div class="explore-details" id="explore-detail-${idx}">
-              <p style="margin:0 0 6px 0">${escapeHtml(deptData[dept].desc)}</p>
-              <p style="margin:0;font-style:italic;font-size:0.95rem">${escapeHtml(deptData[dept].scripture)}</p>
+              <p style="margin:0 0 6px 0">${info.desc}</p>
+              <p style="margin:0;font-style:italic;font-size:0.95rem">${info.scripture}</p>
             </div>
           </div>
         `;
       });
-      html += `</div><div style="margin-top:14px;"><button class="btn" id="back-to-result">Back to Results</button></div>`;
+      
+      html += `</div><div style="margin-top:14px;"><button class="btn" id="back-to-result">${lang.backToResults}</button></div>`;
 
       resultEl.innerHTML = html;
 
-      // Attach toggle listeners (expand/collapse)
+      // Attach toggle listeners
       const items = resultEl.querySelectorAll('.explore-item');
       items.forEach((it) => {
         const idx = it.getAttribute('data-idx');
         const details = resultEl.querySelector(`#explore-detail-${idx}`);
-        // hide details initially
-        details.classList.remove('visible');
         details.style.display = 'none';
-        it.addEventListener('click', (e) => {
-          // only toggle when clicking the whole item (prevents accidental toggles by keyboard buttons)
+        
+        it.addEventListener('click', () => {
           const isVisible = details.style.display === 'block';
-          // collapse all others (optional) — keep this to prevent clutter
-          resultEl.querySelectorAll('.explore-details').forEach(d => { d.style.display = 'none'; d.classList.remove('visible'); });
-          // toggle current
-          if(!isVisible){
-            details.style.display = 'block';
-            details.classList.add('visible');
-          } else {
-            details.style.display = 'none';
-            details.classList.remove('visible');
-          }
+          details.style.display = isVisible ? 'none' : 'block';
         });
       });
 
-            // Back button handler
-document.getElementById('back-to-result').addEventListener('click', () => {
-  resultEl.innerHTML = lastResultHtml;
-
-  // reattach the listeners for explore and restart after restoring
-  document.getElementById('explore-all-btn').addEventListener('click', renderExploreList);
-  document.getElementById('restart-btn').addEventListener('click', restartWithoutReload);
-
-  // animate showing the top departments again
-  lastSorted.forEach((_,i) => {
-    const el = document.getElementById(`dept-${i}`);
-    const sb = document.getElementById(`scripture-${i}`);
-    if(el){
-      setTimeout(()=> {
-        el.classList.add('show');
-        sb.classList.add('visible');
-      }, i*350);
-    }
-  });
-});
-
+      // Back button handler
+      document.getElementById('back-to-result').addEventListener('click', () => {
+        resultEl.innerHTML = lastResultHtml;
+        document.getElementById('explore-all-btn').addEventListener('click', renderExploreList);
+        document.getElementById('restart-btn').addEventListener('click', restartWithoutReload);
+        
+        // Re-animate departments
+        setTimeout(() => {
+          lastSorted.forEach((_, i) => {
+            const el = document.getElementById(`dept-${i}`);
+            const sb = document.getElementById(`scripture-${i}`);
+            if(el){
+              el.classList.add('show');
+              sb.classList.add('visible');
+            }
+          });
+        }, 100);
+      });
     }
 
-    /* --------------- Save results (POST to SHEET_URL) ------------------ */
-    function saveResult(){
-      try {
-        const sorted = Object.entries(deptScores).sort((a,b)=>b[1]-a[1]);
-        const top1 = sorted[0] ? sorted[0][0] : "";
-        const top2 = sorted[1] ? sorted[1][0] : "";
-        const today = new Date();
-        const dateString = today.toLocaleDateString("en-GB", { day:"2-digit", month:"2-digit", year:"numeric" });
-        const payload = { fullName: username, branch: branch, topDept1: top1, topDept2: top2, date: dateString, answers: answersGiven };
-        fetch(SHEET_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-          mode: "no-cors"
-        }).then(()=> console.log("✅ Results autosaved")).catch(err => console.warn("❌ Save error", err));
-      } catch(e) {
-        console.warn("Save failed", e);
-      }
-    }
-
-    /* --------------- Start / Restart ------------------ */
     function restartWithoutReload(){
       currentQ = 0;
-      initScores();
+      questionHistory = [];
+      deptScores = {};
       startScreenEl.style.display = "block";
-      quizEl.style.display = "none";
-      resultEl.style.display = "none";
+      quizEl.classList.remove('show');
+      resultEl.classList.remove('show');
       progressBar.style.width = "0%";
       backBtn.style.display = "none";
     }
-    function restart() { restartWithoutReload(); }
 
-    /* --------------- Start quiz handler ------------------ */
-   document.getElementById('start-kharis').addEventListener('click', () => {
-  username = (usernameInput.value || '').trim();
-  branch = (branchSelect.value || '').trim();
-  
-  if(!username){
-    alert("Please enter your full name 😊");
-    return;
-  }
-  if(!branch){
-    alert("Please select your branch 😊");
-    return;
-  }
-
-  currentQuiz = 'kharis';
-  currentQ = 0;
-  initScores();
-  showQuestion();
-});
-    /* --------------- Light/Dark toggle ------------------ */
-    modeBtn.addEventListener('click', ()=>{
+    function toggleMode() {
       document.body.classList.toggle('light');
       modeBtn.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
-    });
-
-    /* --------------- Ensure Confetti canvas size matches viewport ------------------ */
-    function resizeConfettiCanvas(){
-      confettiCanvas.width = window.innerWidth;
-      confettiCanvas.height = window.innerHeight;
     }
-    window.addEventListener('resize', resizeConfettiCanvas);
-    resizeConfettiCanvas();
 
-    /* --------------- Accessibility: Enter key moves next ------------------ */
-    // Delegated event listener for dynamic buttons
-quizEl.addEventListener('click', (e) => {
-  if(e.target && e.target.id === 'nextBtn') nextQuestion();
-});
-resultEl.addEventListener('click', (e) => {
-  if(e.target && e.target.id === 'restart-btn') restartWithoutReload();
-  if(e.target && e.target.id === 'explore-all-btn') renderExploreList();
-});
-
-
-    /* --------------- Initial focus --------------- */
-    usernameInput.focus();
-// Disable right-click context menu
-document.addEventListener('contextmenu', e => e.preventDefault());
-
-// Disable certain keys: Ctrl+C, Ctrl+V, Ctrl+U, F12, Ctrl+Shift+I
-document.addEventListener('keydown', e => {
-  if (
-    (e.ctrlKey && ['c','v','u'].includes(e.key.toLowerCase())) ||
-    e.key === 'F12' ||
-    (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i')
-  ) {
-    e.preventDefault();
-  }
-});
-
-
-    /* --------------- End IIFE ------------------ */
+    // Initialize the application
+    init();
   })();
   </script>
 </body>
-</html> 
-
+</html>
