@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,6 +87,21 @@
       z-index: 1000;
     }
     
+body.light .language-select {
+  color: #3c1361;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+body.light .language-select option {
+  background: rgba(255, 255, 255, 0.95);
+  color: #3c1361;
+}
+
+body.light .language-dropdown-container::after {
+  color: #3c1361;
+}
+
+
     .language-select {
       appearance: none;
       -webkit-appearance: none;
@@ -397,6 +413,7 @@ const translations = {
         restartButton: "Start Over",
         allDepartments: "All Departments",
         backToResults: "Back to Results",
+       answerPlaceholder: "Type your answer here...",
         errorMsg: "Please type something so we can figure this out 😊",
         noResults: "No department scores were recorded — but don't worry. Try again and add a few keywords in your answers (e.g., \"I love to sing\", \"I like planning events\").",
         // Quiz questions
@@ -447,6 +464,7 @@ const translations = {
         resultsTitle: "{name} ({branch}) — Vos Départements Principaux",
         exploreButton: "Explorer Tous les Départements",
         restartButton: "Recommencer",
+        answerPlaceholder: "Tapez votre réponse ici...",
         allDepartments: "Tous les Départements",
         backToResults: "Retour aux Résultats",
         errorMsg: "Veuillez taper quelque chose pour que nous puissions comprendre 😊",
@@ -497,6 +515,7 @@ const translations = {
         resultsTitle: "{name} ({branch}) — Tus Departamentos Principales",
         exploreButton: "Explorar Todos los Departamentos",
         restartButton: "Comenzar de Nuevo",
+        answerPlaceholder: "Escribe tu respuesta aquí...",
         allDepartments: "Todos los Departamentos",
         backToResults: "Volver a Resultados",
         errorMsg: "Por favor escribe algo para que podamos entender 😊",
@@ -547,6 +566,7 @@ de: {
   backButton: "← Zurück",
   resultsTitle: "{name} ({branch}) — Deine Top-Departments",
   exploreButton: "Alle Departments erkunden",
+answerPlaceholder: "Geben Sie hier Ihre Antwort ein...",
   restartButton: "Von vorne beginnen",
   allDepartments: "Alle Departments",
   backToResults: "Zurück zu den Ergebnissen",
@@ -595,6 +615,7 @@ tw: {
   questionCounter: "Asɛm {current} fi {total} mu",
   nextButton: "Ɛdi akyire",
   backButton: "← San kɔ",
+answerPlaceholder: "Geben Sie hier Ihre Antwort ein...",
   resultsTitle: "{name} ({branch}) — Wo Apam a Ɛsɛ Sen Biara",
   exploreButton: "Hwehwɛ Apam Nyinaa",
   restartButton: "San Hyɛ Ase",
@@ -645,6 +666,7 @@ sv: {
   questionCounter: "Fråga {current} av {total}",
   nextButton: "Nästa",
   backButton: "← Tillbaka",
+answerPlaceholder: "Skriv ditt svar här...",
   resultsTitle: "{name} ({branch}) — Dina Bästa Department",
   exploreButton: "Utforska Alla Department",
   restartButton: "Börja Om",
@@ -695,6 +717,7 @@ gd: {
   questionCounter: "Ceist {current} à {total}",
   nextButton: "Air adhart",
   backButton: "← Air ais",
+answerPlaceholder: "Taing do fhreagairt an-seo...",
   resultsTitle: "{name} ({branch}) — Na Roinnean as Fheàrr Agad",
   exploreButton: "Rannsaich a h-uile Roinn",
   restartButton: "Tòisich às ùr",
@@ -774,34 +797,40 @@ gd: {
 
     /* --------------- Language functions ------------------ */
     function setLanguage(langCode) {
-      currentLanguage = langCode;
-      const lang = translations[langCode] || translations.en;
-      
-      // Update UI text
-      document.getElementById('pageTitle').textContent = lang.title;
-      document.getElementById('pageSubtitle').textContent = lang.subtitle;
-      document.getElementById('username').placeholder = lang.namePlaceholder;
-      document.querySelector('#branch option[disabled]').textContent = lang.branchPlaceholder;
-      document.getElementById('start-kharis').textContent = lang.startButton;
-      
-      // Update back button if visible
-      if (backBtn.style.display !== 'none') {
-        backBtn.textContent = lang.backButton;
-      }
-      
-      // Update quiz if active
-      if (quizEl.classList.contains('show')) {
-        showQuestion();
-      }
-      
-      // Update results if active
-      if (resultEl.classList.contains('show')) {
-        showResult();
-      }
-      
-      // Set the language attribute
-      document.documentElement.lang = langCode;
-    }
+  currentLanguage = langCode;
+  const lang = translations[langCode] || translations.en;
+  
+  // Update UI text
+  document.getElementById('pageTitle').textContent = lang.title;
+  document.getElementById('pageSubtitle').textContent = lang.subtitle;
+  document.getElementById('username').placeholder = lang.namePlaceholder;
+  document.querySelector('#branch option[disabled]').textContent = lang.branchPlaceholder;
+  document.getElementById('start-kharis').textContent = lang.startButton;
+  
+  // Update answer placeholder if quiz is active
+  const answerInput = document.getElementById('answer');
+  if (answerInput) {
+    answerInput.placeholder = lang.answerPlaceholder || 'Type your answer here...';
+  }
+  
+  // Update back button if visible
+  if (backBtn.style.display !== 'none') {
+    backBtn.textContent = lang.backButton;
+  }
+  
+  // Update quiz if active
+  if (quizEl.classList.contains('show')) {
+    showQuestion();
+  }
+  
+  // Update results if active
+  if (resultEl.classList.contains('show')) {
+    showResult();
+  }
+  
+  // Set the language attribute
+  document.documentElement.lang = langCode;
+}
 
     function handleLanguageChange() {
       setLanguage(this.value);
@@ -809,23 +838,25 @@ gd: {
 
     /* --------------- Quiz functions ------------------ */
     function startQuiz() {
-      username = (usernameInput.value || '').trim();
-      branch = (branchSelect.value || '').trim();
-      
-      if(!username){
-        alert("Please enter your full name 😊");
-        return;
-      }
-      if(!branch){
-        alert("Please select your branch 😊");
-        return;
-      }
+  username = (usernameInput.value || '').trim();
+  branch = (branchSelect.value || '').trim();
+  
+  const lang = translations[currentLanguage] || translations.en;
+  
+  if(!username){
+    alert(lang.namePlaceholder + " 😊");
+    return;
+  }
+  if(!branch){
+    alert(lang.branchPlaceholder + " 😊");
+    return;
+  }
 
-      currentQ = 0;
-      questionHistory = [];
-      deptScores = {};
-      showQuestion();
-    }
+  currentQ = 0;
+  questionHistory = [];
+  deptScores = {};
+  showQuestion();
+}
 
     function showQuestion(){
       const lang = translations[currentLanguage] || translations.en;
@@ -835,7 +866,7 @@ gd: {
         <div class="question-counter">${lang.questionCounter.replace('{current}', currentQ+1).replace('{total}', lang.questions.length)}</div>
         <div class="scripture">${qObj.s}</div>
         <div class="question">${qObj.q}</div>
-        <input id="answer" type="text" placeholder="Type your answer here..." aria-label="Your answer" />
+        <input id="answer" type="text" placeholder="${lang.answerPlaceholder || 'Type your answer here...'}" aria-label="Your answer" />
         <div id="error-msg" style="color:#ffd700;font-weight:600;text-align:center;margin-bottom:10px;"></div>
         <button class="btn" id="nextBtn">${lang.nextButton}</button>
       `;
@@ -1210,3 +1241,5 @@ init();
 </script>
 </body>
 </html>
+
+
