@@ -379,10 +379,10 @@
         slides[currentSlide].classList.add('active');
       }, 5000);
     }
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbxz0F4EoHusuSJ_e04shOtOrg9Hh8ijkSwgYQBE81yS7vD7p-6kUoOwj9P_mD5UcYNh/exec"; // replace if needed
 
-    // Language translations
-    const translations = {
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbztqvAbFeGcA9rZujRGscibe3cNDFBR0rOIdtsOKqc5p3gClb_r-xxeZ94MeAO6mQa7/exec";
+
+const translations = {
       en: {
         title: "Discover Your Kharis Department",
         subtitle: "Answer a few short questions to see where your gifting fits best.",
@@ -534,7 +534,208 @@ const SHEET_URL = "https://script.google.com/macros/s/AKfycbxz0F4EoHusuSJ_e04shO
           "Medios": { desc: "Personas creativas y conocedoras de la tecnología que capturan, diseñan y comparten contenido que difunde el mensaje con claridad y excelencia, haciendo visible la visión para todos.", scripture: "Habacuc 2:2 - 'Escribe la visión, y declárala en tablas.'" },
           "Palabra Hablada": { desc: "Personas expresivas y creativas que utilizan poesía, palabra hablada o arte performativo para inspirar y comunicar el evangelio con emoción e impacto.", scripture: "Salmos 19:14 - 'Sean gratos los dichos de mi boca y la meditación de mi corazón delante de ti.'" }
         }
-      }
+      },
+// Add this after the existing Spanish translation in your translations object
+de: {
+  title: "Entdecke Dein Kharis Department",
+  subtitle: "Beantworte ein paar kurze Fragen, um zu sehen, wo deine Begabungen am besten passen.",
+  namePlaceholder: "Gib deinen vollständigen Namen ein",
+  branchPlaceholder: "Wähle deine Zweigstelle",
+  startButton: "Quiz starten",
+  questionCounter: "Frage {current} von {total}",
+  nextButton: "Weiter",
+  backButton: "← Zurück",
+  resultsTitle: "{name} ({branch}) — Deine Top-Departments",
+  exploreButton: "Alle Departments erkunden",
+  restartButton: "Von vorne beginnen",
+  allDepartments: "Alle Departments",
+  backToResults: "Zurück zu den Ergebnissen",
+  errorMsg: "Bitte gib etwas ein, damit wir das herausfinden können 😊",
+  noResults: "Es wurden keine Department-Punkte aufgezeichnet - aber keine Sorge. Versuche es erneut und füge einige Schlüsselwörter in deine Antworten ein (z.B. \"Ich liebe es zu singen\", \"Ich mag die Planung von Veranstaltungen\").",
+  questions: [
+    { q: "Was gibt dir in chaotischen Situationen am meisten Halt?", s: "1 Korinther 14:33 - Denn Gott ist nicht ein Gott der Unordnung, sondern des Friedens." },
+    { q: "Wie möchtest du andere am liebsten beeinflussen?", s: "Matthäus 5:16 - So lasst euer Licht leuchten vor den Leuten." },
+    { q: "In einer Gruppe bist du die Person, die...", s: "Römer 12:6 - Wir haben verschiedene Gaben, nach der Gnade, die uns gegeben ist." },
+    { q: "Welchen Teil eines Gottesdienstes bemerkst du zuerst?", s: "Epheser 6:7 - Dient von Herzen, als dem Herrn und nicht den Menschen." },
+    { q: "Wenn du etwas leiten könntest, was wäre das?", s: "Josua 1:9 - Sei getrost und unverzagt." },
+    { q: "Was tust du natürlich, wenn jemand verletzt ist?", s: "2 Korinther 1:4 - Gott tröstet uns… damit wir andere trösten können." },
+    { q: "Was begeistert dich am meisten: erschaffen, organisieren, helfen oder mutig teilen?", s: "Kolosser 3:23 - Alles, was ihr tut, das tut von Herzen als dem Herrn und nicht den Menschen." },
+    { q: "Wenn du ein Talent für Gott einsetzen könntest, welches wäre das?", s: "1 Petrus 4:10 - Dient einander, ein jeder mit der Gabe, die er empfangen hat." }
+  ],
+  departments: {
+    "Administration": { desc: "Organisierte, detailorientierte und zuverlässige Personen, die sich in Planung, Koordination und reibungslosen Abläufen auszeichnen.", scripture: "1 Korinther 14:40 - 'Alles geschehe aber anständig und in Ordnung.'" },
+    "Kinderdepartment": { desc: "Geduldige, fürsorgliche und fröhliche Menschen, die es lieben, Kinder zu unterrichten, zu ermutigen und im Glauben zu inspirieren.", scripture: "Matthäus 19:14 - 'Lasset die Kindlein zu mir kommen und wehret ihnen nicht; denn solcher ist das Reich Gottes.'" },
+    "Design": { desc: "Innovative und künstlerische Personen, die Ideen visuell zum Leben erwecken und Kreativität nutzen, um Botschaften exzellent zu kommunizieren.", scripture: "2 Mose 35:35 - 'Er hat sie mit Weisheit des Herzens erfüllt, zu machen allerlei Werk.'" },
+    "Drama": { desc: "Ausdrucksstarke, einfallsreiche und mutige Personen, die Geschichtenerzählen und Performance nutzen, um das Evangelium auf kraftvolle Weise zu kommunizieren.", scripture: "Matthäus 13:34 - 'Dies alles redete Jesus in Gleichnissen zu dem Volk, und ohne Gleichnisse redete er nichts zu ihnen.'" },
+    "Gastfreundschaft": { desc: "Warme, einladende und fürsorgliche Menschen, die eine Atmosphäre der Liebe und des Komforts für alle schaffen, denen sie dienen.", scripture: "1 Petrus 4:9 - 'Seid gastfrei untereinander ohne Murren.'" },
+    "Host Team": { desc: "Freundliche, zugängliche und serviceorientierte Personen, die jeden gesehen, wertgeschätzt und willkommen fühlen lassen.", scripture: "Römer 15:7 - 'Darum nehmet einander an, gleichwie Christus euch angenommen hat zu Gottes Lob.'" },
+    "Produktion": { desc: "Fleißige und detailorientierte Personen, die für den reibungslosen Ablauf der Gottesdienste durch technische Exzellenz und Unterstützung hinter den Kulissen sorgen.", scripture: "Kolosser 3:23 - 'Alles, was ihr tut, das tut von Herzen als dem Herrn und nicht den Menschen.'" },
+    "Musik": { desc: "Leidenschaftliche, talentierte und geisterfüllte Personen, die ihre Gaben nutzen, um andere in die Anbetung und Gegenwart Gottes zu führen.", scripture: "Psalm 95:1-2 - 'Kommt, lasst uns dem HERRN frohlocken und jauchzen dem Hort unsres Heils! Lasst uns mit Danken vor sein Angesicht kommen und mit Psalmen ihm jauchzen!'" },
+    "Nachfolge": { desc: "Fürsorgliche, aufmerksame und beziehungsorientierte Personen, die neue Gläubige begleiten, Vertrauen aufbauen und geistliches Wachstum fördern.", scripture: "Matthäus 28:19 - 'Darum gehet hin und machet zu Jüngern alle Völker.'" },
+    "Neue Gläubige": { desc: "Geduldige, unterstützende und mentororientierte Menschen, die anderen helfen, den Glauben zu verstehen und geistlich zu wachsen.", scripture: "Kolosser 1:28 - 'Den verkündigen wir und ermahnen alle Menschen und lehren alle Menschen in aller Weisheit.'" },
+    "Evangelisation": { desc: "Mutige, extrovertierte und selbstbewusste Personen, die das Evangelium teilen und sich mit Mitgefühl und Mut auf andere einlassen.", scripture: "Markus 16:15 - 'Und er sprach zu ihnen: Gehet hin in alle Welt und predigt das Evangelium aller Kreatur.'" },
+    "Heiligtumshüter": { desc: "Verantwortungsbewusste, gewissenhafte und detailorientierte Menschen, die stolz darauf sind, eine saubere und geordnete Anbetungsumgebung zu erhalten.", scripture: "1 Korinther 3:16 - 'Wisset ihr nicht, dass ihr Gottes Tempel seid und der Geist Gottes in euch wohnt?'" },
+    "Aufbau": { desc: "Praktische, handwerklich begabte und lösungsorientierte Personen, die Räume vorbereiten, Logistik managen und Probleme lösen.", scripture: "Nehemia 4:6 - 'So bauten wir die Mauer und fügten alles zusammen bis an die halbe Höhe.'" },
+    "Soziale Medien": { desc: "Kreative, technikaffine und kommunikative Persönlichkeiten, die Geschichtenerzählen und Online-Communitys lieben.", scripture: "Psalm 19:14 - 'Die Worte meines Mundes und das Sinnen meines Herzens gefalle dir, HERR.'" },
+    "Ton": { desc: "Technisch versierte, aufmerksame und präzise Personen, die sich mit Audiomanagement und der Erstellung nahtloser Klangerlebnisse auskennen.", scripture: "1 Korinther 14:7 - 'Wenn auch die leblosen Dinge, die Töne von sich geben, es sei eine Flöte oder Harfe: wenn sie nicht unterschiedliche Töne geben, wie kann man erkennen, was gepfiffen oder geharft wird?'" },
+    "Uniform": { desc: "Akribische, disziplinierte und detailorientierte Menschen, die Wert auf Präsentation, Konsistenz und hohe Standards legen.", scripture: "1 Timotheus 4:12 - 'Niemand verachte deine Jugend; sondern sei ein Vorbild den Gläubigen.'" },
+    "Ordner": { desc: "Freundliche, zugängliche und serviceorientierte Personen, die Menschen auf praktische Weise führen, helfen und betreuen.", scripture: "Hebräer 13:17 - 'Gehorchet euren Lehrern und folget ihnen.'" },
+    "Wohlfahrt": { desc: "Mitfühlende, einfühlsame und großzügige Menschen, die motiviert sind, Bedürftigen zu helfen und Unterstützung zu bieten.", scripture: "Galater 6:2 - 'Einer trage des anderen Last.'" },
+    "Sicherheit": { desc: "Wachsame, verantwortungsbewusste und schützende Personen, die Sicherheit priorisieren und eine sichere Umgebung für andere gewährleisten.", scripture: "Sprüche 27:12 - 'Der Kluge sieht das Unglück und verbirgt sich; die Unverständigen gehen hindurch und werden gestraft.'" },
+    "Medien": { desc: "Kreative und technikaffine Personen, die Inhalte erfassen, gestalten und teilen, die die Botschaft mit Klarheit und Exzellenz verbreiten und die Vision für alle sichtbar machen.", scripture: "Habakuk 2:2 - 'Schreibe das Gesicht und male es auf eine Tafel.'" },
+    "Spoken Word": { desc: "Ausdrucksstarke und kreative Personen, die Poesie, gesprochenes Wort oder Performance-Kunst nutzen, um zu inspirieren und das Evangelium mit Emotion und Wirkung zu kommunizieren.", scripture: "Psalm 19:14 - 'Die Worte meines Mundes und das Sinnen meines Herzens gefalle dir, HERR.'" }
+  }
+},
+tw: {
+  title: "Hwehwɛ Wo Kharis Apam No",
+  subtitle: "Buae nsɛm a ɛyɛ kakraa bi na wuhu baabi a wo donno betumi ayɛ adwuma.",
+  namePlaceholder: "Twerɛ wo din nyinaa",
+  branchPlaceholder: "Paw wo branch",
+  startButton: "Hyɛ ase",
+  questionCounter: "Asɛm {current} fi {total} mu",
+  nextButton: "Ɛdi akyire",
+  backButton: "← San kɔ",
+  resultsTitle: "{name} ({branch}) — Wo Apam a Ɛsɛ Sen Biara",
+  exploreButton: "Hwehwɛ Apam Nyinaa",
+  restartButton: "San Hyɛ Ase",
+  allDepartments: "Apam Nyinaa",
+  backToResults: "San Kɔ Nsɛm a Wonya No Hɔ",
+  errorMsg: "Yɛsrɛ wo, twerɛ biribi sɛ yɛbetumi ahu eyi 😊",
+  noResults: "Wɔnnyae apam biara nkyerɛ - nanso yɛmma haw. San hyɛ ase na fa nsɛm titiriw bi aka wo nsɛm mu (sɛ, \"Medɔ dwom\", \"M'ani gye adeyɛ ahyehyɛ ho\").",
+  questions: [
+    { q: "Sɛ biribi yɛ fɔ owura a, dɛn na ɛma wo yɛ dwo?", s: "1 Korintofo 14:33 – Onyankopɔn nyɛ ɔbarima a ne dwumadi yɛ fɔ, na mmom ɔno ne Asomdwoe." },
+    { q: "Wo pɛ sɛ woyɛ adwuma wɔ nnipa so dɛn?", s: "Mateo 5:16 – Momma hom kan mmerɛw sɛnea ɛbɛyɛ a nnipa behu." },
+    { q: "Wɔ kuw bi mu no, wone nea...", s: "Romafo 12:6 – Yɛwɔ adom ahorow, sɛdeɛ yɛde adom a yɛde ma no." },
+    { q: "Dɛn na wohu no koraa wɔ ahyɛase wɔ asɔre dwumadie mu?", s: "Efesofo 6:7 – Som sɛ Awurade na woresom, na mmom nnipa." },
+    { q: "Sɛ wobetumi de biribi di dwuma a, ebɛyɛ dɛn?", s: "Yosua 1:9 – Yɛ obi a wowo bold ne courage." },
+    { q: "Sɛ obi awu ne ho a, dɛn na woyɛ koraa?", s: "2 Korintofo 1:4 – Onyankopɔn de ahotɔ ma yɛ... sɛ yɛbetumi de ahotɔ ama afoforo." },
+    { q: "Dɛn na ɛma wo ani gye sen biara: sɛdeɛ wubɛyɛ ade, sɛdeɛ wubɛhyehyɛ, sɛdeɛ wubɛboa, anaa sɛdeɛ wubɛkyerɛ ade bold?", s: "Kolosefo 3:23 – Biribiara a moyɛ, momma mommɔ ne ho mmɔden sɛ Awurade na moreyɛ, na mmom nnipa." },
+    { q: "Sɛ wowɔ donno baako a wobetumi de ayɛ adwuma ma Onyankopɔn a, ebɛyɛ dɛn?", s: "1 Petro 4:10 – Momma obiara de adom a wɔde ma no nso mma afoforo." }
+  ],
+  departments: {
+    "Administration": { desc: "Nnipa a wɔyɛ organized, wɔhwɛ details, na wɔwɔ trust a wɔtumi yɛ planning, coordination, na wɔahwɛ sɛ adwuma nyinaa kɔ yie.", scripture: "1 Korintofo 14:40 - 'Nanso biribiara nyinaa mfa nhyɛ order mu.'" },
+    "Nnipa Nkumaa Apam": { desc: "Nnipa a wɔwɔ abotɔrɛ, wɔhwɛ nnipa so, na wɔani gye a wɔpɛ sɛ wɔkyerɛkyerɛ, wɔhyɛ nnipa nkumaa den, na wɔma wɔn ani gye sɛ wɔnyɛ adwuma wɔ gyidie mu.", scripture: "Mateo 19:14 - 'Momma mma nkumaa no mmra me nkyɛn na mmmfa hɔ mmpa wɔn; efirisɛ ɔman a ɛwɔ soro no wɔ wɔn.'" },
+    "Design": { desc: "Nnipa a wɔwɔ creativity, wɔyɛ ade fɛfɛɛfɛ, na wɔde wɔn adwene bɔ adwene a ɛyɛ fɛ na ɛkyerɛ ade kɛse.", scripture: "Exodus 35:35 - 'Ɔde wisdom ahyɛ wɔn akoma mu sɛ wɔnyɛ adwuma ahodoɔ nyinaa.'" },
+    "Drama": { desc: "Nnipa a wɔtumi kasa yie, wɔwɔ adwene, na wɔyɛ bold a wɔde storytelling ne performance kyerɛ asɛmpa wɔ kwan a ɛyɛ anigyeɛ mu.", scripture: "Mateo 13:34 - 'Yesu kaa eyi nyinaa kyerɛɛ nnipa no wɔ anansesɛm mu; na ɔnnyae ankasa nkyerɛɛ wɔn biribiara.'" },
+    "Hospitality": { desc: "Nnipa a wɔyɛ fɛ, wɔaccɛ, na wɔhwɛ nnipa so a wɔbɔ ɔkwan a ɛyɛ dɔ ne ahotɔ ma obiara a wɔsom wɔn.", scripture: "1 Petro 4:9 - 'Montie nnipa a wɔba mo nkyɛn ahyɛ mo nkuran.'" },
+    "Host Team": { desc: "Nnipa a wɔyɛ friendly, approachable, na wɔpɛ sɛ wɔsom a wɔma obiara ahwɛ sɛ wɔahu wɔn, wɔahyɛ wɔn anuonyam, na wɔate wɔn wɔ fie.", scripture: "Romafo 15:7 - 'Enti montie nnipa a wɔba mo nkyɛn sɛ Kristo atie mo, sɛdeɛ ɛbɛyɛ a Onyankopɔn anya anuonyam.'" },
+    "Production": { desc: "Nnipa a wɔyɛ diligent ne detail-oriented a wɔhwɛ sɛ asɔre dwumadie kɔ yie wɔ technical excellence ne behind-the-scenes support so.", scripture: "Kolosefo 3:23 - 'Biribiara a moyɛ, momma mommɔ ne ho mmɔden sɛ Awurade na moreyɛ, na mmom nnipa.'" },
+    "Music": { desc: "Nnipa a wɔwɔ passion, wɔwɔ skill, na Holy Spirit di wɔn so a wɔde wɔn donno di dwuma sɛ wɔkɔkɔ nnipa kɔɔ worship ne Onyankopɔn anim.", scripture: "Dwom 95:1-2 - 'Mommra, yɛnnwom mmoroso mma Awurade; yɛnto nwenee mma yɛn nkwagyeɛ no bo. Yɛmmra ne anim mma no ayɛyie na yɛnnwom mmoroso mma no.'" },
+    "Follow Up": { desc: "Nnipa a wɔhwɛ nnipa so, wɔtie, na wɔpɛ sɛ wɔdi nnipa nkyɛn a wɔpɛ sɛ wɔkɔkɔ agyananom foforo, wɔsii trust, na wɔhyɛ wɔn den sɛ wɔnyɛ adwuma wɔ spiritual growth mu.", scripture: "Mateo 28:19 - 'Enti mommɛkɔ na moyɛ nnipa nyinaa ayɛ disciples.'" },
+    "Nnipa Foforo a Wɔagye Wɔn Di": { desc: "Nnipa a wɔwɔ abotɔrɛ, wɔboa, na wɔpɛ sɛ wɔkyerɛkyerɛ a wɔpɛ sɛ wɔboa afoforo sɛ wɔnte gyidie ase na wɔnyɛ adwuma wɔ spiritual growth mu.", scripture: "Kolosefo 1:28 - 'Ɔno na yɛrekɛkyerɛ, yɛretu fo, na yɛrekyerɛkyerɛ nnipa nyinaa wɔ nyansa nyinaa mu.'" },
+    "Evangelism": { desc: "Nnipa a wɔyɛ bold, outgoing, na confident a wɔpɛ sɛ wɔkyerɛ asɛmpa na wɔde compassion ne courage di nnipa nkyɛn.", scripture: "Mark 16:15 - 'Ɔka kyerɛɛ wɔn sɛ, Mommɛkɔ wiase nyinaa na mokyerɛ asɛmpa no kɔ nnipa nyinaa nkyɛn.'" },
+    "Sanctuary Keepers": { desc: "Nnipa a wɔyɛ responsible, conscientious, na detail-focused a wɔyɛ fɛ sɛ wɔhwɛ sɛ worship baabi no yɛ fɛ, clean, na order wɔ mu.", scripture: "1 Korintofo 3:16 - 'Annyɛ mo nhunu sɛ moyɛ Onyankopɔn tempol na Onyankopɔn Sunsum tena mo mu?'" },
+    "Set-up": { desc: "Nnipa a wɔyɛ hands-on, practical, na solution-oriented a wɔpɛ sɛ wɔhyehyɛ beaeɛ, wɔhwɛ logistics, na wɔpaw nsɛnnahɔ.", scripture: "Nehemia 4:6 - 'Enti yɛsii soro no bio, na soro no nyinaa kɔɔ ne fa.'" },
+    "Social Media": { desc: "Nnipa a wɔwɔ creativity, wɔnim technology, na wɔtumi kasa yie a wɔpɛ sɛ wɔkyerɛ anansesɛm na wɔde online communities di dwuma.", scripture: "Dwom 19:14 - 'Momma me n'anom nsɛm ne m'akoma adwene nnyɛ biribi a ɛyɛ fɛ wɔ wo anim, Awurade.'" },
+    "Sound": { desc: "Nnipa a wɔnim technical ade, wɔtie, na wɔyɛ precise a wɔpɛ sɛ wɔhwɛ audio na wɔyɛ sound experiences a ɛyɛ smooth.", scripture: "1 Korintofo 14:7 - 'Sɛ nnwonkoro a enni nkwa no mma nnwon a ɛyɛ soronko a, obi betumi ahu dɛn na wɔreto?'" },
+    "Uniform": { desc: "Nnipa a wɔyɛ meticulous, disciplined, na detail-oriented a wɔhwɛ presentation, consistency, ne high standards.", scripture: "1 Timoteo 4:12 - 'Mma obiara nnye wo ntoatoa so wɔ wo ntorɔ mu; na mmom yɛ nhwɛsoɔ ma agyidifoɔ no wɔ nsɛm, wɔ nneyɛe, wɔ dɔ, wɔ sunsum, wɔ gyidie, ne wɔ fɛfɛɛfɛ mu.'" },
+    "Ushers": { desc: "Nnipa a wɔyɛ friendly, approachable, na service-minded a wɔpɛ sɛ wɔkɔkɔ nnipa, wɔboa, na wɔhwɛ nnipa so wɔ kwan a ɛyɛ practical.", scripture: "Hebrifo 13:17 - 'Montie mo akandifoɔ na monyɛ sɛdeɛ wɔrekyerɛ; efirisɛ wɔhwɛ mo kra sɛ wɔbɛgye mo asɛm.'" },
+    "Welfare": { desc: "Nnipa a wɔwɔ compassion, empathy, na generous heart a wɔpɛ sɛ wɔboa nnipa a wɔwɔ ahokyere na wɔde support ma.", scripture: "Galatifo 6:2 - 'Mommɔ awerɛhow ahorow di dwuma.'" },
+    "Security": { desc: "Nnipa a wɔyɛ alert, responsible, na protective a wɔhwɛ safety na wɔhwɛ sɛ baabi a wɔwɔ no safe ma afoforo.", scripture: "Mmebusɛm 27:12 - 'Onipa a ɔyɛ onyansafoɔ hunu ahɔhɔ na ɔkɔto ho; na mmom nnipa a wɔnnyɛ nteaseɛ no kɔ so na wɔhunu amane.'" },
+    "Media": { desc: "Nnipa a wɔwɔ creativity ne technology nimdeɛ a wɔtumi capture, design, na share content a ɛkyerɛ asɛm no wɔ clarity ne excellence mu, na ɛma vision no yɛ ade a obiara betumi ahu.", scripture: "Habakkuk 2:2 - 'Twerɛ vision no; na ma no yɛ ade a ɛyɛ kɛseɛ wɔ tablet so, sɛdeɛ ɔbɛtumi ahu na ɔdannan.'" },
+    "Spoken Word": { desc: "Nnipa a wɔtumi kasa yie na wɔwɔ creativity a wɔde poetry, spoken word, anaa performance art di dwuma sɛ wɔhyɛ nnipa den na wɔkyerɛ asɛmpa wɔ emotion ne impact mu.", scripture: "Dwom 19:14 - 'Momma me n'anom nsɛm ne m'akoma adwene nnyɛ biribi a ɛyɛ fɛ wɔ wo anim, Awurade.'" }
+  }
+},
+sv: {
+  title: "Upptäck Ditt Kharis Department",
+  subtitle: "Svara på några korta frågor för att se var dina gåvor passar bäst.",
+  namePlaceholder: "Ange ditt fullständiga namn",
+  branchPlaceholder: "Välj din församling",
+  startButton: "Starta Quiz",
+  questionCounter: "Fråga {current} av {total}",
+  nextButton: "Nästa",
+  backButton: "← Tillbaka",
+  resultsTitle: "{name} ({branch}) — Dina Bästa Department",
+  exploreButton: "Utforska Alla Department",
+  restartButton: "Börja Om",
+  allDepartments: "Alla Department",
+  backToResults: "Tillbaka till Resultat",
+  errorMsg: "Vänligen skriv något så vi kan lista ut detta 😊",
+  noResults: "Inga departmentpoäng registrerades - men oroa dig inte. Försök igen och lägg till några nyckelord i dina svar (t.ex. \"Jag älskar att sjunga\", \"Jag gillar att planera evenemang\").",
+  questions: [
+    { q: "När du möter kaos, vad ger dig mest grund?", s: "1 Korinthier 14:33 – Ty Gud är inte en oredans Gud, utan en fridens Gud." },
+    { q: "Hur föredrar du att påverka andra?", s: "Matteus 5:16 – Låta så edert ljus lysa inför människorna." },
+    { q: "I en grupp är du den som...", s: "Romarbrevet 12:6 – Vi har olika gåvor, efter den nåd som är given oss." },
+    { q: "Vilken del av en gudstjänst märker du naturligt först?", s: "Efesierbrevet 6:7 – Tjäna av hjärtat, som Herren och icke människor." },
+    { q: "Om du kunde leda något, vad skulle det vara?", s: "Josua 1:9 – Var stark och modig." },
+    { q: "När någon är sårad, vad gör du naturligt?", s: "2 Korinthier 1:4 – Gud tröstar oss… så att vi kan trösta andra." },
+    { q: "Vad exciterar dig mest: att skapa, organisera, hjälpa eller dela frimodigt?", s: "Kolosserbrevet 3:23 – Allt vad I gören, det gören av hjärtat, såsom Herren och icke människor." },
+    { q: "Om du hade en talang att använda för Gud, vad skulle det vara?", s: "1 Petrusbrevet 4:10 – Var och en må förvalta den nådegåva han har fått, till att tjäna varandra." }
+  ],
+  departments: {
+    "Administration": { desc: "Organiserade, detaljorienterade och pålitliga personer som utmärker sig på planering, koordinering och säkerställer smidiga operationer.", scripture: "1 Korinthier 14:40 - 'Men allt skall ske hederligt och ordningsfullt.'" },
+    "Barnavdelning": { desc: "Tålmodiga, omhändertagande och glada personer som älskar att lära, uppmuntra och inspirera barn att växa i tron.", scripture: "Matteus 19:14 - 'Låten barnen komma till mig, och förmenen dem det icke; ty sådana hör Guds rike till.'" },
+    "Design": { desc: "Innovativa och konstnärliga personer som för idéer till liv visuellt, använder kreativitet för att kommunicera budskap med excellens.", scripture: "2 Mosebok 35:35 - 'Han har fyllt dem med vishet att göra allahanda arbete.'" },
+    "Drama": { desc: "Uttrycksfulla, fantasifulla och modiga personer som använder berättande och uppträdande för att kommunicera evangeliet på kraftfulla sätt.", scripture: "Matteus 13:34 - 'Allt detta talade Jesus i liknelser till folket, och utan liknelse talade han intet till dem.'" },
+    "Gästfrihet": { desc: "Varma, välkomnande och omtänksamma personer som skapar en atmosfär av kärlek och komfort för alla de tjänar.", scripture: "1 Petrusbrevet 4:9 - 'Varen gästfria mot varandra utan knot.'" },
+    "Värdteam": { desc: "Vänliga, tillgängliga och serviceinriktade personer som får alla att känna sig sedda, värderade och hemma.", scripture: "Romarbrevet 15:7 - 'Därför, taken emot varandra, såsom ock Kristus har tagit emot eder, till Guds ära.'" },
+    "Produktion": { desc: "Flitiga och detaljorienterade personer som säkerställer smidig gudstjänst genom teknisk excellens och stöd bakom kulisserna.", scripture: "Kolosserbrevet 3:23 - 'Och allt vad I gören, det gören av hjärtat, såsom Herren och icke människor.'" },
+    "Musik": { desc: "Passionerade, skickliga och andefyllda personer som använder sina gåvor för att leda andra in i tillbedjan och Guds närvaro.", scripture: "Psaltaren 95:1-2 - 'Kommen, låtom oss glädjossignade till Herren, låtom oss jubla till vår frälsnings klippa. Låtom oss träda fram inför hans ansikte med tacksägelse, låtom oss jubla till honom med psalmer.'" },
+    "Uppföljning": { desc: "Omtänksamma, uppmärksamma och relationsinriktade personer som gillar att guida nya troende, bygga förtroende och uppmuntra andlig tillväxt.", scripture: "Matteus 28:19 - 'Gån therefore ut och gören alla folk till lärjungar.'" },
+    "Nya Troende": { desc: "Tålmodiga, stödjande och mentorinriktade personer som älskar att hjälpa andra att förstå tron och växa andligt.", scripture: "Kolosserbrevet 1:28 - 'Honom förkunna vi, förmana var och en och lära var och en i all vishet.'" },
+    "Evangelisation": { desc: "Modiga, utåtriktade och självsäkra personer som älskar att dela evangeliet och engagera andra med medkänsla och mod.", scripture: "Markus 16:15 - 'Och han sade till dem: Gån ut i hela världen och prediken evangelium för all skapad varelse.'" },
+    "Sanctuary Keepers": { desc: "Ansvarstagande, samvetsgranna och detaljinriktade personer som är stolta över att upprätthålla en ren och ordnad tillbedjansmiljö.", scripture: "1 Korinthier 3:16 - 'Veten I icke att I ären Guds tempel och att Guds Ande bor i eder?'" },
+    "Uppbyggnad": { desc: "Praktiska, hands-on och lösningsorienterade personer som gillar att förbereda utrymmen, hantera logistik och problemlösning.", scripture: "Nehemja 4:6 - 'Så byggde vi muren, och hela muren blev färdig till hälften.'" },
+    "Sociala Medier": { desc: "Kreativa, tekniskt kunniga och kommunikativa personligheter som gillar berättande och engagerande communitys online.", scripture: "Psaltaren 19:14 - 'Låt min muns ord och min hjärtas tanke vara täckliga inför dig, Herre.'" },
+    "Ljud": { desc: "Tekniskt sinnade, uppmärksamma och precisa personer som trivs med att hantera ljud och skapa sömlösa ljudupplevelser.", scripture: "1 Korinthier 14:7 - 'Om ock livlösa ting, som giva ljud, vare sig flöjt eller harpa, icke giva skilda toner, huru skall man veta vad som spelas på flöjten eller harpan?'" },
+    "Uniform": { desc: "Meticulösa, disciplinerade och detaljorienterade personer som värderar presentation, konsistens och höga standarder.", scripture: "1 Timotheusbrevet 4:12 - 'Låt ingen förakta din ungdomskraft, utan var en föredöme för de troende.'" },
+    "Väktare": { desc: "Vänliga, tillgängliga och serviceinriktade personer som gillar att guida, assistera och ta hand om människor på praktiska sätt.", scripture: "Hebreerbrevet 13:17 - 'Hörsammen edra ledare och varen dem underdåniga.'" },
+    "Välfärd": { desc: "Medkännande, empatiska och generösa personer som är motiverade att hjälpa behövande och ge stöd.", scripture: "Galaterbrevet 6:2 - 'Bären varandras bördor.'" },
+    "Säkerhet": { desc: "Vaksamma, ansvarstagande och skyddande personer som prioriterar säkerhet och säkerställer en säker miljö för andra.", scripture: "Ordspråksboken 27:12 - 'Den kloke ser faran och gömmer sig, men de enfaldiga gå fram och lida straff.'" },
+    "Media": { desc: "Kreativa och tekniskt kunniga personer som fångar, designer och delar innehåll som sprider budskapet med klarhet och excellens, gör visionen synlig för alla.", scripture: "Habackuk 2:2 - 'Skriv synen och måla den på tavlor.'" },
+    "Spoken Word": { desc: "Uttrycksfulla och kreativa personer som använder poesi, spoken word eller performancekonst för att inspirera och kommunicera evangeliet med känsla och impact.", scripture: "Psaltaren 19:14 - 'Låt min muns ord och min hjärtas tanke vara täckliga inför dig, Herre.'" }
+  }
+},
+gd: {
+  title: "Lorg do Roinn Kharis",
+  subtitle: "Freagair beagan cheistean gus faicinn càite a bheil do thàlantan a' freagairt as fheàrr.",
+  namePlaceholder: "Cuir a-steach d' ainm slàn",
+  branchPlaceholder: "Tagh do mheur",
+  startButton: "Tòisich an Cuis",
+  questionCounter: "Ceist {current} à {total}",
+  nextButton: "Air adhart",
+  backButton: "← Air ais",
+  resultsTitle: "{name} ({branch}) — Na Roinnean as Fheàrr Agad",
+  exploreButton: "Rannsaich a h-uile Roinn",
+  restartButton: "Tòisich às ùr",
+  allDepartments: "A h-uile Roinn",
+  backToResults: "Air ais gu na Toraidhean",
+  errorMsg: "Cuir rudeigin sìos mas e do thoil e gus an cuir sinn seo ri chèile 😊",
+  noResults: "Cha deach sgòr roinn a chlàradh - ach na gabh dragh. Feuch a-rithist agus cuir faclan-luirg ris do fhreagairtean (me \"Is toigh leam seinn\", \"Is toigh leam tachartasan a phlanadh\").",
+  questions: [
+    { q: "Nuair a tha an sabaid ann, dè an rud as treasa a chuireas talamh fo do chasan?", s: "1 Corintianaich 14:33 - Oir chan e Dia urchraid no mhì-rian ach sìth." },
+    { q: "Ciamar as fheàrr leat buaidh a thoirt air daoine eile?", s: "Mata 5:16 - Lasadh mar sin do sholas air beulaibh dhaoine." },
+    { q: "Ann an buidheann, is tusa an neach a...", s: "Ròmanaich 12:6 - A rèir na gràis a bhuilneadh dhuinn, tha diofar thìodhlacan againn." },
+    { q: "Dè an pàirt de sheirbheis a tha thu a' mothachadh an toiseach?", s: "Ephesianaich 6:7 - A' seirbheisachadh le deòin na chridhe, mar don Tighearna." },
+    { q: "Nam faodadh tu rud a stiùireadh, dè bhiodh ann?", s: "Iosua 1:9 - Bi làidir agus misneachail." },
+    { q: "Nuair a tha cuideigin ann an cràdh, dè nì thu gu nàdarra?", s: "2 Corintianaich 1:4 - Tha Dia a' comhfhurtachdainn... gus an comhfhurtachd sinn daoine eile." },
+    { q: "Dè as brosnachaiche dhut: a bhith a' cruthachadh, ag' eagrachadh, a' cuideachadh, no a' roinn gu dàn?", s: "Colosianaich 3:23 - Ge b'e dè nì sibh, obaraibh e leis an fhìor chridhe." },
+    { q: "Nam biodh aon tàlant agad airson a chleachdadh airson Dhè, dè bhiodh ann?", s: "1 Peadar 4:10 - Cleachdadh gach neach an tìodhlac a fhuair e a sheirbheis dhaoine eile." }
+  ],
+  departments: {
+    "Rianachd": { desc: "Daoine eagraichte, fiosrachail agus earbsach a tha air an làimh le planadh, co-òrdanachadh, agus a' dèanamh cinnteach gu bheil gnìomhachd a' dol air adhart gu rèidh.", scripture: "1 Corintianaich 14:40 - 'Ach dèanar a h-uile càil ann an modh iomchaidh agus òrdail.'" },
+    "Roinn nan Clann": { desc: "Daoine foighidneach, altraimail agus aoibhneach a tha dèidheil air teagasg, brosnachadh, agus bhrosnachadh chloinn fàs ann an creideamh.", scripture: "Mata 19:14 - 'Leigibh leis na naoidhean teachd thugam, agus na bacamaid iad.'" },
+    "Dealbhadh": { desc: "Daoine ùr-ghnàthach agus ealanta a bheir beatha do bheachdan gu lèirsinneach, a' cleachdadh cruthachalachd gus teachdaireachdan a chur an cèill le sàr-mhathais.", scripture: "Ecsodus 35:35 - 'Lìon e iad le tuigse chridhe.'" },
+    "Dràma": { desc: "Daoine faireachail, mac-meanmnach agus dànach a chleachdas sgeulachd agus coileanadh gus an soisgeul a chur an cèill ann an dòighean cumhachdach.", scripture: "Mata 13:34 - 'Labhair Iosa na nithean sin uile ann an cosamhlachdan ris an t-sluagh.'" },
+    "Aoigheachd": { desc: "Daoine blàth, fàilteach agus cùramach a chruthaicheas àile de ghràdh agus de chomhfhurtachd dha a h-uile duine a bhios iad a' frithealadh.", scripture: "1 Peadar 4:9 - 'Dèanaibh aoigheachd dha chèile gun gràinsinn.'" },
+    "Sgioba Fàilte": { desc: "Daoine càirdeil, so-ruigsinneach agus seirbheis-minded a nì a h-uile duine a' faireachdainn air am faicinn, air an luach, agus aig an taigh.", scripture: "Ròmanaich 15:7 - 'Uime sin gabhaibh ribh a chèile, mar a ghabh Crìosd ribhse.'" },
+    "Riochdachadh": { desc: "Daoine dìcheallach agus fiosrachail a bheir cinnteach gu bheil seirbheisean a' dol air adhart gu rèidh tro mhathais teignigeach agus taic cùl-ùrlar.", scripture: "Colosianaich 3:23 - 'Ge b'e dè nì sibh, obaraibh e leis an fhìor chridhe.'" },
+    "Ceòl": { desc: "Daoine dìoghrasach, sgileil agus spioradail a chleachdas an tìodhlacan gus daoine eile a stiùireadh a-steach do adhradh agus do làthaireachd Dhè.", scripture: "Salm 95:1-2 - 'Thigibh, gabhaibh aoibhneas don Tighearna.'" },
+    "Leanmhainn": { desc: "Daoine cùramach, faiceallach agus dàimheach a tha a' còrdadh ri stiùireadh luchd-creidimh ùra, a' togail earbsa, agus a' brosnachadh fàis spioradail.", scripture: "Mata 28:19 - 'Imichibh uime sin, dèanaibh deisealan de na h-uile chinneadh.'" },
+    "Luchd-creidimh Ùra": { desc: "Daoine foighidneach, taiceil agus menteoraichte a tha dèidheil air cuideachadh le daoine eile creideamh a thuigsinn agus fàs spioradail.", scripture: "Colosianaich 1:28 - 'San tì sin tha sinn a' searmonachadh.'" },
+    "Soisgeulachd": { desc: "Daoine dàna, fàsaidh agus misneachail a tha dèidheil air an soisgeul a roinn agus a' dol an sàs le daoine eile le co-fhaireachdainn agus misneachd.", scripture: "Marc 16:15 - 'Agus thubhairt e riu, Imichibh air feadh an t-saoghail uile.'" },
+    "Luchd-gleidhidh an Naomh-lann": { desc: "Daoine cùramach, cogaiseach agus fiosrachail a tha moiteil a' cumail àrainneachd adhraidh glan agus òrdail.", scripture: "1 Corintianaich 3:16 - 'Nach eil fhios agaibh gur sibhse teampall Dhè?'" },
+    "Suidheachadh": { desc: "Daoine practaigeach, làimhseachail agus fuasgladh-minded a tha a' còrdadh ri àiteachan ullachadh, riaghladh loidhnichean, agus fuasgladh fhadartan.", scripture: "Nèhemiah 4:6 - 'Agus thog sinn am balla.'" },
+    "Meadhain Shòisealta": { desc: "Daoine cruthachail, teicneòlasach agus conaltraidh a tha a' còrdadh ri sgeulachd agus a' dol an sàs le coimhearsnachdan air-loidhne.", scripture: "Salm 19:14 - 'Biodh briathran mo bheòil.'" },
+    "Fuaim": { desc: "Daoine teignigeach, faiceallach agus mionaideach a nì soirbheachas le riaghladh claisneachd agus a' cruthachadh eòlasan fuaim rèidh.", scripture: "1 Corintianaich 14:7 - 'Ma bhios na h-innealan neo-bheò sin a' dèanamh fuaime.'" },
+    "Èideadh": { desc: "Daoine mionaideach, smachdail agus fiosrachail a tha a' cur luach air taisbeanadh, cunbhalachd, agus inbhean àrda.", scripture: "1 Timoteus 4:12 - 'Na leig le duine sam bith do òige a dhiùltadh.'" },
+    "Ushers": { desc: "Daoine càirdeil, so-ruigsinneach agus seirbheis-minded a tha a' còrdadh ri stiùireadh, cuideachadh, agus cùram air daoine ann an dòighean practaigeach.", scripture: "Eabhraich 13:17 - 'Thèidibh le ur luchd-stiùiridh.'" },
+    "Leas": { desc: "Daoine co-fhaireachdainneach, iochdmhor agus fialaidh a tha air an brosnachadh gus cuideachadh le daoine a tha ann an èiginn agus taic a thoirt seachad.", scripture: "Galatianaich 6:2 - 'Giùlainibh eallaidean a chèile.'" },
+    "Tèarainteachd": { desc: "Daoine faiceallach, cùramach agus dìonach a chuireas tèarainteachd air beulaibh agus a bheir cinnteach gu bheil àrainneachd sàbhailte airson daoine eile.", scripture: "Gnàth-fhacail 27:12 - 'An duine glic a chì an cunnart.'" },
+    "Meadhain": { desc: "Daoine cruthachail agus teicneòlasach a ghlacas, a dhealbhas, agus a roinn susbaint a sgaoileas an teachdaireachd le soilleireachd agus sàr-mhathais, a' dèanamh an lèirsinn so-lèir dha na h-uile.", scripture: "Habacuc 2:2 - 'Sgrìobh an sealladh.'" },
+    "Facal Labhairte": { desc: "Daoine faireachail agus cruthachail a chleachdas bàrdachd, facal labhairte, no ealain coileanaidh gus brosnachadh agus an soisgeul a chur an cèill le faireachdainn agus buaidh.", scripture: "Salm 19:14 - 'Biodh briathran mo bheòil.'" }
+  }
+}
       // Additional languages would follow the same pattern
     };
 
@@ -686,179 +887,220 @@ const SHEET_URL = "https://script.google.com/macros/s/AKfycbxz0F4EoHusuSJ_e04shO
     }
 
     function scoreAnswer(input) {
-      // Simplified scoring for demo - in a real implementation, this would
-      // analyze the text and assign scores to departments
-      const text = input.toLowerCase();
-      
-      // Just for demo purposes, assign some scores
-      if (text.includes('music') || text.includes('sing') || text.includes('worship')) {
-        deptScores['Music'] = (deptScores['Music'] || 0) + 2;
-      }
-      if (text.includes('child') || text.includes('kid') || text.includes('teach')) {
-        deptScores["Children's Department"] = (deptScores["Children's Department"] || 0) + 2;
-      }
-      if (text.includes('help') || text.includes('serve') || text.includes('care')) {
-        deptScores['Hospitality'] = (deptScores['Hospitality'] || 0) + 2;
-        deptScores['Welfare'] = (deptScores['Welfare'] || 0) + 1;
-      }
-      if (text.includes('organiz') || text.includes('plan') || text.includes('admin')) {
-        deptScores['Administration'] = (deptScores['Administration'] || 0) + 2;
-      }
-      
-      // Ensure all departments have at least some score
-      const lang = translations[currentLanguage] || translations.en;
-      Object.keys(lang.departments).forEach(dept => {
-        deptScores[dept] = deptScores[dept] || Math.random() * 0.5;
-      });
-    }
+  // Simplified scoring for demo - in a real implementation, this would
+  // analyze the text and assign scores to departments
+  const text = input.toLowerCase();
+  
+  // Just for demo purposes, assign some scores
+  if (text.includes('music') || text.includes('sing') || text.includes('worship')) {
+    deptScores['Music'] = (deptScores['Music'] || 0) + 2;
+  }
+  if (text.includes('child') || text.includes('kid') || text.includes('teach')) {
+    deptScores["Children's Department"] = (deptScores["Children's Department"] || 0) + 2;
+  }
+  if (text.includes('help') || text.includes('serve') || text.includes('care')) {
+    deptScores['Hospitality'] = (deptScores['Hospitality'] || 0) + 2;
+    deptScores['Welfare'] = (deptScores['Welfare'] || 0) + 1;
+  }
+  if (text.includes('organiz') || text.includes('plan') || text.includes('admin')) {
+    deptScores['Administration'] = (deptScores['Administration'] || 0) + 2;
+  }
+  
+  // Ensure all departments have at least some score
+  const lang = translations[currentLanguage] || translations.en;
+  Object.keys(lang.departments).forEach(dept => {
+    deptScores[dept] = deptScores[dept] || Math.random() * 0.5;
+  });
+} // <-- THIS CLOSING BRACE WAS MISSING
 
-    function goBack() {
-      if(questionHistory.length === 0) return;
-      const last = questionHistory.pop();
-      currentQ = last.q;
-      deptScores = last.deptScores;
-      showQuestion();
-    }
+function sendToGoogleSheets(data) {
+  console.log('Sending to Google Sheets:', data);
+  
+  fetch(SHEET_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => {
+    console.log('Response received:', response);
+    return response.json();
+  })
+  .then(result => {
+    console.log('Success:', result);
+  })
+  .catch(error => {
+    console.error('Error sending to Google Sheets:', error);
+  });
+}
 
-    function showResult(){
-      quizEl.classList.remove('show');
-      resultEl.classList.add('show');
-      backBtn.style.display = "none";
+function goBack() {
+  if(questionHistory.length === 0) return;
+  const last = questionHistory.pop();
+  currentQ = last.q;
+  deptScores = last.deptScores;
+  showQuestion();
+}
 
-      const lang = translations[currentLanguage] || translations.en;
+function showResult(){
+  quizEl.classList.remove('show');
+  resultEl.classList.add('show');
+  backBtn.style.display = "none";
 
-      // Get top departments based on scores
-      const sorted = Object.entries(deptScores).sort((a, b) => b[1] - a[1]);
-      const topDepts = sorted.slice(0, 2);
-      lastSorted = topDepts;
+  const lang = translations[currentLanguage] || translations.en;
 
-      // Build result HTML
-      let html = `<h2>${lang.resultsTitle.replace('{name}', username).replace('{branch}', branch)}</h2>`;
+  // Get top departments based on scores
+  const sorted = Object.entries(deptScores).sort((a, b) => b[1] - a[1]);
+  const topDepts = sorted.slice(0, 2);
+  lastSorted = topDepts;
 
-      if(topDepts.length === 0){
-        html += `<div class="result"><p>${lang.noResults}</p></div>`;
-      } else {
-        html += `<div class="result">`;
-        topDepts.forEach((entry, idx) => {
-          const dept = entry[0];
-          const deptInfo = lang.departments[dept] || {desc: "Department information", scripture: "Scripture reference"};
-          html += `
-            <div class="department" id="dept-${idx}">
-              <strong>${dept}</strong>
-              <div class="scripture-box" id="scripture-${idx}">
-                <p>${deptInfo.desc}</p>
-                <p><strong>Scripture:</strong> ${deptInfo.scripture}</p>
-              </div>
-            </div>
-          `;
-        });
-        html += `</div>`;
-      }
+  // Send results to Google Sheets
+  const resultsData = {
+    name: username,
+    branch: branch,
+    topDepartments: topDepts.map(dept => ({ name: dept[0], score: dept[1] })),
+    timestamp: new Date().toISOString(),
+    language: currentLanguage
+  };
+  sendToGoogleSheets(resultsData);
 
+  // Build result HTML
+  let html = `<h2>${lang.resultsTitle.replace('{name}', username).replace('{branch}', branch)}</h2>`;
+
+  if(topDepts.length === 0){
+    html += `<div class="result"><p>${lang.noResults}</p></div>`;
+  } else {
+    html += `<div class="result">`;
+    topDepts.forEach((entry, idx) => {
+      const dept = entry[0];
+      const deptInfo = lang.departments[dept] || {desc: "Department information", scripture: "Scripture reference"};
       html += `
-        <div style="margin-top:16px;">
-          <button class="btn" id="explore-all-btn">${lang.exploreButton}</button>
-          <button class="btn" id="restart-btn" style="background:transparent;color:var(--btn-bg);border:2px solid var(--btn-bg);">${lang.restartButton}</button>
+        <div class="department" id="dept-${idx}">
+          <strong>${dept}</strong>
+          <div class="scripture-box" id="scripture-${idx}">
+            <p>${deptInfo.desc}</p>
+            <p><strong>Scripture:</strong> ${deptInfo.scripture}</p>
+          </div>
         </div>
       `;
+    });
+    html += `</div>`;
+  }
 
-      resultEl.innerHTML = html;
-      lastResultHtml = html;
+  html += `
+    <div style="margin-top:16px;">
+      <button class="btn" id="explore-all-btn">${lang.exploreButton}</button>
+      <button class="btn" id="restart-btn" style="background:transparent;color:var(--btn-bg);border:2px solid var(--btn-bg);">${lang.restartButton}</button>
+    </div>
+  `;
 
-      // Show with small animation
+  resultEl.innerHTML = html;
+  lastResultHtml = html;
+
+    // Show with small animation - wait for DOM to render
+  setTimeout(() => {
+    topDepts.forEach((_, i) => {
       setTimeout(() => {
-        topDepts.forEach((_, i) => {
-          const el = document.getElementById(`dept-${i}`);
-          const sb = document.getElementById(`scripture-${i}`);
-          if(el){
-            setTimeout(() => {
-              el.classList.add('show');
-              sb.classList.add('visible');
-            }, i * 350);
-          }
-        });
-      }, 100);
+        const el = document.getElementById(`dept-${i}`);
+        const sb = document.getElementById(`scripture-${i}`);
+        if(el && sb){
+          el.classList.add('show');
+          sb.classList.add('visible');
+        }
+      }, i * 350);
+    });
 
-      // Attach listeners
-      document.getElementById('explore-all-btn').addEventListener('click', renderExploreList);
-      document.getElementById('restart-btn').addEventListener('click', restartWithoutReload);
+    // Attach listeners
+    const exploreBtn = document.getElementById('explore-all-btn');
+    const restartBtn = document.getElementById('restart-btn');
+    
+    if (exploreBtn) {
+      exploreBtn.addEventListener('click', renderExploreList);
     }
+    
+    if (restartBtn) {
+      restartBtn.addEventListener('click', restartWithoutReload);
+    }
+  }, 100);
+} // <-- This closes the showResult function
 
-    function renderExploreList(){
-      const lang = translations[currentLanguage] || translations.en;
-      
-      let html = `<h2>${lang.allDepartments}</h2><div class="explore-list">`;
-      
-      // Add all departments
-      Object.entries(lang.departments).forEach(([dept, info], idx) => {
-        html += `
-          <div class="explore-item" data-idx="${idx}">
-            <div class="title">${dept}</div>
-            <div style="margin-left:12px;font-weight:600;color:var(--btn-bg);">+</div>
-            <div class="explore-details" id="explore-detail-${idx}">
-              <p style="margin:0 0 6px 0">${info.desc}</p>
-              <p style="margin:0;font-style:italic;font-size:0.95rem">${info.scripture}</p>
-            </div>
-          </div>
-        `;
+// MOVE THESE FUNCTIONS OUTSIDE OF showResult - THEY SHOULD BE SEPARATE
+function renderExploreList(){
+  const lang = translations[currentLanguage] || translations.en;
+  
+  let html = `<h2>${lang.allDepartments}</h2><div class="explore-list">`;
+  
+  // Add all departments
+  Object.entries(lang.departments).forEach(([dept, info], idx) => {
+    html += `
+      <div class="explore-item" data-idx="${idx}">
+        <div class="title">${dept}</div>
+        <div style="margin-left:12px;font-weight:600;color:var(--btn-bg);">+</div>
+        <div class="explore-details" id="explore-detail-${idx}">
+          <p style="margin:0 0 6px 0">${info.desc}</p>
+          <p style="margin:0;font-style:italic;font-size:0.95rem">${info.scripture}</p>
+        </div>
+      </div>
+    `;
+  });
+  
+  html += `</div><div style="margin-top:14px;"><button class="btn" id="back-to-result">${lang.backToResults}</button></div>`;
+
+  resultEl.innerHTML = html;
+
+  // Attach toggle listeners
+  const items = resultEl.querySelectorAll('.explore-item');
+  items.forEach((it) => {
+    const idx = it.getAttribute('data-idx');
+    const details = resultEl.querySelector(`#explore-detail-${idx}`);
+    details.style.display = 'none';
+    
+    it.addEventListener('click', () => {
+      const isVisible = details.style.display === 'block';
+      details.style.display = isVisible ? 'none' : 'block';
+    });
+  });
+
+  // Back button handler
+  document.getElementById('back-to-result').addEventListener('click', () => {
+    resultEl.innerHTML = lastResultHtml;
+    document.getElementById('explore-all-btn').addEventListener('click', renderExploreList);
+    document.getElementById('restart-btn').addEventListener('click', restartWithoutReload);
+    
+    // Re-animate departments
+    setTimeout(() => {
+      lastSorted.forEach((_, i) => {
+        const el = document.getElementById(`dept-${i}`);
+        const sb = document.getElementById(`scripture-${i}`);
+        if(el){
+          el.classList.add('show');
+          sb.classList.add('visible');
+        }
       });
-      
-      html += `</div><div style="margin-top:14px;"><button class="btn" id="back-to-result">${lang.backToResults}</button></div>`;
+    }, 100);
+  });
+}
 
-      resultEl.innerHTML = html;
+function restartWithoutReload(){
+  currentQ = 0;
+  questionHistory = [];
+  deptScores = {};
+  startScreenEl.style.display = "block";
+  quizEl.classList.remove('show');
+  resultEl.classList.remove('show');
+  progressBar.style.width = "0%";
+  backBtn.style.display = "none";
+}
 
-      // Attach toggle listeners
-      const items = resultEl.querySelectorAll('.explore-item');
-      items.forEach((it) => {
-        const idx = it.getAttribute('data-idx');
-        const details = resultEl.querySelector(`#explore-detail-${idx}`);
-        details.style.display = 'none';
-        
-        it.addEventListener('click', () => {
-          const isVisible = details.style.display === 'block';
-          details.style.display = isVisible ? 'none' : 'block';
-        });
-      });
+function toggleMode() {
+  document.body.classList.toggle('light');
+  modeBtn.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+}
 
-      // Back button handler
-      document.getElementById('back-to-result').addEventListener('click', () => {
-        resultEl.innerHTML = lastResultHtml;
-        document.getElementById('explore-all-btn').addEventListener('click', renderExploreList);
-        document.getElementById('restart-btn').addEventListener('click', restartWithoutReload);
-        
-        // Re-animate departments
-        setTimeout(() => {
-          lastSorted.forEach((_, i) => {
-            const el = document.getElementById(`dept-${i}`);
-            const sb = document.getElementById(`scripture-${i}`);
-            if(el){
-              el.classList.add('show');
-              sb.classList.add('visible');
-            }
-          });
-        }, 100);
-      });
-    }
-
-    function restartWithoutReload(){
-      currentQ = 0;
-      questionHistory = [];
-      deptScores = {};
-      startScreenEl.style.display = "block";
-      quizEl.classList.remove('show');
-      resultEl.classList.remove('show');
-      progressBar.style.width = "0%";
-      backBtn.style.display = "none";
-    }
-
-    function toggleMode() {
-      document.body.classList.toggle('light');
-      modeBtn.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
-    }
-
-    // Initialize the application
-    init();
-  })();
-  </script>
+// Initialize the application
+init();
+})();
+</script>
 </body>
 </html>
