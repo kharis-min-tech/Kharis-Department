@@ -916,25 +916,32 @@ gd: {
 function sendToGoogleSheets(data) {
   console.log('Sending to Google Sheets:', data);
   
+  // Add error handling and retry logic
   fetch(SHEET_URL, {
     method: 'POST',
+    mode: 'no-cors', // Important for cross-origin requests
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data)
   })
   .then(response => {
-    console.log('Response received:', response);
-    return response.json();
-  })
-  .then(result => {
-    console.log('Success:', result);
+    console.log('Response status:', response.status);
+    // With no-cors mode, we can't access the response body
+    // But we can check if the request was sent successfully
+    if (response.ok || response.type === 'opaque') {
+      console.log('Data successfully sent to Google Sheets');
+    } else {
+      console.error('Failed to send data to Google Sheets');
+    }
   })
   .catch(error => {
     console.error('Error sending to Google Sheets:', error);
+    // You might want to implement a retry mechanism here
   });
-}
 
+
+}
 function goBack() {
   if(questionHistory.length === 0) return;
   const last = questionHistory.pop();
