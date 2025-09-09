@@ -380,7 +380,7 @@
       }, 5000);
     }
 
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbztqvAbFeGcA9rZujRGscibe3cNDFBR0rOIdtsOKqc5p3gClb_r-xxeZ94MeAO6mQa7/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbznl6ltl0ydLSa7STMUPQPguZ5Bf74aEuTMH6mhUwk88ee8xsaMA6QtVvBXclxUor28/exec";
 
 const translations = {
       en: {
@@ -885,8 +885,7 @@ gd: {
         showResult();
       }
     }
-
-    function scoreAnswer(input) {
+function scoreAnswer(input) {
   // Simplified scoring for demo - in a real implementation, this would
   // analyze the text and assign scores to departments
   const text = input.toLowerCase();
@@ -911,24 +910,43 @@ gd: {
   Object.keys(lang.departments).forEach(dept => {
     deptScores[dept] = deptScores[dept] || Math.random() * 0.5;
   });
-} // <-- THIS CLOSING BRACE WAS MISSING
+}
+
+function collectAnswers() {
+  const answers = [];
+  const lang = translations[currentLanguage] || translations.en;
+  
+  for (let i = 0; i < currentQ; i++) {
+    answers.push(`${lang.questions[i].q}: ${questionHistory[i]}`);
+  }
+  
+  return answers;
+}
 
 function sendToGoogleSheets(data) {
   console.log('Sending to Google Sheets:', data);
   
-  // Add error handling and retry logic
+  // Convert department names to English before sending
+  const englishData = {
+    name: data.name,
+    branch: data.branch,
+    // Map department names to English (without scores)
+    topDepartments: data.topDepartments.map(dept => convertToEnglish(dept)),
+    // Store the selected language
+    originalLanguage: data.language,
+    timestamp: new Date().toISOString()
+  };
+
   fetch(SHEET_URL, {
     method: 'POST',
-    mode: 'no-cors', // Important for cross-origin requests
+    mode: 'no-cors',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(englishData)
   })
   .then(response => {
     console.log('Response status:', response.status);
-    // With no-cors mode, we can't access the response body
-    // But we can check if the request was sent successfully
     if (response.ok || response.type === 'opaque') {
       console.log('Data successfully sent to Google Sheets');
     } else {
@@ -937,11 +955,9 @@ function sendToGoogleSheets(data) {
   })
   .catch(error => {
     console.error('Error sending to Google Sheets:', error);
-    // You might want to implement a retry mechanism here
   });
-
-
 }
+
 function goBack() {
   if(questionHistory.length === 0) return;
   const last = questionHistory.pop();
@@ -966,10 +982,12 @@ function showResult(){
   const resultsData = {
     name: username,
     branch: branch,
-    topDepartments: topDepts.map(dept => ({ name: dept[0], score: dept[1] })),
+    topDepartments: topDepts.map(dept => dept[0]),
+    answers: collectAnswers(), // ADD THIS LINE
     timestamp: new Date().toISOString(),
     language: currentLanguage
   };
+
   sendToGoogleSheets(resultsData);
 
   // Build result HTML
@@ -1005,7 +1023,7 @@ function showResult(){
   resultEl.innerHTML = html;
   lastResultHtml = html;
 
-    // Show with small animation - wait for DOM to render
+  // Show with small animation - wait for DOM to render
   setTimeout(() => {
     topDepts.forEach((_, i) => {
       setTimeout(() => {
@@ -1030,6 +1048,9 @@ function showResult(){
       restartBtn.addEventListener('click', restartWithoutReload);
     }
   }, 100);
+
+
+
 } // <-- This closes the showResult function
 
 // MOVE THESE FUNCTIONS OUTSIDE OF showResult - THEY SHOULD BE SEPARATE
@@ -1099,6 +1120,84 @@ function restartWithoutReload(){
   progressBar.style.width = "0%";
   backBtn.style.display = "none";
 }
+
+
+// Helper function to convert department names to English
+function convertToEnglish(deptName) {
+  const departmentMap = {
+    // English to English (base case)
+    "Administration": "Administration",
+    "Children's Department": "Children's Department",
+    "Design": "Design",
+    "Drama": "Drama",
+    "Hospitality": "Hospitality",
+    "Host Team": "Host Team",
+    "Production": "Production",
+    "Music": "Music",
+    "Follow Up": "Follow Up",
+    "New Believers": "New Believers",
+    "Evangelism": "Evangelism",
+    "Sanctuary Keepers": "Sanctuary Keepers",
+    "Set-up": "Set-up",
+    "Social Media": "Social Media",
+    "Sound": "Sound",
+    "Uniform": "Uniform",
+    "Ushers": "Ushers",
+    "Welfare": "Welfare",
+    "Security": "Security",
+    "Media": "Media",
+    "Spoken Word": "Spoken Word",
+    
+    // French to English
+    "Administration": "Administration",
+    "Département des Enfants": "Children's Department",
+    "Design": "Design",
+    "Drame": "Drama",
+    "Hospitalité": "Hospitality",
+    "Équipe d'Accueil": "Host Team",
+    "Production": "Production",
+    "Musique": "Music",
+    "Suivi": "Follow Up",
+    "Nouveaux Croyants": "New Believers",
+    "Évangélisation": "Evangelism",
+    "Gardiens du Sanctuaire": "Sanctuary Keepers",
+    "Installation": "Set-up",
+    "Médias Sociaux": "Social Media",
+    "Son": "Sound",
+    "Uniforme": "Uniform",
+    "Huissiers": "Ushers",
+    "Bien-être": "Welfare",
+    "Sécurité": "Security",
+    "Médias": "Media",
+    "Parole Parlée": "Spoken Word",
+    
+    // Spanish to English
+    "Administración": "Administration",
+    "Departamento Infantil": "Children's Department",
+    "Diseño": "Design",
+    "Drama": "Drama",
+    "Hospitalidad": "Hospitality",
+    "Equipo de Anfitriones": "Host Team",
+    "Producción": "Production",
+    "Música": "Music",
+    "Seguimiento": "Follow Up",
+    "Nuevos Creyentes": "New Believers",
+    "Evangelismo": "Evangelism",
+    "Guardianes del Santuario": "Sanctuary Keepers",
+    "Preparación": "Set-up",
+    "Redes Sociales": "Social Media",
+    "Sonido": "Sound",
+    "Uniforme": "Uniform",
+    "Ujieres": "Ushers",
+    "Bienestar": "Welfare",
+    "Seguridad": "Security",
+    "Medios": "Media",
+    "Palabra Hablada": "Spoken Word"
+  };
+  
+  return departmentMap[deptName] || deptName;
+}
+
 
 function toggleMode() {
   document.body.classList.toggle('light');
