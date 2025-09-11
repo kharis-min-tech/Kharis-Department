@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1231,15 +1233,40 @@ function speakText(text, langCode) {
         // Set language based on selected language
         utterance.lang = getLanguageCode(langCode);
         
-        // Set a pleasant voice
+        // Set a more natural voice with better parameters
         const voices = speechSynthesis.getVoices();
-        const preferredVoice = voices.find(voice => 
-            voice.lang.includes(langCode) && voice.localService === true
+        
+        // Find the best available voice for the language
+        let bestVoice = voices.find(voice => 
+            voice.lang.includes(langCode) && 
+            voice.localService === false && // Cloud voices often sound more natural
+            !voice.name.includes('Robot') && // Avoid robotic voices
+            !voice.name.includes('Zira') && // Avoid specific robotic voices
+            !voice.name.includes('David')
         );
         
-        if (preferredVoice) {
-            utterance.voice = preferredVoice;
+        // If no cloud voice found, try to find any natural-sounding voice
+        if (!bestVoice) {
+            bestVoice = voices.find(voice => 
+                voice.lang.includes(langCode) && 
+                !voice.name.includes('Robot') &&
+                !voice.name.includes('Microsoft') // Often robotic
+            );
         }
+        
+        // Fallback to any available voice
+        if (!bestVoice) {
+            bestVoice = voices.find(voice => voice.lang.includes(langCode));
+        }
+        
+        if (bestVoice) {
+            utterance.voice = bestVoice;
+        }
+        
+        // Adjust speech parameters for more natural sound
+        utterance.rate = 1.0; // Normal speed
+        utterance.pitch = 1.0; // Normal pitch
+        utterance.volume = 1.0; // Full volume
         
         window.speechSynthesis.speak(utterance);
     } else {
@@ -1247,19 +1274,19 @@ function speakText(text, langCode) {
     }
 }
 
+
 function getLanguageCode(langCode) {
     const languageMap = {
-        'en': 'en-GB',
+        'en': 'en-US', // Using US English for more natural voices
         'fr': 'fr-FR',
         'es': 'es-ES',
         'de': 'de-DE',
-        'tw': 'ak-GH', // Twi (Ghana)
+        'tw': 'en-GB', // Twi might not be widely supported, fallback to English
         'sv': 'sv-SE',
-        'gd': 'gd-GB'  // Scottish Gaelic
+        'gd': 'en-GB'  // Scottish Gaelic might not be widely supported
     };
-    return languageMap[langCode] || 'en-GB';
+    return languageMap[langCode] || 'en-US';
 }
-
 function stopSpeech() {
     if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
