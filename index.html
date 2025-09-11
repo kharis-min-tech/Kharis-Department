@@ -1220,6 +1220,7 @@ function restartWithoutReload(){
 }
 
 // Speech synthesis functions
+// Replace the speakText function with this improved version
 function speakText(text, langCode) {
     if ('speechSynthesis' in window) {
         // Cancel any ongoing speech
@@ -1230,64 +1231,152 @@ function speakText(text, langCode) {
         // Set language based on selected language
         utterance.lang = getLanguageCode(langCode);
         
-        // Set a more natural voice with better parameters
+        // Get all available voices
         const voices = speechSynthesis.getVoices();
         
-        // Find the best available voice for the language
-        let bestVoice = voices.find(voice => 
-            voice.lang.includes(langCode) && 
-            voice.localService === false && // Cloud voices often sound more natural
-            !voice.name.includes('Robot') && // Avoid robotic voices
-            !voice.name.includes('Zira') && // Avoid specific robotic voices
-            !voice.name.includes('David')
-        );
+        // Special handling for mobile devices
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         
-        // If no cloud voice found, try to find any natural-sounding voice
-        if (!bestVoice) {
-            bestVoice = voices.find(voice => 
+        // Special handling for Twi (Ghanaian) language
+        if (langCode === 'tw') {
+            // First, try to find Ghanaian-specific voices if available
+            let twiVoice = voices.find(voice => 
+                voice.lang.includes('gh') || // Ghana locale
+                voice.lang.includes('ak') || // Akan language (which includes Twi)
+                voice.name.toLowerCase().includes('africa') ||
+                voice.name.toLowerCase().includes('ghana') ||
+                voice.name.toLowerCase().includes('akan') ||
+                voice.name.toLowerCase().includes('twi')
+            );
+            
+            // If no Ghana-specific voice, try other African accents
+            if (!twiVoice) {
+                twiVoice = voices.find(voice => 
+                    voice.lang.includes('ng') || // Nigerian
+                    voice.lang.includes('za') || // South African
+                    voice.name.toLowerCase().includes('african')
+                );
+            }
+            
+            // For mobile devices, use a different approach
+            if (!twiVoice && isMobile) {
+                // On mobile, prioritize UK English voices which often sound more natural
+                twiVoice = voices.find(voice => 
+                    voice.lang.includes('en-GB') && 
+                    !voice.name.includes('Robot')
+                );
+                
+                // If no UK English, try any non-robotic English voice
+                if (!twiVoice) {
+                    twiVoice = voices.find(voice => 
+                        voice.lang.includes('en') && 
+                        !voice.name.includes('Robot') &&
+                        !voice.name.includes('Microsoft')
+                    );
+                }
+            }
+            
+            // If still no African voice, use a more generic approach
+            if (!twiVoice) {
+                twiVoice = voices.find(voice => 
+                    voice.lang.includes('en') && 
+                    !voice.name.includes('Robot') &&
+                    !voice.name.includes('Zira') &&
+                    !voice.name.includes('David')
+                );
+            }
+            
+            if (twiVoice) {
+                utterance.voice = twiVoice;
+                // Adjust parameters for more natural African speech patterns
+                utterance.rate = isMobile ? 0.95 : 0.9; // Slightly slower for clarity
+                utterance.pitch = isMobile ? 1.05 : 1.0; // Slightly higher pitch on mobile
+            }
+        } else {
+            // For other languages
+            let bestVoice = voices.find(voice => 
                 voice.lang.includes(langCode) && 
                 !voice.name.includes('Robot') &&
-                !voice.name.includes('Microsoft') // Often robotic
+                !voice.name.includes('Zira') &&
+                !voice.name.includes('David')
             );
+            
+            // Mobile-specific voice selection
+            if (!bestVoice && isMobile) {
+                bestVoice = voices.find(voice => 
+                    voice.lang.includes(langCode) && 
+                    !voice.name.includes('Robot') &&
+                    !voice.name.includes('Microsoft')
+                );
+            }
+            
+            if (!bestVoice) {
+                bestVoice = voices.find(voice => voice.lang.includes(langCode));
+            }
+            
+            if (bestVoice) {
+                utterance.voice = bestVoice;
+            }
+            
+            // Adjust parameters for mobile devices
+            if (isMobile) {
+                utterance.rate = 0.95; // Slightly slower on mobile
+                utterance.pitch = 1.0;
+            } else {
+                utterance.rate = 1.0;
+                utterance.pitch = 1.0;
+            }
         }
         
-        // Fallback to any available voice
-        if (!bestVoice) {
-            bestVoice = voices.find(voice => voice.lang.includes(langCode));
-        }
+        utterance.volume = 1.0;
         
-        if (bestVoice) {
-            utterance.voice = bestVoice;
-        }
+        // Add event listeners for better debugging
+        utterance.onstart = function() {
+            console.log('Speech started with voice:', utterance.voice ? utterance.voice.name : 'default');
+        };
         
-        // Adjust speech parameters for more natural sound
-        utterance.rate = 1.0; // Normal speed
-        utterance.pitch = 1.0; // Normal pitch
-        utterance.volume = 1.0; // Full volume
+        utterance.onerror = function(event) {
+            console.error('Speech synthesis error:', event.error);
+        };
         
         window.speechSynthesis.speak(utterance);
     } else {
         console.log('Speech Synthesis not supported');
+        // Fallback: show a message that voice isn't supported
+        alert('Text-to-speech is not supported on this device.');
     }
 }
 
-
+// Update the getLanguageCode function for better mobile support
 function getLanguageCode(langCode) {
     const languageMap = {
-        'en': 'en-US', // Using US English for more natural voices
+        'en': 'en-US',
         'fr': 'fr-FR',
         'es': 'es-ES',
         'de': 'de-DE',
-        'tw': 'en-GB', // Twi might not be widely supported, fallback to English
+        'tw': 'en-GB', // Use UK English for Twi content
         'sv': 'sv-SE',
-        'gd': 'en-GB'  // Scottish Gaelic might not be widely supported
+        'gd': 'en-GB'  // Use UK English for Scottish Gaelic
     };
     return languageMap[langCode] || 'en-US';
 }
-function stopSpeech() {
+
+// Add a function to populate voice options for debugging
+function populateVoiceList() {
     if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
+        const voices = speechSynthesis.getVoices();
+        console.log('Available voices:');
+        voices.forEach(voice => {
+            console.log(`${voice.name} (${voice.lang}) - ${voice.localService ? 'local' : 'remote'}`);
+        });
     }
+}
+
+// Call this when voices are loaded
+if ('speechSynthesis' in window) {
+    speechSynthesis.onvoiceschanged = function() {
+        populateVoiceList();
+    };
 }
 // Helper function to convert department names to English
 function convertToEnglish(deptName) {
@@ -1377,4 +1466,3 @@ init();
 </script>
 </body>
 </html>
-
