@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -833,9 +831,27 @@ answerPlaceholder: "Taing do fhreagairt an-seo...",
     let lastSorted = [];
 
     /* --------------- Initialize ------------------ */
-  function init() {
+  function getOptimalLanguageCode(langCode, isIOS) {
+    const languageMap = {
+        'en': 'en-GB', // Prefer British English on iOS (better voices)
+        'fr': 'fr-FR', 
+        'es': 'es-ES',
+        'de': 'de-DE',
+        'tw': isIOS ? 'en-GB' : 'en-GH', // Use UK English for iOS (better African accent simulation)
+        'sv': 'sv-SE',
+        'gd': 'en-GB'  // Use UK English for Scottish Gaelic
+    };
+    return languageMap[langCode] || 'en-GB';
+}
+function init() {
     initSlideshow();
     setLanguage('en');
+
+function stopSpeech() {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+    }
+}
     
     // Load voices for speech synthesis
     if ('speechSynthesis' in window) {
@@ -1223,117 +1239,85 @@ function restartWithoutReload(){
 }
 
 // Speech synthesis functions
-function speakText(text, langCode) {
-    if ('speechSynthesis' in window) {
-        // Cancel any ongoing speech
-        window.speechSynthesis.cancel();
-        
-        const utterance = new SpeechSynthesisUtterance(text);
-        const voices = speechSynthesis.getVoices();
-        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-        
-        // Set language based on device capabilities
-        utterance.lang = getOptimalLanguageCode(langCode, isMobile);
-        
-        let selectedVoice = findBestVoice(voices, langCode, isMobile);
-        
-        if (selectedVoice) {
-            utterance.voice = selectedVoice;
-            console.log('Using voice:', selectedVoice.name, 'for language:', langCode);
-        } else {
-            console.log('No optimal voice found, using default for:', langCode);
-        }
-        
-        // Optimize speech parameters for mobile
-        utterance.rate = isMobile ? 0.95 : 1.0;
-        utterance.pitch = isMobile ? 1.05 : 1.0;
-        utterance.volume = 1.0;
-        
-        // Add error handling
-        utterance.onerror = function(event) {
-            console.error('Speech synthesis error:', event.error);
-            // Fallback to audio files if available
-            playAudioFallback(langCode, text);
-        };
-        
-        utterance.onend = function() {
-            console.log('Speech finished');
-        };
-        
-        window.speechSynthesis.speak(utterance);
-    } else {
-        console.log('Speech Synthesis not supported');
-        playAudioFallback(langCode, text);
-    }
-}
-
+// iOS-specific voice selection
 function findBestVoice(voices, langCode, isMobile) {
-    // Voice selection priorities for different languages
-    const voicePreferences = {
+    // iOS-specific voice preferences - these are the high-quality voices available on Apple devices
+    const iosVoicePreferences = {
         'de': [
-            // German voices (priority order)
-            { pattern: /de-DE/, quality: 10 },
-            { pattern: /de-AT/, quality: 9 },
-            { pattern: /de-CH/, quality: 8 },
-            // Fallback to high-quality English voices for mobile
-            { pattern: /en-GB/, quality: isMobile ? 7 : 0 },
-            { pattern: /en-US/, quality: isMobile ? 6 : 0 }
+            // German voices on iOS (high quality)
+            { pattern: /Anna|Yannick|Tim/, lang: /de-DE/, quality: 10 },
+            { pattern: /Steffi|Markus/, lang: /de-DE/, quality: 9 }
         ],
         'tw': [
-            // African/English voices for Twi
-            { pattern: /en-GH/, quality: 10 },
-            { pattern: /en-NG/, quality: 9 },
-            { pattern: /en-ZA/, quality: 8 },
-            { pattern: /en-GB/, quality: 7 },
-            { pattern: /en-US/, quality: 6 }
+            // African/English voices for Twi on iOS
+            { pattern: /Tessa|Kyoko/, lang: /en-GH|en-ZA/, quality: 10 },
+            { pattern: /Samantha|Daniel/, lang: /en-GB/, quality: 9 },
+            { pattern: /Karen|Lee/, lang: /en-AU/, quality: 8 }
         ],
         'gd': [
-            // UK/Scottish voices
-            { pattern: /en-GB/, quality: 10 },
-            { pattern: /gd/, quality: 9 }, // Scottish Gaelic if available
-            { pattern: /en-US/, quality: 5 }
+            // Scottish/UK voices on iOS
+            { pattern: /Fiona|Moira/, lang: /en-GB|en-SCOTLAND/, quality: 10 },
+            { pattern: /Daniel|Serena/, lang: /en-GB/, quality: 9 }
         ],
         'en': [
-            { pattern: /en-GB/, quality: 10 },
-            { pattern: /en-US/, quality: 9 },
-            { pattern: /en-AU/, quality: 8 }
+            // English voices on iOS
+            { pattern: /Samantha|Daniel/, lang: /en-GB/, quality: 10 },
+            { pattern: /Karen|Lee/, lang: /en-AU/, quality: 9 },
+            { pattern: /Alex|Fred/, lang: /en-US/, quality: 8 }
         ],
         'fr': [
-            { pattern: /fr-FR/, quality: 10 },
-            { pattern: /fr-CA/, quality: 9 }
+            // French voices on iOS
+            { pattern: /Amélie|Thomas/, lang: /fr-FR/, quality: 10 },
+            { pattern: /Chantal|Nicolas/, lang: /fr-CA/, quality: 9 }
         ],
         'es': [
-            { pattern: /es-ES/, quality: 10 },
-            { pattern: /es-MX/, quality: 9 }
+            // Spanish voices on iOS
+            { pattern: /Monica|Jorge/, lang: /es-ES/, quality: 10 },
+            { pattern: /Paulina|Juan/, lang: /es-MX/, quality: 9 }
         ],
         'sv': [
-            { pattern: /sv-SE/, quality: 10 }
+            // Swedish voices on iOS
+            { pattern: /Alva|Oskar/, lang: /sv-SE/, quality: 10 }
         ]
     };
 
-    const preferences = voicePreferences[langCode] || [{ pattern: /en-GB/, quality: 5 }];
+    const preferences = iosVoicePreferences[langCode] || [
+        { pattern: /Samantha|Daniel/, lang: /en-GB/, quality: 5 }
+    ];
     
-    // Score each voice
+    // Score each voice based on iOS preferences
     const scoredVoices = voices.map(voice => {
         let score = 0;
         let bestMatchQuality = 0;
         
         for (const pref of preferences) {
-            if (pref.pattern.test(voice.lang)) {
+            if (pref.pattern.test(voice.name) && pref.lang.test(voice.lang)) {
                 score = pref.quality;
                 bestMatchQuality = Math.max(bestMatchQuality, pref.quality);
                 break;
             }
         }
         
-        // Bonus points for non-robotic voices
-        if (!voice.name.includes('Robot') && !voice.name.includes('Samantha') && !voice.name.includes('Alex')) {
-            score += 2;
+        // Additional scoring for iOS devices
+        if (isMobile) {
+            // Prefer voices that are known to be high-quality on iOS
+            if (voice.name.includes('Samantha') || voice.name.includes('Daniel') || 
+                voice.name.includes('Fiona') || voice.name.includes('Moira') ||
+                voice.name.includes('Amélie') || voice.name.includes('Thomas') ||
+                voice.name.includes('Monica') || voice.name.includes('Jorge')) {
+                score += 3;
+            }
+            
+            // Avoid robotic voices
+            if (voice.name.includes('Robot') || voice.name.includes('Zira') || 
+                voice.name.includes('Microsoft') || voice.name.includes('Google')) {
+                score -= 5;
+            }
         }
         
         // Bonus for local voices
         if (voice.localService) {
-            score += 1;
+            score += 2;
         }
         
         return { voice, score, bestMatchQuality };
@@ -1345,21 +1329,72 @@ function findBestVoice(voices, langCode, isMobile) {
         return b.bestMatchQuality - a.bestMatchQuality;
     });
 
-    return scoredVoices.length > 0 ? scoredVoices[0].voice : null;
+    // Return the best voice, or null if no good matches
+    return scoredVoices.length > 0 && scoredVoices[0].score > 0 ? scoredVoices[0].voice : null;
 }
 
-function getOptimalLanguageCode(langCode, isMobile) {
+// Enhanced speakText function for iOS
+function speakText(text, langCode) {
+    if ('speechSynthesis' in window) {
+        // Cancel any ongoing speech
+        window.speechSynthesis.cancel();
+        
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voices = speechSynthesis.getVoices();
+        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+        
+        // Set optimal language code
+        utterance.lang = getOptimalLanguageCode(langCode, isIOS);
+        
+        // Find the best voice for iOS
+        let selectedVoice = findBestVoice(voices, langCode, isIOS);
+        
+        if (selectedVoice) {
+            utterance.voice = selectedVoice;
+            console.log('Using iOS voice:', selectedVoice.name, 'for language:', langCode);
+        } else {
+            // Fallback: use the first available voice for the language
+            selectedVoice = voices.find(voice => voice.lang.includes(getOptimalLanguageCode(langCode, isIOS)));
+            if (selectedVoice) {
+                utterance.voice = selectedVoice;
+                console.log('Using fallback voice:', selectedVoice.name);
+            }
+        }
+        
+        // Optimize speech parameters for iOS
+        utterance.rate = isIOS ? 0.92 : 1.0; // Slightly slower for better clarity on iOS
+        utterance.pitch = isIOS ? 1.02 : 1.0; // Slightly higher pitch for better iOS quality
+        utterance.volume = 1.0;
+        
+        // Error handling
+        utterance.onerror = function(event) {
+            console.error('Speech synthesis error:', event.error);
+        };
+        
+        utterance.onend = function() {
+            console.log('Speech finished');
+        };
+        
+        window.speechSynthesis.speak(utterance);
+    } else {
+        console.log('Speech Synthesis not supported');
+    }
+}
+
+// Get optimal language code for iOS
+function getOptimalLanguageCode(langCode, isIOS) {
     const languageMap = {
-        'en': 'en-GB',
+        'en': 'en-GB', // Prefer British English on iOS (better voices)
         'fr': 'fr-FR', 
         'es': 'es-ES',
         'de': 'de-DE',
-        'tw': isMobile ? 'en-GB' : 'en-GH', // Use UK English for mobile, Ghana English for desktop
+        'tw': isIOS ? 'en-GB' : 'en-GH', // Use UK English for iOS (better African accent simulation)
         'sv': 'sv-SE',
         'gd': 'en-GB'  // Use UK English for Scottish Gaelic
     };
     return languageMap[langCode] || 'en-GB';
 }
+
 // Add a function to populate voice options for debugging
 function populateVoiceList() {
     if ('speechSynthesis' in window) {
