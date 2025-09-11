@@ -223,6 +223,28 @@ body.light .language-dropdown-container::after {
       cursor: pointer;
     }
     
+.voice-btn {
+    background: transparent;
+    border: none;
+    color: var(--btn-bg);
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.voice-btn:hover {
+    transform: scale(1.1);
+}
+
+.question-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+
     .back-btn {
       background: transparent;
       color: var(--btn-bg);
@@ -784,17 +806,21 @@ answerPlaceholder: "Taing do fhreagairt an-seo...",
     let lastSorted = [];
 
     /* --------------- Initialize ------------------ */
-    function init() {
-      initSlideshow();
-      setLanguage('en');
-      
-      // Set up event listeners
-      document.getElementById('start-kharis').addEventListener('click', startQuiz);
-      backBtn.addEventListener('click', goBack);
-      modeBtn.addEventListener('click', toggleMode);
-      languageSelect.addEventListener('change', handleLanguageChange);
+  function init() {
+    initSlideshow();
+    setLanguage('en');
+    
+    // Load voices for speech synthesis
+    if ('speechSynthesis' in window) {
+        speechSynthesis.getVoices();
     }
-
+    
+    // Set up event listeners
+    document.getElementById('start-kharis').addEventListener('click', startQuiz);
+    backBtn.addEventListener('click', goBack);
+    modeBtn.addEventListener('click', toggleMode);
+    languageSelect.addEventListener('change', handleLanguageChange);
+}
     /* --------------- Language functions ------------------ */
     function setLanguage(langCode) {
   currentLanguage = langCode;
@@ -859,34 +885,45 @@ answerPlaceholder: "Taing do fhreagairt an-seo...",
 }
 
     function showQuestion(){
-      const lang = translations[currentLanguage] || translations.en;
-      const qObj = lang.questions[currentQ];
+    const lang = translations[currentLanguage] || translations.en;
+    const qObj = lang.questions[currentQ];
 
-      quizEl.innerHTML = `
+    quizEl.innerHTML = `
         <div class="question-counter">${lang.questionCounter.replace('{current}', currentQ+1).replace('{total}', lang.questions.length)}</div>
         <div class="scripture">${qObj.s}</div>
-        <div class="question">${qObj.q}</div>
+        <div class="question-container">
+            <div class="question">${qObj.q}</div>
+            <button class="voice-btn" id="voiceBtn" aria-label="Read question aloud">🔊</button>
+        </div>
         <input id="answer" type="text" placeholder="${lang.answerPlaceholder || 'Type your answer here...'}" aria-label="Your answer" />
         <div id="error-msg" style="color:#ffd700;font-weight:600;text-align:center;margin-bottom:10px;"></div>
         <button class="btn" id="nextBtn">${lang.nextButton}</button>
-      `;
+    `;
 
-      quizEl.classList.add('show');
-      startScreenEl.style.display = "none";
-      resultEl.classList.remove('show');
-      backBtn.style.display = currentQ > 0 ? "inline-block" : "none";
-      backBtn.textContent = lang.backButton;
-      progressBar.style.width = Math.round(((currentQ+1)/lang.questions.length)*100) + "%";
+    quizEl.classList.add('show');
+    startScreenEl.style.display = "none";
+    resultEl.classList.remove('show');
+    backBtn.style.display = currentQ > 0 ? "inline-block" : "none";
+    backBtn.textContent = lang.backButton;
+    progressBar.style.width = Math.round(((currentQ+1)/lang.questions.length)*100) + "%";
 
-      // Add event listeners
-      setTimeout(() => {
+    // Add event listeners
+    setTimeout(() => {
         const nextBtn = document.getElementById('nextBtn');
         if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
         
         const answerInput = document.getElementById('answer');
         if (answerInput) answerInput.focus();
-      }, 20);
-    }
+        
+        // Add voice button event listener
+        const voiceBtn = document.getElementById('voiceBtn');
+        if (voiceBtn) {
+            voiceBtn.addEventListener('click', () => {
+                speakText(qObj.q, currentLanguage);
+            });
+        }
+    }, 20);
+}
 
     function nextQuestion(){
       const inputEl = document.getElementById('answer');
@@ -990,11 +1027,14 @@ function sendToGoogleSheets(data) {
 }
 
 function goBack() {
-  if(questionHistory.length === 0) return;
-  const last = questionHistory.pop();
-  currentQ = last.q;
-  deptScores = last.deptScores;
-  showQuestion();
+    // Stop any ongoing speech
+    stopSpeech();
+    
+    if(questionHistory.length === 0) return;
+    const last = questionHistory.pop();
+    currentQ = last.q;
+    deptScores = last.deptScores;
+    showQuestion();
 }
 
 function showResult(){
@@ -1142,17 +1182,64 @@ function renderExploreList(){
 }
 
 function restartWithoutReload(){
-  currentQ = 0;
-  questionHistory = [];
-  deptScores = {};
-  startScreenEl.style.display = "block";
-  quizEl.classList.remove('show');
-  resultEl.classList.remove('show');
-  progressBar.style.width = "0%";
-  backBtn.style.display = "none";
+    // Stop any ongoing speech
+    stopSpeech();
+    
+    currentQ = 0;
+    questionHistory = [];
+    deptScores = {};
+    startScreenEl.style.display = "block";
+    quizEl.classList.remove('show');
+    resultEl.classList.remove('show');
+    progressBar.style.width = "0%";
+    backBtn.style.display = "none";
 }
 
+// Speech synthesis functions
+function speakText(text, langCode) {
+    if ('speechSynthesis' in window) {
+        // Cancel any ongoing speech
+        window.speechSynthesis.cancel();
+        
+        const utterance = new SpeechSynthesisUtterance(text);
+        
+        // Set language based on selected language
+        utterance.lang = getLanguageCode(langCode);
+        
+        // Set a pleasant voice
+        const voices = speechSynthesis.getVoices();
+        const preferredVoice = voices.find(voice => 
+            voice.lang.includes(langCode) && voice.localService === true
+        );
+        
+        if (preferredVoice) {
+            utterance.voice = preferredVoice;
+        }
+        
+        window.speechSynthesis.speak(utterance);
+    } else {
+        console.log('Speech Synthesis not supported');
+    }
+}
 
+function getLanguageCode(langCode) {
+    const languageMap = {
+        'en': 'en-GB',
+        'fr': 'fr-FR',
+        'es': 'es-ES',
+        'de': 'de-DE',
+        'tw': 'ak-GH', // Twi (Ghana)
+        'sv': 'sv-SE',
+        'gd': 'gd-GB'  // Scottish Gaelic
+    };
+    return languageMap[langCode] || 'en-GB';
+}
+
+function stopSpeech() {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+    }
+}
 // Helper function to convert department names to English
 function convertToEnglish(deptName) {
   const departmentMap = {
@@ -1241,5 +1328,3 @@ init();
 </script>
 </body>
 </html>
-
-
