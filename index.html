@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -600,7 +602,7 @@ const translations = {
           "Palabra Hablada": { desc: "Personas expresivas y creativas que utilizan poesía, palabra hablada o arte performativo para inspirar y comunicar el evangelio con emoción e impacto.", scripture: "Salmos 19:14 - 'Sean gratos los dichos de mi boca y la meditación de mi corazón delante de ti.'" }
         }
       },
-
+// Add this after the existing Spanish translation in your translations object
 de: {
   title: "Entdecke Dein Kharis Department",
   subtitle: "Beantworte ein paar kurze Fragen, um zu sehen, wo deine Begabungen am besten passen.",
@@ -805,7 +807,7 @@ answerPlaceholder: "Taing do fhreagairt an-seo...",
     "Facal Labhairte": { desc: "Daoine faireachail agus cruthachail a chleachdas bàrdachd, facal labhairte, no ealain coileanaidh gus brosnachadh agus an soisgeul a chur an cèill le faireachdainn agus buaidh.", scripture: "Salm 19:14 - 'Biodh briathran mo bheòil.'" }
   }
 }
-      
+      // Additional languages would follow the same pattern
     };
 
     /* --------------- DOM refs ------------------ */
@@ -978,7 +980,8 @@ answerPlaceholder: "Taing do fhreagairt an-seo...",
       }
     }
 function scoreAnswer(input) {
-  
+  // Simplified scoring for demo - in a real implementation, this would
+  // analyze the text and assign scores to departments
   const text = input.toLowerCase();
   
   // Just for demo purposes, assign some scores
@@ -996,7 +999,7 @@ function scoreAnswer(input) {
     deptScores['Administration'] = (deptScores['Administration'] || 0) + 2;
   }
   
-  
+  // Ensure all departments have at least some score
   const lang = translations[currentLanguage] || translations.en;
   Object.keys(lang.departments).forEach(dept => {
     deptScores[dept] = deptScores[dept] || Math.random() * 0.5;
@@ -1067,7 +1070,7 @@ function showResult(){
 
   const lang = translations[currentLanguage] || translations.en;
 
-  
+  // Get top departments based on scores
   const sorted = Object.entries(deptScores).sort((a, b) => b[1] - a[1]);
   const topDepts = sorted.slice(0, 2);
   lastSorted = topDepts;
@@ -1219,140 +1222,112 @@ function restartWithoutReload(){
 }
 
 // Speech synthesis functions
+// Update the speakText function with these voice selection improvements
 function speakText(text, langCode) {
     if ('speechSynthesis' in window) {
-        // Cancel any ongoing speech
         window.speechSynthesis.cancel();
         
         const utterance = new SpeechSynthesisUtterance(text);
-        
-        // Set language based on selected language
         utterance.lang = getLanguageCode(langCode);
-        
-        // Get all available voices
         const voices = speechSynthesis.getVoices();
         
-        // Special handling for mobile devices
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        // Special handling for different languages
+        let selectedVoice = null;
         
-        // Special handling for Twi (Ghanaian) language
-        if (langCode === 'tw') {
-            // First, try to find Ghanaian-specific voices if available
-            let twiVoice = voices.find(voice => 
-                voice.lang.includes('gh') || // Ghana locale
-                voice.lang.includes('ak') || // Akan language (which includes Twi)
-                voice.name.toLowerCase().includes('africa') ||
-                voice.name.toLowerCase().includes('ghana') ||
-                voice.name.toLowerCase().includes('akan') ||
-                voice.name.toLowerCase().includes('twi')
-            );
-            
-            // If no Ghana-specific voice, try other African accents
-            if (!twiVoice) {
-                twiVoice = voices.find(voice => 
-                    voice.lang.includes('ng') || // Nigerian
-                    voice.lang.includes('za') || // South African
-                    voice.name.toLowerCase().includes('african')
-                );
-            }
-            
-            // For mobile devices, use a different approach
-            if (!twiVoice && isMobile) {
-                // On mobile, prioritize UK English voices which often sound more natural
-                twiVoice = voices.find(voice => 
-                    voice.lang.includes('en-GB') && 
-                    !voice.name.includes('Robot')
+        switch(langCode) {
+            case 'de': // German
+                // Prefer German voices, fallback to UK English for mobile
+                selectedVoice = voices.find(voice => 
+                    voice.lang.includes('de-DE') || 
+                    voice.lang.includes('de-AT') ||
+                    voice.lang.includes('de-CH')
                 );
                 
-                // If no UK English, try any non-robotic English voice
-                if (!twiVoice) {
-                    twiVoice = voices.find(voice => 
-                        voice.lang.includes('en') && 
-                        !voice.name.includes('Robot') &&
-                        !voice.name.includes('Microsoft')
+                // Mobile fallback: use a natural-sounding English voice
+                if (!selectedVoice && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                    selectedVoice = voices.find(voice => 
+                        voice.lang.includes('en-GB') && 
+                        voice.name.toLowerCase().includes('female') &&
+                        !voice.name.includes('Robot')
                     );
                 }
-            }
-            
-            // If still no African voice, use a more generic approach
-            if (!twiVoice) {
-                twiVoice = voices.find(voice => 
-                    voice.lang.includes('en') && 
-                    !voice.name.includes('Robot') &&
-                    !voice.name.includes('Zira') &&
-                    !voice.name.includes('David')
+                break;
+                
+            case 'tw': // Twi (Ghanaian)
+                // Try to find African-accented voices first
+                selectedVoice = voices.find(voice => 
+                    voice.lang.includes('en-GH') || // Ghana English
+                    voice.lang.includes('en-NG') || // Nigerian English
+                    voice.name.toLowerCase().includes('africa') ||
+                    voice.name.toLowerCase().includes('ghana')
                 );
-            }
-            
-            if (twiVoice) {
-                utterance.voice = twiVoice;
-                // Adjust parameters for more natural African speech patterns
-                utterance.rate = isMobile ? 0.95 : 0.9; // Slightly slower for clarity
-                utterance.pitch = isMobile ? 1.05 : 1.0; // Slightly higher pitch on mobile
-            }
-        } else {
-            // For other languages
-            let bestVoice = voices.find(voice => 
-                voice.lang.includes(langCode) && 
-                !voice.name.includes('Robot') &&
-                !voice.name.includes('Zira') &&
-                !voice.name.includes('David')
-            );
-            
-            // Mobile-specific voice selection
-            if (!bestVoice && isMobile) {
-                bestVoice = voices.find(voice => 
+                
+                // Fallback to natural UK English voices
+                if (!selectedVoice) {
+                    selectedVoice = voices.find(voice => 
+                        voice.lang.includes('en-GB') && 
+                        !voice.name.includes('Robot') &&
+                        !voice.name.includes('Zira')
+                    );
+                }
+                break;
+                
+            case 'gd': // Scottish Gaelic
+                // Try to find Scottish or UK voices
+                selectedVoice = voices.find(voice => 
+                    voice.lang.includes('en-GB') || 
+                    voice.name.toLowerCase().includes('scottish') ||
+                    voice.name.toLowerCase().includes('uk')
+                );
+                
+                // Fallback to any non-robotic UK English
+                if (!selectedVoice) {
+                    selectedVoice = voices.find(voice => 
+                        voice.lang.includes('en-GB') && 
+                        !voice.name.includes('Robot')
+                    );
+                }
+                break;
+                
+            default:
+                // For other languages, use the default selection
+                selectedVoice = voices.find(voice => 
                     voice.lang.includes(langCode) && 
-                    !voice.name.includes('Robot') &&
-                    !voice.name.includes('Microsoft')
+                    !voice.name.includes('Robot')
                 );
-            }
-            
-            if (!bestVoice) {
-                bestVoice = voices.find(voice => voice.lang.includes(langCode));
-            }
-            
-            if (bestVoice) {
-                utterance.voice = bestVoice;
-            }
-            
-            // Adjust parameters for mobile devices
-            if (isMobile) {
-                utterance.rate = 0.95; // Slightly slower on mobile
-                utterance.pitch = 1.0;
-            } else {
-                utterance.rate = 1.0;
-                utterance.pitch = 1.0;
-            }
         }
         
+        // If no specific voice found, use the first available voice for the language
+        if (!selectedVoice) {
+            selectedVoice = voices.find(voice => voice.lang.includes(langCode));
+        }
+        
+        // Final fallback: use any non-robotic voice
+        if (!selectedVoice) {
+            selectedVoice = voices.find(voice => !voice.name.includes('Robot'));
+        }
+        
+        if (selectedVoice) {
+            utterance.voice = selectedVoice;
+        }
+        
+        // Adjust speech parameters for better quality
+        utterance.rate = 0.9; // Slightly slower for clarity
+        utterance.pitch = 1.0;
         utterance.volume = 1.0;
         
-        // Add event listeners for better debugging
-        utterance.onstart = function() {
-            console.log('Speech started with voice:', utterance.voice ? utterance.voice.name : 'default');
-        };
-        
-        utterance.onerror = function(event) {
-            console.error('Speech synthesis error:', event.error);
-        };
-        
         window.speechSynthesis.speak(utterance);
-    } else {
-        console.log('Speech Synthesis not supported');
-        // Fallback: show a message that voice isn't supported
-        alert('Text-to-speech is not supported on this device.');
     }
 }
 
-// Update the getLanguageCode function for better mobile support
+// Update the getLanguageCode function
 function getLanguageCode(langCode) {
     const languageMap = {
         'en': 'en-US',
-        'fr': 'fr-FR',
+        'fr': 'fr-FR', 
         'es': 'es-ES',
         'de': 'de-DE',
-        'tw': 'en-GB', // Use UK English for Twi content
+        'tw': 'en-GH', // Use Ghana English for Twi content
         'sv': 'sv-SE',
         'gd': 'en-GB'  // Use UK English for Scottish Gaelic
     };
@@ -1464,4 +1439,3 @@ init();
 </script>
 </body>
 </html>
-
