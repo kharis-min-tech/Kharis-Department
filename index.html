@@ -600,7 +600,7 @@ const translations = {
           "Palabra Hablada": { desc: "Personas expresivas y creativas que utilizan poesía, palabra hablada o arte performativo para inspirar y comunicar el evangelio con emoción e impacto.", scripture: "Salmos 19:14 - 'Sean gratos los dichos de mi boca y la meditación de mi corazón delante de ti.'" }
         }
       },
-// Add this after the existing Spanish translation in your translations object
+
 de: {
   title: "Entdecke Dein Kharis Department",
   subtitle: "Beantworte ein paar kurze Fragen, um zu sehen, wo deine Begabungen am besten passen.",
@@ -805,7 +805,7 @@ answerPlaceholder: "Taing do fhreagairt an-seo...",
     "Facal Labhairte": { desc: "Daoine faireachail agus cruthachail a chleachdas bàrdachd, facal labhairte, no ealain coileanaidh gus brosnachadh agus an soisgeul a chur an cèill le faireachdainn agus buaidh.", scripture: "Salm 19:14 - 'Biodh briathran mo bheòil.'" }
   }
 }
-      // Additional languages would follow the same pattern
+      
     };
 
     /* --------------- DOM refs ------------------ */
@@ -978,8 +978,7 @@ answerPlaceholder: "Taing do fhreagairt an-seo...",
       }
     }
 function scoreAnswer(input) {
-  // Simplified scoring for demo - in a real implementation, this would
-  // analyze the text and assign scores to departments
+  
   const text = input.toLowerCase();
   
   // Just for demo purposes, assign some scores
@@ -997,7 +996,7 @@ function scoreAnswer(input) {
     deptScores['Administration'] = (deptScores['Administration'] || 0) + 2;
   }
   
-  // Ensure all departments have at least some score
+  
   const lang = translations[currentLanguage] || translations.en;
   Object.keys(lang.departments).forEach(dept => {
     deptScores[dept] = deptScores[dept] || Math.random() * 0.5;
@@ -1068,7 +1067,7 @@ function showResult(){
 
   const lang = translations[currentLanguage] || translations.en;
 
-  // Get top departments based on scores
+  
   const sorted = Object.entries(deptScores).sort((a, b) => b[1] - a[1]);
   const topDepts = sorted.slice(0, 2);
   lastSorted = topDepts;
@@ -1220,7 +1219,6 @@ function restartWithoutReload(){
 }
 
 // Speech synthesis functions
-// Replace the speakText function with this improved version
 function speakText(text, langCode) {
     if ('speechSynthesis' in window) {
         // Cancel any ongoing speech
@@ -1466,3 +1464,4 @@ init();
 </script>
 </body>
 </html>
+
