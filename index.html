@@ -6,6 +6,7 @@ charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kharis Department Quiz </title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.elevenlabs.io/elevenlabs-1.3.0.js"></script>
   <style>
     * { box-sizing: border-box; transition: all .25s ease; }
     html, body { height: 100%; margin: 0; }
@@ -959,12 +960,13 @@ function stopSpeech() {
         if (answerInput) answerInput.focus();
         
         // Add voice button event listener
-        const voiceBtn = document.getElementById('voiceBtn');
-        if (voiceBtn) {
-            voiceBtn.addEventListener('click', () => {
-                speakText(qObj.q, currentLanguage);
-            });
-        }
+        // In your showQuestion function, update the voice button event listener:
+const voiceBtn = document.getElementById('voiceBtn');
+if (voiceBtn) {
+  voiceBtn.addEventListener('click', () => {
+    speakText(qObj.q, currentLanguage);
+  });
+}
     }, 20);
 }
 
@@ -1238,224 +1240,85 @@ function restartWithoutReload(){
     backBtn.style.display = "none";
 }
 
-// Speech synthesis functions
-// iOS-specific voice selection
-// Enhanced voice selection with more natural voices
-// Enhanced voice selection for iOS devices with authentic accents
-// Enhanced voice selection with better iOS compatibility
-function findBestVoice(voices, langCode, isIOS) {
-    // Voice preferences optimized for iOS with specific voice names
-    const voicePreferences = {
-        'en': [
-            // iOS premium voices (UK English)
-            { pattern: /Samantha|Daniel|Moira|Fiona/, lang: /en-GB/, quality: 10, rate: 0.95, pitch: 1.0 },
-            // iOS US voices
-            { pattern: /Alex|Fred/, lang: /en-US/, quality: 9, rate: 0.97, pitch: 1.0 },
-            // Australian voices (often more natural sounding)
-            { pattern: /Karen|Lee/, lang: /en-AU/, quality: 8, rate: 0.94, pitch: 1.0 }
-        ],
-        'tw': [
-            // African-accented voices - prioritize specific voice names
-            { pattern: /Tessa/, lang: /en-GH|en-ZA|en-NG/, quality: 10, rate: 0.90, pitch: 1.05 },
-            // UK voices that work well for African accent simulation
-            { pattern: /Samantha/, lang: /en-GB/, quality: 8, rate: 0.92, pitch: 1.07 },
-            // Australian voices as fallback
-            { pattern: /Karen/, lang: /en-AU/, quality: 7, rate: 0.91, pitch: 1.06 }
-        ],
-        'gd': [
-            // Scottish voices - UK English with specific settings
-            { pattern: /Fiona|Moira/, lang: /en-GB/, quality: 10, rate: 0.94, pitch: 0.97 },
-            { pattern: /Daniel/, lang: /en-GB/, quality: 9, rate: 0.96, pitch: 0.98 },
-            { pattern: /Samantha/, lang: /en-GB/, quality: 8, rate: 0.95, pitch: 0.99 }
-        ],
-        'fr': [
-            { pattern: /Amélie|Thomas/, lang: /fr-FR/, quality: 10, rate: 0.95, pitch: 1.0 },
-            { pattern: /Chantal|Nicolas/, lang: /fr-CA/, quality: 9, rate: 0.96, pitch: 1.0 }
-        ],
-        'es': [
-            { pattern: /Monica|Jorge/, lang: /es-ES/, quality: 10, rate: 0.95, pitch: 1.0 },
-            { pattern: /Paulina|Juan/, lang: /es-MX/, quality: 9, rate: 0.96, pitch: 1.0 }
-        ],
-        'de': [
-            { pattern: /Anna|Yannick|Tim/, lang: /de-DE/, quality: 10, rate: 0.95, pitch: 1.0 },
-            { pattern: /Steffi|Markus/, lang: /de-DE/, quality: 9, rate: 0.96, pitch: 1.0 }
-        ],
-        'sv': [
-            { pattern: /Alva|Oskar/, lang: /sv-SE/, quality: 10, rate: 0.95, pitch: 1.0 }
-        ]
+// Initialize ElevenLabs with your API key
+const ELEVENLABS_API_KEY = "sk_17394b07cf28fa24edfd36e4cd50b14b1f8d0d4e5a9a3733";
+
+// Voice ID mapping for different languages - you need to replace these with your actual voice IDs
+const voiceMapping = {
+  'en': 'goT3UYdM9bhm0n2lmKQx', // English voice ID (example - replace with your actual voice ID)
+  'fr': 'SmWACbi37pETyxxMhSpc', // French voice ID (example - replace with your actual voice ID)
+  'es': 'zl1Ut8dvwcVSuQSB9XkG', // Spanish voice ID (example - replace with your actual voice ID)
+  'de': 'mZOnUa1KefZXI63p0DFu', // German voice ID (example - replace with your actual voice ID)
+  'tw': 'LEvd0YiWkwZ6hTZOmdVE', // General voice for Twi (example - replace with your actual voice ID)
+  'sv': '4xkUqaR9MYOJHoaC1Nak', // Swedish voice ID (example - replace with your actual voice ID)
+  'gd': 'v2zbX16tJNtRIx8rSHDM'  // Scottish Gaelic voice ID (example - replace with your actual voice ID)
+};
+
+let currentAudio = null;
+
+async function speakText(text, langCode) {
+  // Stop any existing audio
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio = null;
+  }
+
+  try {
+    const voiceId = voiceMapping[langCode] || voiceMapping['en'];
+
+    // Optional: show a visual indicator for loading
+    console.log("Generating audio...");
+
+    // Generate ElevenLabs audio
+    const audioResponse = await fetch(
+      `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'audio/mpeg',
+          'Content-Type': 'application/json',
+          'xi-api-key': ELEVENLABS_API_KEY
+        },
+        body: JSON.stringify({
+          text: text,
+          model_id: "eleven_multilingual_v2",
+          voice_settings: { stability: 0.4, similarity_boost: 0.7 }
+        })
+      }
+    );
+
+    if (!audioResponse.ok) {
+      const errText = await audioResponse.text();
+      console.error('ElevenLabs API error:', audioResponse.status, errText);
+      return;
+    }
+
+    const audioBlob = await audioResponse.blob();
+    const audioUrl = URL.createObjectURL(audioBlob);
+
+    // Create audio element and play
+    const audio = new Audio(audioUrl);
+    currentAudio = audio;
+
+    audio.onended = () => {
+      URL.revokeObjectURL(audioUrl);
+      currentAudio = null;
     };
 
-    const preferences = voicePreferences[langCode] || [
-        { pattern: /Samantha|Daniel/, lang: /en-GB/, quality: 5, rate: 0.95, pitch: 1.0 }
-    ];
-    
-    // First, try to find exact matches
-    let bestMatch = null;
-    let highestScore = 0;
-    
-    for (const voice of voices) {
-        let score = 0;
-        let config = {};
-        
-        for (const pref of preferences) {
-            if (pref.pattern.test(voice.name) && pref.lang.test(voice.lang)) {
-                score = pref.quality;
-                config = { ...pref };
-                
-                // iOS-specific bonuses
-                if (isIOS) {
-                    if (voice.name.includes('Samantha') && voice.lang.includes('en-GB')) score += 5;
-                    if (voice.name.includes('Tessa') && voice.lang.includes('en-GH')) score += 10;
-                    if (voice.name.includes('Fiona') && voice.lang.includes('en-GB')) score += 5;
-                    if (voice.name.includes('Moira') && voice.lang.includes('en-GB')) score += 4;
-                }
-                
-                break;
-            }
-        }
-        
-        if (score > highestScore) {
-            highestScore = score;
-            bestMatch = { voice, config, score };
-        }
+    await audio.play();
+
+  } catch (err) {
+    console.error('ElevenLabs TTS error:', err);
+    // Optional fallback if ElevenLabs fails
+    if ('speechSynthesis' in window) {
+      const fallback = new SpeechSynthesisUtterance(text);
+      fallback.lang = langCode;
+      window.speechSynthesis.speak(fallback);
     }
-    
-    // If no good match found, fall back to any voice with the right language
-    if (!bestMatch || highestScore < 5) {
-        for (const voice of voices) {
-            if (voice.lang.includes(getOptimalLanguageCode(langCode, isIOS))) {
-                return {
-                    voice,
-                    config: { rate: 0.95, pitch: 1.0 },
-                    score: 3
-                };
-            }
-        }
-    }
-    
-    return bestMatch;
+  }
 }
 
-// Enhanced speakText function with better iOS handling
-function speakText(text, langCode) {
-    if (!('speechSynthesis' in window)) {
-        console.log('Speech Synthesis not supported');
-        return;
-    }
-    
-    // Cancel any ongoing speech
-    window.speechSynthesis.cancel();
-    
-    const utterance = new SpeechSynthesisUtterance();
-    const voices = speechSynthesis.getVoices();
-    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    
-    // Get the best voice match
-    const voiceResult = findBestVoice(voices, langCode, isIOS);
-    
-    if (voiceResult && voiceResult.voice) {
-        utterance.voice = voiceResult.voice;
-        utterance.rate = voiceResult.config.rate || 0.95;
-        utterance.pitch = voiceResult.config.pitch || 1.0;
-        utterance.volume = 1.0;
-        
-        console.log('Using voice:', voiceResult.voice.name, 'for language:', langCode);
-    } else {
-        // Fallback to default settings
-        utterance.lang = getOptimalLanguageCode(langCode, isIOS);
-        utterance.rate = 0.95;
-        utterance.pitch = 1.0;
-        utterance.volume = 1.0;
-        console.log('Using default voice settings for language:', langCode);
-    }
-    
-    // Special processing for different languages
-    let processedText = text;
-    
-    // African English (Twi) processing
-    if (langCode === 'tw') {
-        // Add slight pauses for more natural African speech rhythm
-        processedText = processedText.replace(/([.,!?;:])/g, '$1 ');
-        utterance.rate = 0.90;
-        utterance.pitch = 1.05;
-    }
-    
-    // Scottish English processing
-    if (langCode === 'gd') {
-        // Adjust for Scottish accent simulation
-        processedText = processedText.replace(/([.,!?])/g, '$1 ');
-        utterance.rate = 0.94;
-        utterance.pitch = 0.97;
-    }
-    
-    // General natural speech improvements
-    processedText = processedText.replace(/\s+/g, ' ').trim();
-    
-    utterance.text = processedText;
-    
-    // Error handling
-    utterance.onerror = function(event) {
-        console.error('Speech synthesis error:', event.error);
-        // Fallback to alert for very important messages
-        if (event.error === 'interrupted') {
-            console.log('Speech was interrupted');
-        }
-    };
-    
-    utterance.onend = function() {
-        console.log('Speech finished');
-    };
-    
-    // Add a small delay to ensure speech synthesis is ready
-    setTimeout(() => {
-        try {
-            window.speechSynthesis.speak(utterance);
-        } catch (error) {
-            console.error('Error speaking text:', error);
-        }
-    }, 100);
-}
 
-// Get optimal language code
-function getOptimalLanguageCode(langCode, isIOS) {
-    const languageMap = {
-        'en': 'en-GB',
-        'fr': 'fr-FR', 
-        'es': 'es-ES',
-        'de': 'de-DE',
-        'tw': isIOS ? 'en-GH' : 'en-GB',
-        'sv': 'sv-SE',
-        'gd': isIOS ? 'en-GB' : 'en-SCOTLAND'
-    };
-    return languageMap[langCode] || 'en-GB';
-}
-
-// Voice loading with better error handling
-function loadVoices() {
-    return new Promise((resolve) => {
-        if (!('speechSynthesis' in window)) {
-            resolve([]);
-            return;
-        }
-        
-        const voices = speechSynthesis.getVoices();
-        if (voices.length > 0) {
-            resolve(voices);
-            return;
-        }
-        
-        // Wait for voices to load
-        speechSynthesis.onvoiceschanged = function() {
-            const loadedVoices = speechSynthesis.getVoices();
-            resolve(loadedVoices);
-        };
-        
-        // Timeout fallback
-        setTimeout(() => {
-            resolve(speechSynthesis.getVoices());
-        }, 1000);
-    });
-}
 
 // Initialize voices properly
 let voicesLoaded = false;
