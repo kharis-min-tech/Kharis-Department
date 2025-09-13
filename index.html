@@ -844,28 +844,31 @@ answerPlaceholder: "Taing do fhreagairt an-seo...",
     };
     return languageMap[langCode] || 'en-GB';
 }
-function init() {
-    initSlideshow();
-    setLanguage('en');
+
 
 function stopSpeech() {
-    if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-    }
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+  }
 }
-    
-    // Load voices for speech synthesis
-    if ('speechSynthesis' in window) {
-        speechSynthesis.getVoices();
-    }
-    
-    // Set up event listeners
-    document.getElementById('start-kharis').addEventListener('click', startQuiz);
-    backBtn.addEventListener('click', goBack);
-    modeBtn.addEventListener('click', toggleMode);
-    languageSelect.addEventListener('change', handleLanguageChange);
+
+function init() {
+  initSlideshow();
+  setLanguage('en');
+
+  // load voices
+  if ('speechSynthesis' in window) {
+    speechSynthesis.getVoices();
+  }
+
+  // event listeners
+  document.getElementById('start-kharis').addEventListener('click', startQuiz);
+  backBtn.addEventListener('click', goBack);
+  modeBtn.addEventListener('click', toggleMode);
+  languageSelect.addEventListener('change', handleLanguageChange);
 }
-    /* --------------- Language functions ------------------ */
+
+   /* --------------- Language functions ------------------ */
     function setLanguage(langCode) {
   currentLanguage = langCode;
   const lang = translations[langCode] || translations.en;
@@ -970,34 +973,37 @@ if (voiceBtn) {
     }, 20);
 }
 
-    function nextQuestion(){
-      const inputEl = document.getElementById('answer');
-      const value = inputEl ? inputEl.value.trim() : '';
-      const lang = translations[currentLanguage] || translations.en;
+    function nextQuestion() {
+  const inputEl = document.getElementById('answer');
+  const value = inputEl ? inputEl.value.trim() : '';
+  const lang = translations[currentLanguage] || translations.en;
 
-      if (!value) {
-        document.getElementById('error-msg').textContent = lang.errorMsg;
-        return;
-      }
+  if (!value) {
+    document.getElementById('error-msg').textContent = lang.errorMsg;
+    return;
+  }
 
-      // Save snapshot for back
-      questionHistory.push({ 
-        q: currentQ,
-        deptScores: {...deptScores}
-      });
-      
-      // Score the answer (simplified for demo)
-      scoreAnswer(value);
-      
-      currentQ++;
-      const langData = translations[currentLanguage] || translations.en;
+  // Save snapshot *before scoring* (so goBack restores correctly)
+  questionHistory[currentQ] = {
+    q: currentQ,
+    deptScores: { ...deptScores }, // This line is crucial
+    answer: value
+  };
 
-      if (currentQ < langData.questions.length) {
-        showQuestion();
-      } else {
-        showResult();
-      }
-    }
+  // Now score the answer
+  scoreAnswer(value);
+
+  currentQ++;
+  const langData = translations[currentLanguage] || translations.en;
+
+  if (currentQ < langData.questions.length) {
+    showQuestion();
+  } else {
+    showResult();
+  }
+}
+
+
 function scoreAnswer(input) {
   // Simplified scoring for demo - in a real implementation, this would
   // analyze the text and assign scores to departments
@@ -1072,15 +1078,35 @@ function sendToGoogleSheets(data) {
 }
 
 function goBack() {
-    // Stop any ongoing speech
-    stopSpeech();
+  stopSpeech();
+
+  if (currentQ === 0) return; // can't go back from first question
+
+  currentQ--; // move back one step
+
+  // Get the previous state from questionHistory
+  const previous = questionHistory[currentQ];
+
+  if (previous) {
+    // Restore the department scores from the previous state
+    deptScores = { ...previous.deptScores };
     
-    if(questionHistory.length === 0) return;
-    const last = questionHistory.pop();
-    currentQ = last.q;
-    deptScores = last.deptScores;
+    // Show the previous question
     showQuestion();
+
+    // Restore the previous answer after the DOM loads
+    setTimeout(() => {
+      const answerInput = document.getElementById('answer');
+      if (answerInput && previous.answer) {
+        answerInput.value = previous.answer;
+      }
+    }, 20);
+  }
+
+  // Show/hide back button based on current question
+  backBtn.style.display = currentQ > 0 ? "inline-block" : "none";
 }
+
 
 function showResult(){
   quizEl.classList.remove('show');
@@ -1423,4 +1449,3 @@ init();
 </script>
 </body>
 </html>
-
