@@ -320,9 +320,11 @@ body.light .language-dropdown-container::after {
 <option value="en">English 🇬🇧</option>
 <option value="fr">Français (French) 🇫🇷</option>
 <option value="es">Español (Spanish) 🇪🇸</option>
+<option value="kri">kri(Sierra Leone) 🇸🇱</option>
 <option value="de">Deutsch (German) 🇩🇪</option>
  <option value="tw">Twi (Ghana) 🇬🇭</option>
-  <option value="sv">Svenska 🇸🇪</option>
+<option value="jam">Patois (Jamaica) 🇯🇲</option>
+<option value="sv">Svenska 🇸🇪</option>
   <option value="gd">Gàidhlig (Scottish) 🏴󠁧󠁢󠁳󠁣󠁴󠁿</option>
 <option disabled>────────── Coming Soon Translations ──────────</option>
  <option value="pt"disabled>Português (Portuguese) 🇵🇹</option>
@@ -806,8 +808,109 @@ answerPlaceholder: "Taing do fhreagairt an-seo...",
     "Meadhain": { desc: "Daoine cruthachail agus teicneòlasach a ghlacas, a dhealbhas, agus a roinn susbaint a sgaoileas an teachdaireachd le soilleireachd agus sàr-mhathais, a' dèanamh an lèirsinn so-lèir dha na h-uile.", scripture: "Habacuc 2:2 - 'Sgrìobh an sealladh.'" },
     "Facal Labhairte": { desc: "Daoine faireachail agus cruthachail a chleachdas bàrdachd, facal labhairte, no ealain coileanaidh gus brosnachadh agus an soisgeul a chur an cèill le faireachdainn agus buaidh.", scripture: "Salm 19:14 - 'Biodh briathran mo bheòil.'" }
   }
+},
+ kri: {
+  title: "Fayn Weh Yu Fit Fɔ Sarb Na Kharis",
+  subtitle: "Ansa som question dem fɔ si wetin God gi yu fɔ du na church.",
+  namePlaceholder: "Wus na yu ful nem",
+  branchPlaceholder: "Chus yu branch",
+  startButton: "Stat di Quiz",
+  questionCounter: "Question {current} ɔut ɔf {total}",
+  nextButton: "Neks",
+  backButton: "← Bak",
+  resultsTitle: "{name} ({branch}) — Yu Top Department Dem",
+  exploreButton: "Luk Ɔl Department Dem",
+  restartButton: "Stat Bɔk",
+  answerPlaceholder: "Rait yu ansa ya...",
+  allDepartments: "Ɔl Department Dem",
+  backToResults: "Bak to Result",
+  errorMsg: "Plis rait somtin mek we sabi 😊",
+  noResults: "Nɔ department score nɔ show — bɔt nɔ worry. Trai bɔk an put som word dem insai yu ansa (fo example, \"A laik fɔ sing\", \"A laik fɔ organize program\").",
+  questions: [
+    { q: "Wen tin dem dɔsɔ, wetin de kip yu calm?", s: "1 Corinth 14:33 - God nɔ God fɔ confusion, bɔt fɔ pis." },
+    { q: "Ow yu laik fɔ impact oda pipul?", s: "Matthew 5:16 - Mek yu lait shayn bifɔ pipul." },
+    { q: "Na grup, yu na di wan we...", s: "Romans 12:6 - Wi get difrɛn gift dem we God gi wi." },
+    { q: "Wetin yu fos notice wen service dɔ stat?", s: "Ephesians 6:7 - Sarb wit glad hat, laik na fɔ di Lord." },
+    { q: "If yu fo lead somtin, wetin dat go bi?", s: "Joshua 1:9 - Tek hɑt an get courage." },
+    { q: "Wen sombɔdi de suffer, wetin yu du normal?", s: "2 Corinth 1:4 - God comfort wi so wi kin comfort oda." },
+    { q: "Wetin yu laik pas: mek, organize, help ɔ share strong?", s: "Colossians 3:23 - Wetin yu du, du am wit all yu hɑt." },
+    { q: "If yu get wan talent fɔ God, wetin dat go bi?", s: "1 Peter 4:10 - Yus yu gift fɔ help oda dem." }
+  ],
+  departments: {
+    "Administration": { desc: "Pipul we organized, careful an reliable, den sabi plan, arrange an mek tin run smooth.", scripture: "1 Corinth 14:40 - 'Mek ɛvrithin happen wit ɔda.'" },
+    "Pikin Department": { desc: "Pipul we get patient, den laik teach, encourage an help pikin dem grow wit God.", scripture: "Matthew 19:14 - 'Lɛf di pikin dem mek den kam to mi; God in kingdom na fɔ dem.'" },
+    "Design": { desc: "Creative pipul we sabi draw, design an use art fɔ talk God ein message wit style.", scripture: "Exodus 35:35 - 'God don gi dem wisdom fɔ du art work.'" },
+    "Drama": { desc: "Expressive pipul we use play an drama fɔ show di gospel clear.", scripture: "Matthew 13:34 - 'Jesus tok na parabol.'" },
+    "Hospitality": { desc: "Warm an kind pipul we welkam an mek oda feel comfort.", scripture: "1 Peter 4:9 - 'Sarb oda wit hospitality witout complain.'" },
+    "Host Team": { desc: "Frendly pipul we make shɔ say ɛvribɔdi feel welkam an important.", scripture: "Romans 15:7 - 'Accept oda jus laik Christ accept yu.'" },
+    "Production": { desc: "Pipul we de handle technical tin dem an mek service run well wit excellence.", scripture: "Colossians 3:23 - 'Do ɛvrithin laik na fɔ di Lord.'" },
+    "Music": { desc: "Pipul wit passion we sabi play an sing fɔ lead worship an bring God ein presence.", scripture: "Psalm 95:1-2 - 'Mek wi sing wit joy to di Lord!'" },
+    "Follow Up": { desc: "Pipul we de care fɔ new believah dem, help dem grow an build trust.", scripture: "Matthew 28:19 - 'Go an mek disciple ɛvriawia.'" },
+    "New Believers": { desc: "Patient mentor pipul we help new Christian dem grow wit God.", scripture: "Colossians 1:28 - 'Wi de teach an encourage ɛvribɔdi wit wisdom.'" },
+    "Evangelism": { desc: "Bold pipul we laik share di gospel wit courage an compassion.", scripture: "Mark 16:15 - 'Go ɛvriawia an preach di good news.'" },
+    "Sanctuary Keepers": { desc: "Responsible pipul we mek sure church space clean an in ɔda.", scripture: "1 Corinth 3:16 - 'Yu body na God ein temple an God Spirit de insai yu.'" },
+    "Set-up": { desc: "Practical pipul we laik prepare, fix space an solve problem dem.", scripture: "Nehemiah 4:6 - 'Wi build di wall half way up.'" },
+    "Social Media": { desc: "Creative pipul we sabi technology an storytelling fɔ connect wit pipul online.", scripture: "Psalm 19:14 - 'Mek di word dem we a tok an di thought insai mi hɑt ples God.'" },
+    "Sound": { desc: "Technical pipul we sabi audio an mek sound clear.", scripture: "1 Corinth 14:7 - 'If sound no clear, ɔda no go sabi.'" },
+    "Uniform": { desc: "Discipline pipul we laik presentation an keep standard high.", scripture: "1 Timothy 4:12 - 'Yu youth no fo stop yu, show example fɔ oda.'" },
+    "Ushers": { desc: "Frendly pipul we laik guide, help an care fɔ pipul insai church.", scripture: "Hebrew 13:17 - 'Obey yu leader dem an respect dem.'" },
+    "Welfare": { desc: "Compassionate pipul we laik help needi wan dem an give support.", scripture: "Galatians 6:2 - 'Carry each oda in burden.'" },
+    "Security": { desc: "Watchful pipul we de protect an keep place safe.", scripture: "Proverbs 27:12 - 'Wise man see danger an hide; simple one go an get problem.'" },
+    "Media": { desc: "Creative pipul we capture an share content fɔ spread di vision clear.", scripture: "Habakkuk 2:2 - 'Rait di vision pan board.'" },
+    "Spoken Word": { desc: "Expressive pipul we yus poetry, spoken word ɔ art fɔ inspire an preach God ein word.", scripture: "Psalm 19:14 - 'Mek di word an thought insai mi hɑt ples God.'" }
+  }
+},
+jam: {
+  title: "Weh Yu Fit Fi Serve ina Kharis",
+  subtitle: "Answer some question dem fi see weh yuh talent dem work best ina church.",
+  namePlaceholder: "Put yuh full name",
+  branchPlaceholder: "Choose yuh branch",
+  startButton: "Start di Quiz",
+  questionCounter: "Question {current} a {total}",
+  nextButton: "Next",
+  backButton: "← Back",
+  resultsTitle: "{name} ({branch}) — Yu Top Department Dem",
+  exploreButton: "Check All Department Dem",
+  restartButton: "Start Ova",
+  answerPlaceholder: "Write yuh answer yah...",
+  allDepartments: "All Department Dem",
+  backToResults: "Back to Results",
+  errorMsg: "Please write someting weh mek sense 😊",
+  noResults: "No department score show — nuh worry. Try again an put more words inna yuh answer (fi example, 'Mi love fi sing', 'Mi love fi organize program').",
+  questions: [
+    { q: "Wen tings rough, wetin keep yuh calm?", s: "1 Corinth 14:33 - God nah God a confusion, but a peace." },
+    { q: "How yuh like fi impact odda people?", s: "Matthew 5:16 - Mek yuh light shine before people." },
+    { q: "Ina group, yuh usually a di one weh...", s: "Romans 12:6 - Wi all get different gift weh God gi wi." },
+    { q: "Wetin yuh first notice wen service start?", s: "Ephesians 6:7 - Serve wid glad heart, like fi di Lord." },
+    { q: "If yuh fi lead someting, how yuh go do it?", s: "Joshua 1:9 - Tek courage an stand firm." },
+    { q: "Wen somebody a suffer, wetin yuh normally do?", s: "2 Corinth 1:4 - God comfort wi so wi can comfort odda." },
+    { q: "Wetin yuh love fi pass: mek, organize, help or share?", s: "Colossians 3:23 - Anyting yuh do, do it wid all yuh heart." },
+    { q: "If yuh get a talent fi God, how yuh go use it?", s: "1 Peter 4:10 - Use yuh gift fi help odda people." }
+  ],
+  departments: {
+    "Administration": { desc: "People weh organized, careful an reliable, dem know how fi plan an mek tings run smooth.", scripture: "1 Corinth 14:40 - 'Mek everyting happen orderly.'" },
+    "Children Department": { desc: "Patient people weh love fi teach, encourage an help pickney dem grow wid God.", scripture: "Matthew 19:14 - 'Lef di pickney dem come to mi; God kingdom fi dem.'" },
+    "Design": { desc: "Creative people weh draw, design an use art fi show God message wid style.", scripture: "Exodus 35:35 - 'God gi dem wisdom fi do artwork.'" },
+    "Drama": { desc: "Expressive people weh use play an drama fi show di gospel clearly.", scripture: "Matthew 13:34 - 'Jesus use parables.'" },
+    "Hospitality": { desc: "Warm an kind people weh welcome an mek odda feel comfortable.", scripture: "1 Peter 4:9 - 'Serve odda wid hospitality without complain.'" },
+    "Host Team": { desc: "Friendly people weh mek sure everybody feel welcome an important.", scripture: "Romans 15:7 - 'Accept odda like Christ accept yuh.'" },
+    "Production": { desc: "People weh handle technical tings an mek service run well wid excellence.", scripture: "Colossians 3:23 - 'Do everything like fi di Lord.'" },
+    "Music": { desc: "Passionate people weh play an sing fi lead worship an bring God presence.", scripture: "Psalm 95:1-2 - 'Sing wid joy to di Lord!'" },
+    "Follow Up": { desc: "People weh care fi new believers, help dem grow an build trust.", scripture: "Matthew 28:19 - 'Go an make disciples everywhere.'" },
+    "New Believers": { desc: "Patient mentor people weh help new Christians grow wid God.", scripture: "Colossians 1:28 - 'Teach an encourage everybody wid wisdom.'" },
+    "Evangelism": { desc: "Bold people weh share di gospel wid courage an compassion.", scripture: "Mark 16:15 - 'Go everywhere an preach di good news.'" },
+    "Sanctuary Keepers": { desc: "Responsible people weh mek sure church clean an orderly.", scripture: "1 Corinth 3:16 - 'Yuh body a di temple of God an Spirit de inside yuh.'" },
+    "Set-up": { desc: "Practical people weh prepare, fix space an solve problems.", scripture: "Nehemiah 4:6 - 'Wi build di wall half way up.'" },
+    "Social Media": { desc: "Creative people weh use technology an storytelling fi connect wid people online.", scripture: "Psalm 19:14 - 'Mek di words an thoughts inna mi heart please God.'" },
+    "Sound": { desc: "Technical people weh mek sound clear an audible.", scripture: "1 Corinth 14:7 - 'If sound nuh clear, odda no go understand.'" },
+    "Uniform": { desc: "Disciplined people weh care bout presentation an keep high standard.", scripture: "1 Timothy 4:12 - 'Youth, show example fi odda.'" },
+    "Ushers": { desc: "Friendly people weh guide, help an care fi people ina church.", scripture: "Hebrews 13:17 - 'Obey yuh leaders an respect dem.'" },
+    "Welfare": { desc: "Compassionate people weh help needy an give support.", scripture: "Galatians 6:2 - 'Carry each oda burden.'" },
+    "Security": { desc: "Watchful people weh protect an keep place safe.", scripture: "Proverbs 27:12 - 'Wise man see danger an hide; fool go face problem.'" },
+    "Media": { desc: "Creative people weh capture an share content fi spread di vision clear.", scripture: "Habakkuk 2:2 - 'Write di vision pan board.'" },
+    "Spoken Word": { desc: "Expressive people weh use poetry, spoken word or art fi inspire an preach God word.", scripture: "Psalm 19:14 - 'Mek di words an thoughts inna mi heart please God.'" }
+  }
 }
-      // Additional languages would follow the same pattern
     };
 
     /* --------------- DOM refs ------------------ */
@@ -1270,15 +1373,20 @@ function restartWithoutReload(){
 const ELEVENLABS_API_KEY = "sk_17394b07cf28fa24edfd36e4cd50b14b1f8d0d4e5a9a3733";
 
 // Voice ID mapping for different languages - you need to replace these with your actual voice IDs
-const voiceMapping = {
-  'en': '991lF4hc0xxfec4Y6B0i', // English voice ID (example - replace with your actual voice ID)
-  'fr': 'SmWACbi37pETyxxMhSpc', // French voice ID (example - replace with your actual voice ID)
-  'es': 'zl1Ut8dvwcVSuQSB9XkG', // Spanish voice ID (example - replace with your actual voice ID)
-  'de': 'mZOnUa1KefZXI63p0DFu', // German voice ID (example - replace with your actual voice ID)
-  'tw': 'IAkWen5Y9zgtcrKepkq8', // General voice for Twi (example - replace with your actual voice ID)
-  'sv': '4xkUqaR9MYOJHoaC1Nak', // Swedish voice ID (example - replace with your actual voice ID)
-  'gd': 'v2zbX16tJNtRIx8rSHDM'  // Scottish Gaelic voice ID (example - replace with your actual voice ID)
-};
+  const voiceMapping = {
+  'en': '991lF4hc0xxfec4Y6B0i',
+  'fr': 'SmWACbi37pETyxxMhSpc', 
+  'es': 'zl1Ut8dvwcVSuQSB9XkG',
+  'de': 'mZOnUa1KefZXI63p0DFu',
+  'tw': 'IAkWen5Y9zgtcrKepkq8',
+  'sv': '4xkUqaR9MYOJHoaC1Nak',
+  'gd': 'v2zbX16tJNtRIx8rSHDM',
+  'kri': 'IAkWen5Y9zgtcrKepkq8',
+  'jam': 'mrDMz4sYNCz18XYFpmyV'
+  
+  
+};//
+
 
 let currentAudio = null;
 
@@ -1388,14 +1496,10 @@ function convertToEnglish(deptName) {
     "Spoken Word": "Spoken Word",
     
     // French to English
-    "Administration": "Administration",
     "Département des Enfants": "Children's Department",
-    "Design": "Design",
     "Drame": "Drama",
     "Hospitalité": "Hospitality",
     "Équipe d'Accueil": "Host Team",
-    "Production": "Production",
-    "Musique": "Music",
     "Suivi": "Follow Up",
     "Nouveaux Croyants": "New Believers",
     "Évangélisation": "Evangelism",
@@ -1414,7 +1518,6 @@ function convertToEnglish(deptName) {
     "Administración": "Administration",
     "Departamento Infantil": "Children's Department",
     "Diseño": "Design",
-    "Drama": "Drama",
     "Hospitalidad": "Hospitality",
     "Equipo de Anfitriones": "Host Team",
     "Producción": "Production",
@@ -1426,15 +1529,61 @@ function convertToEnglish(deptName) {
     "Preparación": "Set-up",
     "Redes Sociales": "Social Media",
     "Sonido": "Sound",
-    "Uniforme": "Uniform",
     "Ujieres": "Ushers",
     "Bienestar": "Welfare",
     "Seguridad": "Security",
     "Medios": "Media",
-    "Palabra Hablada": "Spoken Word"
+    "Palabra Hablada": "Spoken Word",
+
+// Krio to English department mapping
+  "Administration": "Administration",
+"Children's Department": "Children's Department",
+  "Design": "Dizayn",
+  "Drama": "Drɑma",
+  "Hospitality": "Ospitaliti",
+  "Host Team": "Ost Tim",
+  "Production": "Prodɔkshɔn",
+  "Music": "Miuzik",
+  "Follow Up": "Fɔlo Ɔp",
+  "New Believers": "Nyū Bilivaz",
+  "Evangelism": "Ivandjelizim",
+  "Sanctuary Keepers": "Sankchuari Kipaz",
+  "Set-up": "Set-ɔp",
+  "Social Media": "Soshal Midia",
+  "Sound": "Saun",
+  "Uniform": "Yuniform",
+  "Ushers": "Ɔshaaz",
+  "Welfare": "Wɛlfɛa",
+  "Security": "Sikyuriti",
+  "Media": "Midia",
+  "Spoken Word": "Spokɛn Wɔd",
+
+//English to patois 
+
+  "Administration": "Administreishan",
+  "Children's Department": "Pickney Dept",
+  "Design": "Dizayn",
+  "Drama": "Draama",
+  "Hospitality": "Ospitaliti",
+  "Host Team": "Ous Tim",
+  "Production": "Pradokshan",
+  "Music": "Myuuzik",
+  "Follow Up": "Folo Up",
+  "New Believers": "Nyu Biliivaaz",
+  "Evangelism": "Evandjelizm",
+  "Sanctuary Keepers": "Sankchuari Kipaaz",
+  "Set-up": "Set-op",
+  "Social Media": "Soshyal Miidya",
+  "Sound": "Soun",
+  "Uniform": "Yuunifarm",
+  "Ushers": "Usherz",
+  "Welfare": "Welfiar",
+  "Security": "Sikyuriti",
+  "Media": "Miidya",
+  "Spoken Word": "Spoukn Wod"
+
   };
-  
-  return departmentMap[deptName] || deptName;
+   return departmentMap[deptName] || deptName;
 }
 
 
@@ -1444,9 +1593,24 @@ function toggleMode() {
 }
 
 // Initialize the application
+function loadVoices() {
+  return new Promise((resolve) => {
+    if ('speechSynthesis' in window) {
+      const voices = speechSynthesis.getVoices();
+      if (voices.length) {
+        resolve(voices);
+      } else {
+        speechSynthesis.addEventListener('voiceschanged', () => {
+          resolve(speechSynthesis.getVoices());
+        });
+      }
+    } else {
+      resolve([]);
+    }
+  });
+}
 init();
 })();
 </script>
 </body>
 </html>
-
