@@ -78,7 +78,23 @@ charset="UTF-8">
       text-align: center;
       box-shadow: inset 0 2px 6px rgba(0,0,0,0.15);
     }
-    
+    #privacy-link {
+  transition: all 0.3s ease;
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+#privacy-link:hover {
+  transform: scale(1.05);
+  background-color: rgba(255, 215, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+}
+
+#privacy-link:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
     /* Bubbly Dropdown Styles */
     .language-dropdown-container {
       position: relative;
@@ -1586,6 +1602,22 @@ function convertToEnglish(deptName) {
   "Spoken Word": "Spoukn Wod"
 
   };
+  // Add this to your init function
+document.getElementById('privacy-link').addEventListener('click', function(e) {
+  this.classList.add('click-effect');
+  setTimeout(() => this.classList.remove('click-effect'), 300);
+});
+
+// Add this CSS
+.click-effect {
+  animation: pulse 0.3s ease;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
    return departmentMap[deptName] || deptName;
 }
 
@@ -1616,4 +1648,5 @@ init();
 </script>
 </body>
 </html>
+
 
