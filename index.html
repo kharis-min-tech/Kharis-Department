@@ -382,6 +382,9 @@ body.light .language-dropdown-container::after {
       </select>
       <button class="btn" id="start-kharis">Start Quiz</button>
     </div>
+<div style="text-align:center; margin-top:30px;">
+  <a href="privacy-policy.html" style="color:var(--btn-bg); text-decoration:none; font-size:0.9rem; font-weight:600;">Privacy Policy</a>
+</div>
 
     <!-- Quiz -->
     <div id="quiz"></div>
@@ -1591,7 +1594,6 @@ function toggleMode() {
   document.body.classList.toggle('light');
   modeBtn.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
 }
-
 // Initialize the application
 function loadVoices() {
   return new Promise((resolve) => {
