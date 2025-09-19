@@ -382,10 +382,9 @@ body.light .language-dropdown-container::after {
       </select>
       <button class="btn" id="start-kharis">Start Quiz</button>
     </div>
-<div style="text-align:center; margin-top:30px;">
+<div id="privacy-policy-link" style="text-align:center; margin-top:30px;">
   <a href="Privacy-policy.html" style="color:var(--btn-bg); text-decoration:none; font-size:0.9rem; font-weight:600;">Privacy Policy</a>
 </div>
-
     <!-- Quiz -->
     <div id="quiz"></div>
 
@@ -1019,7 +1018,7 @@ function init() {
     function startQuiz() {
   username = (usernameInput.value || '').trim();
   branch = (branchSelect.value || '').trim();
-  
+document.getElementById('privacy-policy-link').style.display = 'none';
   const lang = translations[currentLanguage] || translations.en;
   
   if(!username){
@@ -1218,7 +1217,7 @@ function showResult(){
   quizEl.classList.remove('show');
   resultEl.classList.add('show');
   backBtn.style.display = "none";
-
+document.getElementById('privacy-policy-link').style.display = 'block';
   const lang = translations[currentLanguage] || translations.en;
 
   // Get top departments based on scores
@@ -1361,7 +1360,8 @@ function renderExploreList(){
 function restartWithoutReload(){
     // Stop any ongoing speech
     stopSpeech();
-    
+   
+document.getElementById('privacy-policy-link').style.display = 'block';
     currentQ = 0;
     questionHistory = [];
     deptScores = {};
@@ -1616,3 +1616,4 @@ init();
 </script>
 </body>
 </html>
+
