@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Kharis Church Department Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { 
+      box-sizing: border-box; 
+      transition: all 0.3s ease; 
+    }
+    
+    html, body { 
+      height: 100%; 
+      margin: 0; 
+      padding: 0;
+      font-family: 'Quicksand', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #2a0c4a 0%, #3c1361 50%, #6b2c9c 100%);
+      color: #f8f9fa;
+      line-height: 1.7;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    .header {
+      background: rgba(60, 19, 97, 0.95);
+      padding: 25px 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .header-title {
+      font-family: 'Fredoka One', cursive;
+      color: #ffd700;
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    
+    .language-selector {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .language-label {
+      font-weight: 600;
+      color: #ffd700;
+    }
+    
+    .language-select {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 215, 0, 0.5);
+      border-radius: 25px;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      outline: none;
+    }
+    
+    .language-select option {
+      background: rgba(60, 19, 97, 0.95);
+      color: #fff;
+    }
+    
+    .main-content {
+      flex: 1;
+      padding: 40px 0;
+    }
+    
+    .policy-container {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 215, 0, 0.15);
+    }
+    
+    h1 {
+      font-family: 'Fredoka One', cursive;
+      color: #ffd700;
+      margin-bottom: 15px;
+      font-size: 2.8rem;
+      text-align: center;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .subtitle {
+      text-align: center;
+      margin-bottom: 40px;
+      opacity: 0.9;
+      font-size: 1.2rem;
+    }
+    
+    h2 {
+      font-family: 'Fredoka One', cursive;
+      color: #ffd700;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      font-size: 1.9rem;
+      padding-bottom: 10px;
+      border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    h2 i {
+      font-size: 1.5rem;
+    }
+    
+    h3 {
+      color: #ffd700;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+    
+    p {
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+    }
+    
+    ul {
+      margin-left: 25px;
+      margin-bottom: 25px;
+    }
+    
+    li {
+      margin-bottom: 12px;
+      position: relative;
+      padding-left: 10px;
+    }
+    
+    li:before {
+      content: "•";
+      color: #ffd700;
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+    
+    .last-updated {
+      text-align: center;
+      font-style: italic;
+      margin-top: 50px;
+      opacity: 0.8;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 15px;
+      border-radius: 10px;
+    }
+    
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 40px;
+      padding: 14px 30px;
+      background: linear-gradient(135deg, #ffd700 0%, #ffde2a 100%);
+      color: #3c1361;
+      border-radius: 50px;
+      text-decoration: none;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+      border: none;
+      cursor: pointer;
+    }
+    
+    .back-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+    }
+    
+    .contact-info {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 25px;
+      border-radius: 15px;
+      margin-top: 40px;
+      border-left: 4px solid #ffd700;
+    }
+    
+    .footer {
+      background: rgba(44, 12, 76, 0.9);
+      padding: 25px 0;
+      text-align: center;
+      margin-top: 60px;
+    }
+    
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .footer-logo {
+      width: 50px;
+      opacity: 0.8;
+    }
+    
+    .footer-text {
+      opacity: 0.7;
+      font-size: 0.95rem;
+    }
+    
+    @media (max-width: 768px) {
+      .policy-container {
+        padding: 25px;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      h2 {
+        font-size: 1.6rem;
+      }
+      
+      .header-title {
+        font-size: 1.5rem;
+      }
+      
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
+      
+      .language-selector {
+        justify-content: center;
+      }
+    }
+    
+    /* Print styles */
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+      
+      .header, .footer, .back-button, .language-selector {
+        display: none;
+      }
+      
+      .policy-container {
+        box-shadow: none;
+        background: white;
+        border: 1px solid #ddd;
+      }
+      
+      h1, h2, h3 {
+        color: #333;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo-container">
+        <img src="https://kharis.org/wp-content/uploads/2022/08/Logo_transparent_noText.png" 
+             alt="Kharis Church Logo" class="logo">
+        <h2 class="header-title">Kharis Church</h2>
+      </div>
+      
+      <div class="language-selector">
+        <span class="language-label">Language:</span>
+        <select id="languageSelect" class="language-select">
+          <option value="en">English 🇬🇧</option>
+          <option value="fr">Français (French) 🇫🇷</option>
+          <option value="es">Español (Spanish) 🇪🇸</option>
+          <option value="kri">Krio (Sierra Leone) 🇸🇱</option>
+          <option value="de">Deutsch (German) 🇩🇪</option>
+          <option value="tw">Twi (Ghana) 🇬🇭</option>
+          <option value="jam">Patois (Jamaica) 🇯🇲</option>
+          <option value="sv">Svenska (Swedish) 🇸🇪</option>
+          <option value="gd">Gàidhlig (Scottish) 🏴󠁧󠁢󠁳󠁣󠁴󠁿</option>
+        </select>
+      </div>
+    </div>
+  </header>
+  
+  <main class="main-content">
+    <div class="container">
+      <div class="policy-container">
+        <h1 id="policy-title">Privacy Policy</h1>
+        <p class="subtitle" id="policy-subtitle">Kharis Church Department Discovery Quiz</p>
+        
+        <div id="policy-content">
+          <!-- Content will be loaded dynamically based on language -->
+        </div>
+        
+        <a href="kharisquizcode.html" class="back-button" id="back-button"><i class="fas fa-arrow-left"></i> Back to Quiz</a>
+      </div>
+    </div>
+  </main>
+  
+  <footer class="footer">
+    <div class="container footer-content">
+      <img src="https://kharis.org/wp-content/uploads/2022/08/Logo_transparent_noText.png" 
+           alt="Kharis Church Logo" class="footer-logo">
+      <p class="footer-text">© 2025 Kharis Church. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Language content definitions
+    const policyContent = {
+      en: {
+        title: "Privacy Policy",
+        subtitle: "Kharis Church Department Discovery Quiz",
+        lastUpdated: "Last Updated: September 19, 2025",
+        backButton: "Back to Quiz",
+        content: `
+          <h2><i class="fas fa-info-circle"></i> 1. Introduction</h2>
+          <p>Kharis Church ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our Department Discovery Quiz.</p>
+          <p>By using the Quiz, you consent to the data practices described in this policy. If you do not agree, please do not use the Quiz.</p>
+          
+          <h2><i class="fas fa-database"></i> 2. Information We Collect</h2>
+          
+          <h3>Personal Information:</h3>
+          <ul>
+            <li>Full Name</li>
+            <li>Date</li>
+            <li>TimeStamp</li>
+            <li>Chosen Departments</li>
+            <li>Language</li>
+            <li>Selected Kharis Church branch location</li>
+          </ul>
+          
+          <h3>Quiz Responses:</h3>
+          <ul>
+            <li>Answers to chosen department questions</li>
+            <li>Department compatibility results</li>
+          </ul>
+          
+          <h3>Technical Information:</h3>
+          <ul>
+            <li>IP address and browser type</li>
+            <li>Device information</li>
+            <li>Usage data and quiz interaction patterns</li>
+          </ul>
+          
+          <h2><i class="fas fa-cogs"></i> 3. How We Use Your Information</h2>
+          <p>We use the information we collect for the following purposes:</p>
+          <ul>
+            <li>To generate your personalized department compatibility results</li>
+            <li>To connect you with ministry opportunities at your selected branch</li>
+            <li>To improve our quiz and church services</li>
+            <li>For internal analytical purposes to understand congregation gifts</li>
+            <li>To communicate with you about church activities (with your consent)</li>
+          </ul>
+          
+          <h2><i class="fas fa-lock"></i> 4. Data Storage and Security</h2>
+          <p>Your data is stored securely in Google Sheets with appropriate access controls. We implement measures to protect your personal information against unauthorized access, alteration, or destruction.</p>
+          <p>Data is retained for ministry purposes unless you request deletion. Quiz responses are anonymized for analytical purposes after 24 months.</p>
+          
+          <h2><i class="fas fa-shield-alt"></i> 5. Your Rights</h2>
+          <p>Depending on your location, you may have the following rights regarding your personal information:</p>
+          <ul>
+            <li>Right to access and receive a copy of your personal data</li>
+            <li>Right to rectify inaccurate or incomplete data</li>
+            <li>Right to erasure of your personal data</li>
+            <li>Right to restrict or object to processing</li>
+            <li>Right to withdraw consent at any time</li>
+          </ul>
+          
+          <h2><i class="fas fa-envelope"></i> 6. Contact Us</h2>
+          <div class="contact-info">
+            <p>If you have questions about this Privacy Policy or our data practices, please contact:</p>
+            <p><strong>Kharis Church Data Protection Officer</strong><br>
+            Email: dataprotection@kharis.org<br>
+            Address: 146 Praed St, London W2 1EE</p>
+          </div>
+        `
+      },
+      fr: {
+        title: "Politique de Confidentialité",
+        subtitle: "Quiz de Découverte des Départements de l'Église Kharis",
+        lastUpdated: "Dernière mise à jour: 19 septembre 2025",
+        backButton: "Retour au Quiz",
+        content: `
+          <h2><i class="fas fa-info-circle"></i> 1. Introduction</h2>
+          <p>Kharis Church (« nous », « notre » ou « nos ») s'engage à protéger votre vie privée. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations lorsque vous utilisez notre Quiz de Découverte des Départements.</p>
+          <p>En utilisant le Quiz, vous consentez aux pratiques de données décrites dans cette politique. Si vous n'êtes pas d'accord, veuillez ne pas utiliser le Quiz.</p>
+          
+          <h2><i class="fas fa-database"></i> 2. Informations que nous collectons</h2>
+          
+          <h3>Informations personnelles :</h3>
+          <ul>
+            <li>Nom complet</li>
+            <li>Date</li>
+            <li>Horodatage</li>
+            <li>Départements choisis</li>
+            <li>Langue</li>
+            <li>Emplacement de la branche sélectionnée de Kharis Church</li>
+          </ul>
+          
+          <h3>Réponses au quiz :</h3>
+          <ul>
+            <li>Réponses aux questions des départements choisis</li>
+            <li>Résultats de compatibilité des départements</li>
+          </ul>
+          
+          <h3>Informations techniques :</h3>
+          <ul>
+            <li>Adresse IP et type de navigateur</li>
+            <li>Informations sur l'appareil</li>
+            <li>Données d'utilisation et modèles d'interaction avec le quiz</li>
+          </ul>
+          
+          <h2><i class="fas fa-cogs"></i> 3. Comment nous utilisons vos informations</h2>
+          <p>Nous utilisons les informations que nous collectons aux fins suivantes :</p>
+          <ul>
+            <li>Pour générer vos résultats personnalisés de compatibilité avec les départements</li>
+            <li>Pour vous mettre en relation avec des opportunités de ministère dans votre branche sélectionnée</li>
+            <li>Pour améliorer notre quiz et les services de l'église</li>
+            <li>À des fins analytiques internes pour comprendre les dons de la congrégation</li>
+            <li>Pour communiquer avec vous concernant les activités de l'église (avec votre consentement)</li>
+          </ul>
+          
+          <h2><i class="fas fa-lock"></i> 4. Stockage et sécurité des données</h2>
+          <p>Vos données sont stockées en toute sécurité dans Google Sheets avec des contrôles d'accès appropriés. Nous mettons en œuvre des mesures pour protéger vos informations personnelles contre tout accès, modification ou destruction non autorisé.</p>
+          <p>Les données sont conservées à des fins ministérielles sauf si vous demandez leur suppression. Les réponses au quiz sont anonymisées à des fins analytiques après 24 mois.</p>
+          
+          <h2><i class="fas fa-shield-alt"></i> 5. Vos droits</h2>
+          <p>Selon votre lieu de résidence, vous pouvez avoir les droits suivants concernant vos informations personnelles :</p>
+          <ul>
+            <li>Droit d'accéder et de recevoir une copie de vos données personnelles</li>
+            <li>Droit de rectifier des données inexactes ou incomplètes</li>
+            <li>Droit à l'effacement de vos données personnelles</li>
+            <li>Droit de restreindre ou de vous opposer au traitement</li>
+            <li>Droit de retirer votre consentement à tout moment</li>
+          </ul>
+          
+          <h2><i class="fas fa-envelope"></i> 6. Contactez-nous</h2>
+          <div class="contact-info">
+            <p>Si vous avez des questions concernant cette politique de confidentialité ou nos pratiques en matière de données, veuillez contacter :</p>
+            <p><strong>Délégué à la protection des données de Kharis Church</strong><br>
+            Email : dataprotection@kharis.org<br>
+            Adresse : 146 Praed St, London W2 1EE</p>
+          </div>
+        `
+      },
+      es: {
+        title: "Política de Privacidad",
+        subtitle: "Quiz de Descubrimiento de Departamentos de la Iglesia Kharis",
+        lastUpdated: "Última actualización: 19 de septiembre de 2025",
+        backButton: "Volver al Quiz",
+        content: `
+          <h2><i class="fas fa-info-circle"></i> 1. Introducción</h2>
+          <p>Kharis Church ("nosotros", "nuestro" o "nos") se compromete a proteger su privacidad. Esta Política de Privacidad explica cómo recopilamos, utilizamos y protegemos su información cuando utiliza nuestro Quiz de Descubrimiento de Departamentos.</p>
+          <p>Al utilizar el Quiz, usted acepta las prácticas de datos descritas en esta política. Si no está de acuerdo, por favor no utilice el Quiz.</p>
+          
+          <h2><i class="fas fa-database"></i> 2. Información que recopilamos</h2>
+          
+          <h3>Información personal:</h3>
+          <ul>
+            <li>Nombre completo</li>
+            <li>Fecha</li>
+            <li>Sello de tiempo</li>
+            <li>Departamentos elegidos</li>
+            <li>Idioma</li>
+            <li>Ubicación de la sucursal de la Iglesia Kharis seleccionada</li>
+          </ul>
+          
+          <h3>Respuestas del Quiz:</h3>
+          <ul>
+            <li>Respuestas a las preguntas de los departamentos elegidos</li>
+            <li>Resultados de compatibilidad de departamentos</li>
+          </ul>
+          
+          <h3>Información técnica:</h3>
+          <ul>
+            <li>Dirección IP y tipo de navegador</li>
+            <li>Información del dispositivo</li>
+            <li>Datos de uso y patrones de interacción con el quiz</li>
+          </ul>
+          
+          <h2><i class="fas fa-cogs"></i> 3. Cómo utilizamos su información</h2>
+          <p>Utilizamos la información que recopilamos para los siguientes propósitos:</p>
+          <ul>
+            <li>Generar sus resultados personalizados de compatibilidad con departamentos</li>
+            <li>Conectarlo con oportunidades de ministerio en su sucursal seleccionada</li>
+            <li>Mejorar nuestro quiz y los servicios de la iglesia</li>
+            <li>Para fines analíticos internos para entender los dones de la congregación</li>
+            <li>Comunicarnos con usted sobre actividades de la iglesia (con su consentimiento)</li>
+          </ul>
+          
+          <h2><i class="fas fa-lock"></i> 4. Almacenamiento y seguridad de datos</h2>
+          <p>Sus datos se almacenan de forma segura en Google Sheets con controles de acceso apropiados. Implementamos medidas para proteger su información personal contra acceso, alteración o destrucción no autorizados.</p>
+          <p>Los datos se conservan con fines ministeriales a menos que solicite su eliminación. Las respuestas del quiz se anonimizan con fines analíticos después de 24 meses.</p>
+          
+          <h2><i class="fas fa-shield-alt"></i> 5. Sus derechos</h2>
+          <p>Dependiendo de su ubicación, puede tener los siguientes derechos con respecto a su información personal:</p>
+          <ul>
+            <li>Derecho a acceder y recibir una copia de sus datos personales</li>
+            <li>Derecho a rectificar datos inexactos o incompletos</li>
+            <li>Derecho a la eliminación de sus datos personales</li>
+            <li>Derecho a restringir u oponerse al procesamiento</li>
+            <li>Derecho a retirar su consentimiento en cualquier momento</li>
+          </ul>
+          
+          <h2><i class="fas fa-envelope"></i> 6. Contáctenos</h2>
+          <div class="contact-info">
+            <p>Si tiene preguntas sobre esta Política de Privacidad o nuestras prácticas de datos, por favor contacte a:</p>
+            <p><strong>Oficial de Protección de Datos de Kharis Church</strong><br>
+            Email: dataprotection@kharis.org<br>
+            Dirección: 146 Praed St, London W2 1EE</p>
+          </div>
+        `
+      },
+      kri: {
+        title: "Politik fɔ Priivasì",
+        subtitle: "Kharis Choch Dipatment Diskova Kwiz",
+        lastUpdated: "Las Apdet: Septemba 19, 2025",
+        backButton: "Go Bak to Kwiz",
+        content: `
+          <h2><i class="fas fa-info-circle"></i> 1. Introdokshon</h2>
+          <p>Kharis Choch ("wi", "awa", "wi wan") de komit fɔ protɛkt yu priivasì. Dis Priivasì Politik eksplen aw wi de kolekt, yuz, an protɛkt yu infɔmeshɔn wen yu yuz awa Dipatment Diskova Kwiz.</p>
+          <p>Bai yuzin di Kwiz, yu de gri fɔ di data praktis we de diskraib fɔ dis politik. If yu nɔ gri, plɛs nɔ yuz di Kwiz.</p>
+          
+          <h2><i class="fas fa-database"></i> 2. Infɔmeshɔn Wi de Kolekt</h2>
+          
+          <h3>Pasonal Infɔmeshɔn:</h3>
+          <ul>
+            <li>Ful Nem</li>
+            <li>Det</li>
+            <li>Temstamp</li>
+            <li>Dipatment we yu chuz</li>
+            <li>Langwej</li>
+            <li>Kharis Choch branch we yu selekt</li>
+          </ul>
+          
+          <h3>Kwiz Ansas:</h3>
+          <ul>
+            <li>Ansas to kweshɔns fɔ dipatment we yu chuz</li>
+            <li>Dipatment kompatibiliti rizɔlt</li>
+          </ul>
+          
+          <h3>Teknikal Infɔmeshɔn:</h3>
+          <ul>
+            <li>IP adres an browser taip</li>
+            <li>Divais infɔmeshɔn</li>
+            <li>Yuz data an kwiz intarakshon patan</li>
+          </ul>
+          
+          <h2><i class="fas fa-cogs"></i> 3. Aw Wi de Yuz Yu Infɔmeshɔn</h2>
+          <p>Wi de yuz di infɔmeshɔn we wi de kolekt fɔ dis pɔpɔs:</p>
+          <ul>
+            <li>Fɔ mek yu pasonal dipatment kompatibiliti rizɔlt</li>
+            <li>Fɔ konekt yu wit minestri opɔchuniti fɔ yu branch we yu selekt</li>
+            <li>Fɔ impruv awa kwiz an choch sɔvis</li>
+            <li>Fɔ intanal analitik pɔpɔs fɔ andastan kongrigeshon gift</li>
+            <li>Fɔ tɔk to yu baut choch aktivitis (wit yu kɔnsɛnt)</li>
+          </ul>
+          
+          <h2><i class="fas fa-lock"></i> 4. Data Stɔrij an Sɛkuriti</h2>
+          <p>Yu data de stɔr sɛkurlì fɔ Google Sheets wit apropriet akses kontrɔl. Wi de put mɛja fɔ protɛkt yu pasonal infɔmeshɔn from pípul we nɔ gɛt pɔmishɔn fɔ akses, chenj, o distrɔy am.</p>
+          <p>Wi de kip data fɔ minestri pɔpɔs if yu nɔ aks fɔ dilit. Kwiz ansas de mek anonimas fɔ analitik pɔpɔs afta 24 mont.</p>
+          
+          <h2><i class="fas fa-shield-alt"></i> 5. Yu Rat</h2>
+          <p>Dipend pan yu lɔkeshɔn, yu fit gɛt dis rat fɔ yu pasonal infɔmeshɔn:</p>
+          <ul>
+            <li>Rat fɔ akses an gɛt kopi fɔ yu pasonal data</li>
+            <li>Rat fɔ kɔrɛkt infɔmeshɔn we nɔ kɔrɛkt o we nɔ komplit</li>
+            <li>Rat fɔ dilit yu pasonal data</li>
+            <li>Rat fɔ ristrik o objɛk to prosesin</li>
+            <li>Rat fɔ widdro yu kɔnsɛnt enitaim</li>
+          </ul>
+          
+          <h2><i class="fas fa-envelope"></i> 6. Kontak Wi</h2>
+          <div class="contact-info">
+            <p>If yu gɛt kweshɔn baut dis Priivasì Politik o awa data praktis, plɛs kontak:</p>
+            <p><strong>Kharis Choch Data Prɔtɛkshɔn Ofisa</strong><br>
+            Imel: dataprotection@kharis.org<br>
+            Adres: 146 Praed St, London W2 1EE</p>
+          </div>
+        `
+      },
+      de: {
+        title: "Datenschutzrichtlinie",
+        subtitle: "Kharis Church Abteilung-Entdeckungs-Quiz",
+        lastUpdated: "Zuletzt aktualisiert: 19. September 2025",
+        backButton: "Zurück zum Quiz",
+        content: `
+          <h2><i class="fas fa-info-circle"></i> 1. Einführung</h2>
+          <p>Kharis Church ("wir", "uns" oder "unser") ist bestrebt, Ihre Privatsphäre zu schützen. Diese Datenschutzrichtlinie erklärt, wie wir Ihre Informationen sammeln, verwenden und schützen, wenn Sie unser Abteilung-Entdeckungs-Quiz verwenden.</p>
+          <p>Durch die Nutzung des Quiz stimmen Sie den in dieser Richtlinie beschriebenen Datenpraktiken zu. Wenn Sie nicht einverstanden sind, verwenden Sie bitte das Quiz nicht.</p>
+          
+          <h2><i class="fas fa-database"></i> 2. Informationen, die wir sammeln</h2>
+          
+          <h3>Persönliche Informationen:</h3>
+          <ul>
+            <li>Vollständiger Name</li>
+            <li>Datum</li>
+            <li>Zeitstempel</li>
+            <li>Ausgewählte Abteilungen</li>
+            <li>Sprache</li>
+            <li>Ausgewählter Kharis Church Standort</li>
+          </ul>
+          
+          <h3>Quiz-Antworten:</h3>
+          <ul>
+            <li>Antworten auf Fragen der gewählten Abteilungen</li>
+            <li>Abteilungskompatibilitätsergebnisse</li>
+          </ul>
+          
+          <h3>Technische Informationen:</h3>
+          <ul>
+            <li>IP-Adresse und Browsertyp</li>
+            <li>Geräteinformationen</li>
+            <li>Nutzungsdaten und Quiz-Interaktionsmuster</li>
+          </ul>
+          
+          <h2><i class="fas fa-cogs"></i> 3. Wie wir Ihre Informationen verwenden</h2>
+          <p>Wir verwenden die von uns gesammelten Informationen für folgende Zwecke:</p>
+          <ul>
+            <li>Um Ihre personalisierten Abteilungskompatibilitätsergebnisse zu generieren</li>
+            <li>Um Sie mit Ministeriumsmöglichkeiten an Ihrem ausgewählten Standort zu verbinden</li>
+            <li>Um unser Quiz und die kirchlichen Dienste zu verbessern</li>
+            <li>Für interne analytische Zwecke, um die Gaben der Gemeinde zu verstehen</li>
+            <li>Um mit Ihnen über Kirchenaktivitäten zu kommunizieren (mit Ihrer Zustimmung)</li>
+          </ul>
+          
+          <h2><i class="fas fa-lock"></i> 4. Datenspeicherung und Sicherheit</h2>
+          <p>Ihre Daten werden sicher in Google Sheets mit entsprechenden Zugriffskontrollen gespeichert. Wir implementieren Maßnahmen zum Schutz Ihrer persönlichen Informationen vor unbefugtem Zugriff, Veränderung oder Zerstörung.</p>
+          <p>Daten werden für ministerielle Zwecke aufbewahrt, es sei denn, Sie fordern deren Löschung. Quiz-Antworten werden nach 24 Monaten für analytische Zwecke anonymisiert.</p>
+          
+          <h2><i class="fas fa-shield-alt"></i> 5. Ihre Rechte</h2>
+          <p>Abhängig von Ihrem Standort können Sie folgende Rechte in Bezug auf Ihre persönlichen Informationen haben:</p>
+          <ul>
+            <li>Recht auf Zugang zu und Erhalt einer Kopie Ihrer persönlichen Daten</li>
+            <li>Recht auf Berichtigung ungenauer oder unvollständiger Daten</li>
+            <li>Recht auf Löschung Ihrer persönlichen Daten</li>
+            <li>Recht auf Einschränkung oder Widerspruch gegen die Verarbeitung</li>
+            <li>Recht, Ihre Einwilligung jederzeit zu widerrufen</li>
+          </ul>
+          
+          <h2><i class="fas fa-envelope"></i> 6. Kontaktieren Sie uns</h2>
+          <div class="contact-info">
+            <p>Wenn Sie Fragen zu dieser Datenschutzrichtlinie oder unseren Datenpraktiken haben, wenden Sie sich bitte an:</p>
+            <p><strong>Kharis Church Datenschutzbeauftragter</strong><br>
+            Email: dataprotection@kharis.org<br>
+            Adresse: 146 Praed St, London W2 1EE</p>
+          </div>
+        `
+      },
+      tw: {
+        title: "Nkɔsoɔ a Wɔde Sie Adwene",
+        subtitle: "Kharis Asɔredan Apam Nhwɛsoɔ",
+        lastUpdated: "Sɛ Ɔsan Sesaɛ: September 19, 2025",
+        backButton: "San Kɔ Nhwɛsoɔ no Hɔ",
+        content: `
+          <h2><i class="fas fa-info-circle"></i> 1. Nkyerɛkyerɛmu</h2>
+          <p>Kharis Asɔredan ("yɛn", "yɛ", "yɛn dea") ayɛ adwene sɛ wɔbɛsie wo nkɔsoɔ. Nkɔsoɔ a Wɔde Sie Adwene yi kyerɛ sɛnea yɛtɔn, yɛde di dwuma, na yɛsie wo nkɔm firi sɛ wode yɛn Apam Nhwɛsoɔ no di dwuma.</p>
+          <p>Sɛ wode Nhwɛsoɔ no di dwuma a, wupene sɛ wɔde wo nkɔm no ayɛ adwuma sɛnea ɛwɔ saa nkɔsoɔ yi mu. Sɛ wonni nteaseɛ a, yɛsrɛ wo mfa nni dwuma.</p>
+          
+          <h2><i class="fas fa-database"></i> 2. Nkɔm a Yɛtɔn</h2>
+          
+                     <li>Ɛda</li>
+            <li>Bere a Wɔyɛɛ</li>
+            <li>Apam a Wɔpaw</li>
+            <li>Kasa</li>
+            <li>Kharis Asɔredan bea a wɔpaw</li>
+          </ul>
+          
+          <h3>Nhwɛsoɔ Mu Nsesaeɛ:</h3>
+          <ul>
+            <li>Nsesaeɛ ma apam nhwɛsoɔ nsɛm</li>
+            <li>Apam a ɛfata mpɛnsɛmpɛnsɛm nsesaeɛ</li>
+          </ul>
+          
+          <h3>Nyansahu Nkɔm:</h3>
+          <ul>
+            <li>IP adrɛs ne browser no su</li>
+            <li>Agugu nkɔm</li>
+            <li>Dwumadi nkɔm ne nhwɛsoɔ nkitahodi abɔdeɛ</li>
+          </ul>
+          
+          <h2><i class="fas fa-cogs"></i> 3. Sɛnea Yɛde Wo Nkɔm Di Dwuma</h2>
+          <p>Yɛde nkɔm a yɛtɔn no di dwuma ma eyi:</p>
+          <ul>
+            <li>Sɛ yɛbɛyɛ wo pɛ apam a ɛfata mpɛnsɛmpɛnsɛm nsesaeɛ</li>
+            <li>Sɛ yɛbɛkɔ wo ne asɔredan dwumadi ahorow a ɛwɔ wo bea a wɔpaw no</li>
+            <li>Sɛ yɛbɛyɛ yɛn nhwɛsoɔ ne asɔredan nnoɔma ayɛ yie</li>
+            <li>Ma yɛn mu nhwɛsoɔ sɛ yɛbɛte asɔredan mmarima ne mmaa ayɛmyɛ aseɛ</li>
+            <li>Sɛ yɛbɛka wo asɔredan nnoɔma ho asɛm (sɛ wupene a)</li>
+          </ul>
+          
+          <h2><i class="fas fa-lock"></i> 4. Nkɔm Sie Ne Siesiee</h2>
+          <p>Wo nkɔm wɔ Google Sheets mu yie na wɔde nkɔsoɔ a ɛfata sie. Yɛde nnoɔma ayɛ sɛ wɔrennya wo nkɔm a wɔde sie no animtiaa, sesa, anaa sɛe.</p>
+          <p>Wɔsie nkɔm ma asɔredan dwumadi gye sɛ wubisa sɛ wɔmmfa nnye. Wɔde nhwɛsoɔ nsesaeɛ yɛ obiara nkɔm ma nhwɛsoɔ nnoɔma akyi bere a ɔbɛyɛ abien afe.</p>
+          
+          <h2><i class="fas fa-shield-alt"></i> 5. Wo Tumidie</h2>
+          <p>Twi wo bea, wo tumi wɔ saa tumidie yi wɔ wo nkɔm a wɔde sie ho:</p>
+          <ul>
+            <li>Tumidie sɛ wubɛhwehwɛ na wonya wo nkɔm a wɔde sie no kopi</li>
+            <li>Tumidie sɛ wubɛsesa nkɔm a ɛnyɛ yie anaa a ɛnyɛ pɛpɛɛpɛ</li>
+            <li>Tumidie sɛ wubɛpɛ sɛ wɔyɛ wo nkɔm a wɔde sie no fi</li>
+            <li>Tumidie sɛ wubɛkyɛw anaa sɛ wubɛkyir nnoɔma a wɔyɛ</li>
+            <li>Tumidie sɛ wubɛyɛ wo pɛnso da biara</li>
+          </ul>
+          
+          <h2><i class="fas fa-envelope"></i> 6. Yɛn Nkitahodi</h2>
+          <div class="contact-info">
+            <p>Sɛ wowɔ nsɛm a ebisa fa Nkɔsoɔ a Wɔde Sie Adwɛne yi ho anaa yɛn nkɔm a yɛde yɛ nnoɔma ho a, yɛsrɛ wo kɔ so kɔka:</p>
+            <p><strong>Kharis Asɔredan Nkɔm Siesiee Hwɛsoɔ</strong><br>
+            Email: dataprotection@kharis.org<br>
+            Adrɛs: 146 Praed St, London W2 1EE</p>
+          </div>
+        `
+      },
+      jam: {
+        title: "Privasi Policy",
+        subtitle: "Kharis Church Department Discovri Kwiz",
+        lastUpdated: "Laas Opdet: Septemba 19, 2025",
+        backButton: "Go Bak to Kwiz",
+        content: `
+          <h2><i class="fas fa-info-circle"></i> 1. Intradokshan</h2>
+          <p>Kharis Church ("wi", "wi own", "wi's") komitid fi protek yu privasi. Dis Privasi Policy explain ow wi kolek, yuz, an protek yu infamieshan wen yu yuz wi Department Discovri Kwiz.</p>
+          <p>Bai yuzin di Kwiz, yu agri to di data praktis we diskaib ina dis policy. If yu no agri, pliz no yuz di Kwiz.</p>
+          
+          <h2><i class="fas fa-database"></i> 2. Infamieshan Wi Kolek</h2>
+          
+          <h3>Pasonal Infamieshan:</h3>
+          <ul>
+            <li>Fuul Niem</li>
+            <li>Date</li>
+            <li>Tiem Stamp</li>
+            <li>Department We Yu Chuz</li>
+            <li>Langwij</li>
+            <li>Kharis Church branch we yu selek</li>
+          </ul>
+          
+          <h3>Kwiz Ansaz:</h3>
+          <ul>
+            <li>Ansaz to kwestyans fi department we yu chuz</li>
+            <li>Department kompatibiliti rizolt</li>
+          </ul>
+          
+          <h3>Teknikal Infamieshan:</h3>
+          <ul>
+            <li>IP adres an brauza taip</li>
+            <li>Divais infamieshan</li>
+            <li>Yuz data an kwiz intarakshan patan</li>
+          </ul>
+          
+          <h2><i class="fas fa-cogs"></i> 3. Ow Wi Yuz Yu Infamieshan</h2>
+          <p>Wi yuz di infamieshan we wi kolek fi dis puopos:</p>
+          <ul>
+            <li>Fi mek yu pasonal department kompatibiliti rizolt</li>
+            <li>Fi konek yu wid minestri opochuniti fi yu branch we yu selek</li>
+            <li>Fi impruv wi kwiz an choch savis</li>
+            <li>Fi intanal analitik puopos fi andastan kongrigieshan gift</li>
+            <li>Fi chat to yu bout choch aktivitis (wid yu konsent)</li>
+          </ul>
+          
+          <h2><i class="fas fa-lock"></i> 4. Data Stuorij an Sekioriti</h2>
+          <p>Yu data de ina Google Sheets gud wid apropriet akses kontuol. Wi put miija fi protek yu pasonal infamieshan fram piipl we no get paamishan fi akses, chienj, ar distuor.</p>
+          <p>Wi kip data fi minestri puopos if yu no aks fi dilit. Kwiz ansaz mek anonimas fi analitik puopos afta 24 monts.</p>
+          
+          <h2><i class="fas fa-shield-alt"></i> 5. Yu Raits</h2>
+          <p>Dipen pan yu lieshan, yu kyan get dis raits fi yu pasonal infamieshan:</p>
+          <ul>
+            <li>Rait fi akses an get kopi fi yu pasonal data</li>
+            <li>Rait fi kieriekt infamieshan we no kieriekt ar we no kompliet</li>
+            <li>Rait fi dilit yu pasonal data</li>
+            <li>Rait fi riskriek ar abjek to pruosesin</li>
+            <li>Rait fi widro yu konsent enitaim</li>
+          </ul>
+          
+          <h2><i class="fas fa-envelope"></i> 6. Kontak Wi</h2>
+          <div class="contact-info">
+            <p>If yu gat kwestyans bout dis Privasi Policy ar wi data praktis, pliz kontak:</p>
+            <p><strong>Kharis Church Data Pruoteshan Afisa</strong><br>
+            Iemel: dataprotection@kharis.org<br>
+            Adres: 146 Praed St, London W2 1EE</p>
+          </div>
+        `
+      },
+      sv: {
+        title: "Integritetspolicy",
+        subtitle: "Kharis Kyrkas Avdelningsupptäckarquiz",
+        lastUpdated: "Senast uppdaterad: 19 september 2025",
+        backButton: "Tillbaka till Quizet",
+        content: `
+          <h2><i class="fas fa-info-circle"></i> 1. Introduktion</h2>
+          <p>Kharis Kyrka ("vi", "vår" eller "oss") är engagerade i att skydda din integritet. Denna integritetspolicy förklarar hur vi samlar in, använder och skyddar din information när du använder vår Avdelningsupptäckarquiz.</p>
+          <p>Genom att använda Quizet samtycker du till de datapraxis som beskrivs i denna policy. Om du inte samtycker, vänligen använd inte Quizet.</p>
+          
+          <h2><i class="fas fa-database"></i> 2. Information vi samlar in</h2>
+          
+          <h3>Personlig information:</h3>
+          <ul>
+            <li>Fullständigt namn</li>
+            <li>Datum</li>
+            <li>Tidsstämpel</li>
+            <li>Valda avdelningar</li>
+            <li>Språk</li>
+            <li>Vald Kharis Kyrka filialplats</li>
+          </ul>
+          
+          <h3>Quizsvar:</h3>
+          <ul>
+            <li>Svar på frågor från valda avdelningar</li>
+            <li>Avdelningskompatibilitetsresultat</li>
+          </ul>
+          
+          <h3>Teknisk information:</h3>
+          <ul>
+            <li>IP-adress och webbläsartyp</li>
+            <li>Enhetsinformation</li>
+            <li>Användningsdata och quizinteraktionsmönster</li>
+          </ul>
+          
+          <h2><i class="fas fa-cogs"></i> 3. Hur vi använder din information</h2>
+          <p>Vi använder den information vi samlar in för följande ändamål:</p>
+          <ul>
+            <li>För att generera dina personliga avdelningskompatibilitetsresultat</li>
+            <li>För att koppla dig till möjligheter inom verksamheten vid din valda filial</li>
+            <li>För att förbättra vårt quiz och kyrkans tjänster</li>
+            <li>För intern analytisk syfte för att förstå församlingens gåvor</li>
+            <li>För att kommunicera med dig om kyrkans aktiviteter (med ditt samtycke)</li>
+          </ul>
+          
+          <h2><i class="fas fa-lock"></i> 4. Datalagring och säkerhet</h2>
+          <p>Dina data lagras säkert i Google Sheets med lämpliga åtkomstkontroller. Vi implementerar åtgärder för att skydda din personliga information mot obehörig åtkomst, ändring eller förstöring.</p>
+          <p>Data behålls för verksamhetsändamål om du inte begär radering. Quizsvar anonymiseras för analytiska ändamål efter 24 månader.</p>
+          
+          <h2><i class="fas fa-shield-alt"></i> 5. Dina rättigheter</h2>
+          <p>Beroende på din plats kan du ha följande rättigheter gällande din personliga information:</p>
+          <ul>
+            <li>Rätt att komma åt och få en kopia av dina personuppgifter</li>
+            <li>Rätt att rätta felaktiga eller ofullständiga uppgifter</li>
+            <li>Rätt att radera dina personuppgifter</li>
+            <li>Rätt att begränsa eller invända mot behandling</li>
+            <li>Rätt att återkalla ditt samtycke när som helst</li>
+          </ul>
+          
+          <h2><i class="fas fa-envelope"></i> 6. Kontakta oss</h2>
+          <div class="contact-info">
+            <p>Om du har frågor om denna integritetspolicy eller våra datapraxis, vänligen kontakta:</p>
+            <p><strong>Kharis Kyrka Dataskyddsombud</strong><br>
+            E-post: dataprotection@kharis.org<br>
+            Adress: 146 Praed St, London W2 1EE</p>
+          </div>
+        `
+      },
+      gd: {
+        title: "Poileasaidh Dìomhaireachd",
+        subtitle: "Cuairt-measachd Roinn Eaglais Kharis",
+        lastUpdated: "Ùrachadh Mu Dheireadh: 19 Sultain 2025",
+        backButton: "Air Ais don Chuairt-measachd",
+        content: `
+          <h2><i class="fas fa-info-circle"></i> 1. Ro-ràdh</h2>
+          <p>Tha Eaglais Kharis ("sinne", "ar" no "againn") dealasach a' dìon do phrìobhaideachd. Mìneachaidh am Poileasaidh Dìomhaireachd seo mar a chruinnicheas, a chleachdas agus a dhìonas sinn am fiosrachadh agad nuair a chleachdas tu ar Cuairt-measachd Roinn.</p>
+          <p>Le bhith a' cleachdadh na Cuairt-measachd, tha thu ag aontachadh ris na cleachdaidhean dàta a tha air am mìneachadh sa phoileasaidh seo. Mura h-eil thu ag aontachadh, na cleachd am Cuairt-measachd.</p>
+          
+          <h2><i class="fas fa-database"></i> 2. Fiosrachadh a Chruinnicheas Sinn</h2>
+          
+          <h3>Fiosrachadh Pearsanta:</h3>
+          <ul>
+            <li>Ainm slàn</li>
+            <li>Ceann-là</li>
+            <li>Stampa-ama</li>
+            <li>Roinnean a thagh thu</li>
+            <li>Cànan</li>
+            <li>Meur Eaglais Kharis a thagh thu</li>
+          </ul>
+          
+          <h3>Freagairtean Cuairt-measachd:</h3>
+          <ul>
+            <li>Freagairtean do cheistean roinnean a thagh thu</li>
+            <li>Toraidhean co-fhreagarrachd roinnean</li>
+          </ul>
+          
+          <h3>Fiosrachadh Teicnigeach:</h3>
+          <ul>
+            <li>Seòladh IP agus seòrsa brabhsair</li>
+            <li>Fiosrachadh inneil</li>
+            <li>Dàta cleachdaidh agus pàtrain eadar-obrachadh cuairt-measachd</li>
+          </ul>
+          
+          <h2><i class="fas fa-cogs"></i> 3. Mar a Cleachdas Sinn am Fiosrachadh Agad</h2>
+          <p>Cleachdaidh sinn am fiosrachadh a chruinnicheas sinn airson na h-amasan a leanas:</p>
+          <ul>
+            <li>Gus do thoraidhean co-fhreagarrachd roinnean pearsanta a ghineadh</li>
+            <li>Gus ceangal a dhèanamh thu ri cothroman ministrealachd aig do mheur taghte</li>
+            <li>Gus ar cuairt-measachd agus seirbheisean na h-eaglaise a leasachadh</li>
+            <li>Airson adhbharan anailis a-staigh gus tuigse fhaighinn air tiodhlacan na coithional</li>
+            <li>Gus conaltradh riut mu ghnìomhachd na h-eaglaise (le d' chead)</li>
+          </ul>
+          
+          <h2><i class="fas fa-lock"></i> 4> Stòradh Dàta agus Tèarainteachd</h2>
+          <p>Tha d' dàta air a stòradh gu tèarainte ann an Google Sheets le smachdadh ruigsinneachd iomchaidh. Cuiridh sinn an gnìomh ceumannan gus d' fhiosrachadh pearsanta a dhìon an aghaidh ruigsinneachd, atharrachadh no sgrios gun chead.</p>
+          <p>Thèid dàta a ghleidheadh airson adhbharan ministrealachd mura iarr thu a sguabadh às. Thèid freagairtean cuairt-measachd a dhèanamh gun urra airson adhbharan anailis às deidh 24 mìosan.</p>
+          
+          <h2><i class="fas fa-shield-alt"></i> 5. Do Chòraichean</h2>
+          <p>A rèir do shuidheachaidh, is dòcha gu bheil na còraichean a leanas agad a thaobh d' fhiosrachadh pearsanta:</p>
+          <ul>
+            <li>Còir ruigsinneachd agus lethbhreac fhaighinn de do dhàta pearsanta</li>
+            <li>Còir dàta mearachdach no neo-iomlan a cheartachadh</li>
+            <li>Còir sguabadh às do dhàta pearsanta</li>
+            <li>Còir cuibhreachadh no gearain an aghaidh giollachd</li>
+            <li>Còir do chead a tharraing air ais uair sam bith</li>
+          </ul>
+          
+          <h2><i class="fas fa-envelope"></i> 6. Cuir fios thugainn</h2>
+          <div class="contact-info">
+            <p>Ma tha ceistean agad mun Phoileasaidh Dìomhaireachd seo no na cleachdaidhean dàta againn, cuir fios thugainn:</p>
+            <p><strong>Oifigear Dìon Dàta Eaglais Kharis</strong><br>
+            Post-d: dataprotection@kharis.org<br>
+            Seòladh: 146 Praed St, London W2 1EE</p>
+          </div>
+        `
+      }
+    };
+
+    
+    // Function to get URL parameters
+    function getUrlParameter(name) {
+      name = name.replace(/[\[\]]/g, '\\$&');
+      const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+      const results = regex.exec(window.location.href);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    // Function to set the language
+    function setLanguage(langCode) {
+      const content = policyContent[langCode] || policyContent['en'];
+      
+      // Update page content
+      document.getElementById('policy-title').textContent = content.title;
+      document.getElementById('policy-subtitle').textContent = content.subtitle;
+      document.getElementById('back-button').innerHTML = `<i class="fas fa-arrow-left"></i> ${content.backButton}`;
+      
+      // Update policy content
+      document.getElementById('policy-content').innerHTML = content.content;
+      
+      // Update last updated text
+      const lastUpdatedEl = document.createElement('p');
+      lastUpdatedEl.className = 'last-updated';
+      lastUpdatedEl.innerHTML = `<strong>${content.lastUpdated}</strong>`;
+      document.getElementById('policy-content').appendChild(lastUpdatedEl);
+      
+      // Set language selector value
+      document.getElementById('languageSelect').value = langCode;
+      
+      // Update page language attribute
+      document.documentElement.lang = langCode;
+    }
+
+    // Initialize the page
+    function init() {
+      // Get language from URL parameter or default to English
+      const lang = getUrlParameter('lang') || 'en';
+      
+      // Set the language
+      setLanguage(lang);
+      
+      // Add event listener to language selector
+      document.getElementById('languageSelect').addEventListener('change', function() {
+        setLanguage(this.value);
+      });
+    }
+
+    // Run initialization when page loads
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
