@@ -34,7 +34,28 @@ charset="UTF-8">
       --text-color: #111;
       background: linear-gradient(180deg,#fff,#f4f4f4);
     }
-    
+    .video-container {
+  text-align: center;
+  margin: 15px 0;
+}
+
+video {
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  max-width: 100%;
+}
+
+/* Optional: Add a play button overlay */
+.video-container::before {
+  content: '▶️';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  opacity: 0.8;
+  pointer-events: none;
+}
     .card {
       width: 100%;
       max-width: 820px;
@@ -498,24 +519,37 @@ const translations = {
           "Administration": { desc: "Organised, detail-oriented, and dependable individuals who excel at planning, coordinating, and ensuring smooth operations.", scripture: "1 Corinthians 14:40 - 'But everything should be done in a fitting and orderly way.'" },
           "Children's Department": { desc: "Patient, nurturing, and joyful people who love teaching, encouraging, and inspiring children to grow in faith.", scripture: "Matthew 19:14 - 'Let the little children come to me, and do not hinder them, for the kingdom of heaven belongs to such as these.'" },
           "Design": { desc: "Innovative and artistic individuals who bring ideas to life visually, using creativity to communicate messages with excellence.", scripture: "Exodus 35:35 - 'He has filled them with skill to do all kinds of work as engravers, designers, embroiderers... and weavers.'" },
-          "Drama": { desc: "Expressive, imaginative, and bold individuals who use storytelling and performance to communicate the gospel in powerful ways.", scripture: "Matthew 13:34 - 'Jesus spoke all these things to the crowd in parables; he did not say anything to them without using a parable.'" },
+          "Drama": { desc: "Expressive, imaginative, and bold individuals who use storytelling and performance to communicate the gospel in powerful ways.", scripture: "Matthew 13:34 - 'Jesus spoke all these things to the crowd in parables; he did not say anything to them without using a parable.'", video:"https://drive.google.com/file/d/1hIHcNZx4wMO5O2CJm5W_6BWvZPWcVSEE/preview" },
           "Hospitality": { desc: "Warm, welcoming, and caring people who create an atmosphere of love and comfort for everyone they serve.", scripture: "1 Peter 4:9 - 'Offer hospitality to one another without grumbling.'" },
           "Host Team": { desc: "Friendly, approachable, and service-minded individuals who make everyone feel seen, valued, and at home.", scripture: "Romans 15:7 - 'Therefore welcome one another as Christ has welcomed you, for the glory of God.'" },
-          "Production": { desc: "Diligent and detail-oriented individuals who ensure the smooth running of services through technical excellence and behind-the-scenes support.", scripture: "Colossians 3:23 - 'Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.'" },
+          "Production": { desc: "Diligent and detail-oriented individuals who ensure the smooth running of services through technical excellence and behind-the-scenes support.", scripture: "Colossians 3:23 - 'Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.'",  video: "https://drive.google.com/file/d/1D8WzMj_UKZutlHTh_gTbTBfS1-ndTmLs/preview" 
+},
           "Music": { desc: "Passionate, skilled, and Spirit-filled individuals who use their gifts to lead others into worship and the presence of God.", scripture: "Psalm 95:1-2 - 'Come, let us sing for joy to the Lord; let us shout aloud to the Rock of our salvation. Let us come before him with thanksgiving and extol him with music and song.'" },
-          "Follow Up": { desc: "Caring, attentive, and relational individuals who enjoy guiding new believers, building trust, and encouraging spiritual growth.", scripture: "Matthew 28:19 - 'Therefore go and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit.'" },
+          "Follow Up": { desc: "Caring, attentive, and relational individuals who enjoy guiding new believers, building trust, and encouraging spiritual growth.", scripture: "Matthew 28:19 - 'Therefore go and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit.'", video: "https://drive.google.com/file/d/1AoopdlF7PD0oX_BN0tGMsqyWLq6xS1Br/preview" },
           "New Believers": { desc: "Patient, supportive, and mentoring-minded people who love helping others understand faith and grow spiritually.", scripture: "Colossians 1:28 - 'He is the one we proclaim, admonishing and teaching everyone with all wisdom, so that we may present everyone fully mature in Christ.'" },
           "Evangelism": { desc: "Bold, outgoing, and confident individuals who love sharing the gospel and engaging others with compassion and courage.", scripture: "Mark 16:15 - 'He said to them, \"Go into all the world and preach the gospel to all creation.\"'" },
-          "Sanctuary Keepers": { desc: "Responsible, conscientious, and detail-focused people who take pride in maintaining a clean and orderly worship environment.", scripture: "1 Corinthians 3:16 - 'Don't you know that you yourselves are God's temple and that God's Spirit dwells in your midst?'" },
+          "Sanctuary Keepers": { desc: "Responsible, conscientious, and detail-focused people who take pride in maintaining a clean and orderly worship environment.", scripture: "1 Corinthians 3:16 - 'Don't you know that you yourselves are God's temple and that God's Spirit dwells in your midst?'", video: "https://drive.google.com/file/d/1Mbqwv6uSTPSRbio3RAnmXJYIZoDXydBN/preview"  },
           "Set-up": { desc: "Hands-on, practical, and solution-oriented individuals who enjoy preparing spaces, managing logistics, and problem-solving.", scripture: "Nehemiah 4:6 - 'So we rebuilt the wall till all of it reached half its height, for the people worked with all their heart.'" },
           "Social Media": { desc: "Creative, tech-savvy, and communicative personalities who enjoy storytelling and engaging communities online.", scripture: "Psalm 19:14 - 'May these words of my mouth and this meditation of my heart be pleasing in your sight, Lord, my Rock and my Redeemer.'" },
           "Sound": { desc: "Technically-minded, attentive, and precise individuals who thrive on managing audio and creating seamless sound experiences.", scripture: "1 Corinthians 14:7 - 'If even lifeless instruments give sounds, how will anyone know what is played?'" },
-          "Uniform": { desc: "Meticulous, disciplined, and detail-oriented people who value presentation, consistency, and high standards.", scripture: "1 Timothy 4:12 - 'Don't let anyone look down on you because you are young, but set an example for the believers in speech, in conduct, in love, in faith and in purity.'" },
-          "Ushers": { desc: "Friendly, approachable, and service-minded individuals who enjoy guiding, assisting, and caring for people in practical ways.", scripture: "Hebrews 13:17 - 'Have confidence in your leaders and submit to their authority, because they keep watch over you as those who must give an account.'" },
+          "Uniform": { desc: "Meticulous, disciplined, and detail-oriented people who value presentation, consistency, and high standards.", scripture: "1 Timothy 4:12 - 'Don't let anyone look down on you because you are young, but set an example for the believers in speech, in conduct, in love, in faith and in purity.'", video: "https://drive.google.com/file/d/17-Sh6QsMROumfDEPzwQpc8n0dPkYsPFK/preview" },
+          "Ushers": { desc: "Friendly, approachable, and service-minded individuals who enjoy guiding, assisting, and caring for people in practical ways.", scripture: "Hebrews 13:17 - 'Have confidence in your leaders and submit to their authority, because they keep watch over you as those who must give an account.'", video: "https://drive.google.com/file/d/1H1DQlVu9DLl2OozCk81zye3cKRBNYYln/preview" },
           "Welfare": { desc: "Compassionate, empathetic, and generous-hearted people who are motivated to help those in need and provide support.", scripture: "Galatians 6:2 - 'Carry each other's burdens, and in this way you will fulfill the law of Christ.'" },
+"Photography": {
+  desc: "Observant, creative, and detail-focused individuals who capture moments that tell stories, inspire faith, and reflect the beauty of God’s creation through the lens.",
+  scripture: "Habakkuk 2:2 - 'Then the Lord replied: “Write down the revelation and make it plain on tablets so that a herald may run with it.”'",
+  video: "https://drive.google.com/file/d/178_O2grSjbt_BDyiFep-sO4LmPVR3rXY/preview"
+},
+
+"K-Music": {
+  desc: "Creative, expressive, and passionate individuals who use their musical gifts—whether producing, writing, singing, or rapping—to glorify God and lead others into His presence.",
+  scripture: "Psalm 150:6 - 'Let everything that has breath praise the Lord. Praise the Lord.'",
+  video: "https://drive.google.com/file/d/10kjoMBz8welbBh3AuTZKKqtllqWToJfc/preview"
+},
+
+
           "Security": { desc: "Alert, responsible, and protective individuals who prioritise safety and ensure a secure environment for others.", scripture: "Proverbs 27:12 - 'The prudent see danger and take refuge, but the simple keep going and pay the penalty.'" },
-          "Media": { desc: "Creative and tech-savvy individuals who capture, design, and share content that spreads the message with clarity and excellence, making the vision visible to all.", scripture: "Habakkuk 2:2 - 'Write the vision; make it plain on tablets, so he may run who reads it.'" },
-          "Spoken Word": { desc: "Expressive and creative individuals who use poetry, spoken word, or performance art to inspire and communicate the gospel with emotion and impact.", scripture: "Psalm 19:14 - 'May the words of my mouth and the meditation of my heart be pleasing in your sight, O Lord.'" }
+                   "Spoken Word": { desc: "Expressive and creative individuals who use poetry, spoken word, or performance art to inspire and communicate the gospel with emotion and impact.", scripture: "Psalm 19:14 - 'May the words of my mouth and the meditation of my heart be pleasing in your sight, O Lord.'",video: "https://drive.google.com/file/d/17Jcm8r7B9GEvp070z2entoxO7-_o_q2t/preview" }
         }
       },
       fr: {
@@ -1252,27 +1286,34 @@ document.getElementById('privacy-policy-link').style.display = 'block';
   sendToGoogleSheets(resultsData);
 
   // Build result HTML
-  let html = `<h2>${lang.resultsTitle.replace('{name}', username).replace('{branch}', branch)}</h2>`;
+let html = `<h2>${lang.resultsTitle.replace('{name}', username).replace('{branch}', branch)}</h2>`;
 
-  if(topDepts.length === 0){
-    html += `<div class="result"><p>${lang.noResults}</p></div>`;
-  } else {
-    html += `<div class="result">`;
-    topDepts.forEach((entry, idx) => {
-      const dept = entry[0];
-      const deptInfo = lang.departments[dept] || {desc: "Department information", scripture: "Scripture reference"};
-      html += `
-        <div class="department" id="dept-${idx}">
-          <strong>${dept}</strong>
-          <div class="scripture-box" id="scripture-${idx}">
-            <p>${deptInfo.desc}</p>
-            <p><strong>Scripture:</strong> ${deptInfo.scripture}</p>
-          </div>
-        </div>
-      `;
-    });
-    html += `</div>`;
-  }
+if(topDepts.length === 0){
+  html += `<div class="result"><p>${lang.noResults}</p></div>`;
+} else {
+  html += `<div class="result">`;
+  topDepts.forEach((entry, idx) => {
+    const dept = entry[0];
+    const deptInfo = lang.departments[dept] || {desc: "Department information", scripture: "Scripture reference"};
+    html += `
+  <div class="department" id="dept-${idx}">
+    <strong>${dept}</strong>
+    <div class="scripture-box" id="scripture-${idx}">
+      <p>${deptInfo.desc}</p>
+      <p><strong>Scripture:</strong> ${deptInfo.scripture}</p>
+     ${deptInfo.video ? `
+  <div class="video-container" style="margin-top:15px;">
+    <iframe width="100%" height="200" src="${deptInfo.video}" 
+            frameborder="0" allowfullscreen style="border-radius:8px;">
+    </iframe>
+  </div>
+` : ''}
+    </div>
+  </div>
+`;
+  });
+  html += `</div>`;
+}
 
   html += `
     <div style="margin-top:16px;">
@@ -1321,18 +1362,25 @@ function renderExploreList(){
   let html = `<h2>${lang.allDepartments}</h2><div class="explore-list">`;
   
   // Add all departments
-  Object.entries(lang.departments).forEach(([dept, info], idx) => {
-    html += `
-      <div class="explore-item" data-idx="${idx}">
-        <div class="title">${dept}</div>
-        <div style="margin-left:12px;font-weight:600;color:var(--btn-bg);">+</div>
-        <div class="explore-details" id="explore-detail-${idx}">
-          <p style="margin:0 0 6px 0">${info.desc}</p>
-          <p style="margin:0;font-style:italic;font-size:0.95rem">${info.scripture}</p>
-        </div>
-      </div>
-    `;
-  });
+Object.entries(lang.departments).forEach(([dept, info], idx) => {
+  html += `
+  <div class="explore-item" data-idx="${idx}">
+    <div class="title">${dept}</div>
+    <div style="margin-left:12px;font-weight:600;color:var(--btn-bg);">+</div>
+    <div class="explore-details" id="explore-detail-${idx}">
+      <p style="margin:0 0 6px 0">${info.desc}</p>
+      <p style="margin:0;font-style:italic;font-size:0.95rem">${info.scripture}</p>
+    ${info.video ? `
+  <div style="margin-top:12px;">
+    <iframe width="100%" height="150" src="${info.video}" 
+            frameborder="0" allowfullscreen style="border-radius:6px;">
+    </iframe>
+  </div>
+` : ''}
+    </div>
+  </div>
+`;
+});
   
   html += `</div><div style="margin-top:14px;"><button class="btn" id="back-to-result">${lang.backToResults}</button></div>`;
 
@@ -1630,5 +1678,4 @@ init();
 </script>
 </body>
 </html>
-
 
