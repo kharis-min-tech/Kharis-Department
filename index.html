@@ -1207,12 +1207,20 @@ function scoreAnswer(input) {
     // K-Music ONLY for Kharis Phase Two branches
     if (branch.includes('Kharis Phase 2')) {
       deptScores['K-Music'] = (deptScores['K-Music'] || 0) + 2;
+    } else {
+      // Remove K-Music entirely for non-Phase Two branches
+      delete deptScores['K-Music'];
     }
   }
   
   // Children's Department ONLY for Kharis London
-  if ((text.includes('child') || text.includes('kid') || text.includes('teach')) && branch === 'Kharis Church London') {
-    deptScores["Children's Department"] = (deptScores["Children's Department"] || 0) + 2;
+  if (text.includes('child') || text.includes('kid') || text.includes('teach')) {
+    if (branch === 'Kharis Church London') {
+      deptScores["Children's Department"] = (deptScores["Children's Department"] || 0) + 2;
+    } else {
+      // Remove Children's Department entirely for non-London branches
+      delete deptScores["Children's Department"];
+    }
   }
   
   if (text.includes('help') || text.includes('serve') || text.includes('care')) {
@@ -1229,15 +1237,16 @@ function scoreAnswer(input) {
   Object.keys(lang.departments).forEach(dept => {
     // Skip Children's Department for non-London branches
     if (dept === "Children's Department" && branch !== 'Kharis Church London') {
-      deptScores[dept] = 0; // Set score to 0 for non-London branches
+      delete deptScores[dept]; // Remove entirely for non-London branches
+      return;
     }
     // Skip K-Music for non-Phase Two branches
-    else if (dept === "K-Music" && !branch.includes('Kharis Phase 2')) {
-      deptScores[dept] = 0; // Set score to 0 for non-Phase Two branches
+    if (dept === "K-Music" && !branch.includes('Kharis Phase 2')) {
+      delete deptScores[dept]; // Remove entirely for non-Phase Two branches
+      return;
     }
-    else {
-      deptScores[dept] = deptScores[dept] || Math.random() * 0.5;
-    }
+    
+    deptScores[dept] = deptScores[dept] || Math.random() * 0.5;
   });
 }
 
@@ -1418,26 +1427,36 @@ function renderExploreList(){
   
   let html = `<h2>${lang.allDepartments}</h2><div class="explore-list">`;
   
-  // Add all departments
-Object.entries(lang.departments).forEach(([dept, info], idx) => {
-  html += `
-  <div class="explore-item" data-idx="${idx}">
-    <div class="title">${dept}</div>
-    <div style="margin-left:12px;font-weight:600;color:var(--btn-bg);">+</div>
-    <div class="explore-details" id="explore-detail-${idx}">
-      <p style="margin:0 0 6px 0">${info.desc}</p>
-      <p style="margin:0;font-style:italic;font-size:0.95rem">${info.scripture}</p>
-    ${info.video ? `
-  <div style="margin-top:12px;">
-    <iframe width="100%" height="150" src="${info.video}" 
-            frameborder="0" allowfullscreen style="border-radius:6px;">
-    </iframe>
-  </div>
-` : ''}
+  // Add all departments with branch restrictions
+  Object.entries(lang.departments).forEach(([dept, info], idx) => {
+    // Skip Children's Department for non-London branches
+    if (dept === "Children's Department" && branch !== 'Kharis Church London') {
+      return; // Skip this department entirely
+    }
+    
+    // Skip K-Music for non-Phase Two branches
+    if (dept === "K-Music" && !branch.includes('Kharis Phase 2')) {
+      return; // Skip this department entirely
+    }
+    
+    html += `
+    <div class="explore-item" data-idx="${idx}">
+      <div class="title">${dept}</div>
+      <div style="margin-left:12px;font-weight:600;color:var(--btn-bg);">+</div>
+      <div class="explore-details" id="explore-detail-${idx}">
+        <p style="margin:0 0 6px 0">${info.desc}</p>
+        <p style="margin:0;font-style:italic;font-size:0.95rem">${info.scripture}</p>
+      ${info.video ? `
+    <div style="margin-top:12px;">
+      <iframe width="100%" height="150" src="${info.video}" 
+              frameborder="0" allowfullscreen style="border-radius:6px;">
+      </iframe>
     </div>
-  </div>
-`;
-});
+  ` : ''}
+      </div>
+    </div>
+  `;
+  });
   
   html += `</div><div style="margin-top:14px;"><button class="btn" id="back-to-result">${lang.backToResults}</button></div>`;
 
@@ -1448,12 +1467,14 @@ Object.entries(lang.departments).forEach(([dept, info], idx) => {
   items.forEach((it) => {
     const idx = it.getAttribute('data-idx');
     const details = resultEl.querySelector(`#explore-detail-${idx}`);
-    details.style.display = 'none';
-    
-    it.addEventListener('click', () => {
-      const isVisible = details.style.display === 'block';
-      details.style.display = isVisible ? 'none' : 'block';
-    });
+    if (details) {
+      details.style.display = 'none';
+      
+      it.addEventListener('click', () => {
+        const isVisible = details.style.display === 'block';
+        details.style.display = isVisible ? 'none' : 'block';
+      });
+    }
   });
 
   // Back button handler
