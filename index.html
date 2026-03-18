@@ -34,16 +34,67 @@ charset="UTF-8">
       --text-color: #111;
       background: linear-gradient(180deg,#fff,#f4f4f4);
     }
+    
+    /* Video container styles - FIXED for non-stretchy videos */
     .video-container {
-  text-align: center;
-  margin: 15px 0;
-}
+      text-align: center;
+      margin: 15px 0;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+    }
 
-video {
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  max-width: 100%;
-}
+    .video-container iframe {
+      width: 100%;
+      height: auto;
+      min-height: 180px;
+      max-height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      aspect-ratio: 16/9;
+    }
+
+    /* Thumbnail style for videos */
+    .video-thumbnail {
+      position: relative;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #000;
+      aspect-ratio: 16/9;
+    }
+
+    .video-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .video-thumbnail:hover img {
+      transform: scale(1.05);
+    }
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 215, 0, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #3c1361;
+      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      pointer-events: none;
+    }
 
     .card {
       width: 100%;
@@ -54,6 +105,25 @@ video {
       box-shadow: 0 10px 30px rgba(0,0,0,0.35);
       color: var(--text-color);
       position: relative;
+      max-height: 90vh;
+      overflow-y: auto; /* ADDED: Makes the card scrollable */
+      scrollbar-width: thin;
+      scrollbar-color: var(--btn-bg) rgba(255,255,255,0.1);
+    }
+    
+    /* Custom scrollbar for the card */
+    .card::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .card::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+    }
+    
+    .card::-webkit-scrollbar-thumb {
+      background: var(--btn-bg);
+      border-radius: 10px;
     }
     
     h1 { font-family: 'Fredoka One', cursive; margin-bottom: 0.6rem; }
@@ -218,6 +288,8 @@ body.light .language-dropdown-container::after {
       text-align: left;
       font-style: italic;
       display: none;
+      max-height: 400px; /* ADDED: Prevents content from being cut off */
+      overflow-y: auto; /* ADDED: Makes scripture box scrollable if needed */
     }
     
     .scripture-box.visible { display: block; }
@@ -232,6 +304,7 @@ body.light .language-dropdown-container::after {
       padding: 6px 10px;
       border-radius: 18px;
       cursor: pointer;
+      z-index: 10; /* Ensures button stays on top */
     }
     
 .voice-btn {
@@ -267,21 +340,83 @@ body.light .language-dropdown-container::after {
       display: inline-block;
     }
     
-    /* Explore list styles */
-    .explore-list { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+    /* Explore list styles - IMPROVED */
+    .explore-list { 
+      margin-top: 12px; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 8px;
+      max-height: 500px; /* ADDED: Prevents list from getting too long */
+      overflow-y: auto; /* ADDED: Makes explore list scrollable */
+      padding-right: 5px;
+    }
+    
     .explore-item {
       background: rgba(255,255,255,0.06);
       padding: 12px 14px;
       border-radius: 8px;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column; /* CHANGED: Stack items vertically */
       cursor: pointer;
       font-weight: 700;
+      transition: all 0.3s ease;
     }
-    .explore-item .title { flex: 1; text-align: left; font-weight: 700; }
-    .explore-details { display: none; padding: 10px 12px; margin-top: 8px; background: rgba(0,0,0,0.15); border-radius: 6px; text-align: left; font-style: normal; color: var(--text-color); }
-    .explore-details.visible { display: block; }
+    
+    .explore-item:hover {
+      background: rgba(255,215,0,0.15);
+    }
+    
+    .explore-item .title { 
+      flex: 1; 
+      text-align: left; 
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .explore-item .title .expand-icon {
+      font-size: 1.2rem;
+      color: var(--btn-bg);
+      transition: transform 0.3s ease;
+    }
+    
+    .explore-item.expanded .title .expand-icon {
+      transform: rotate(45deg);
+    }
+    
+    .explore-details { 
+      display: none; 
+      padding: 15px 12px; 
+      margin-top: 12px; 
+      background: rgba(0,0,0,0.2); 
+      border-radius: 8px; 
+      text-align: left; 
+      font-style: normal; 
+      color: var(--text-color);
+      max-height: 400px; /* ADDED: Prevents content cut-off */
+      overflow-y: auto; /* ADDED: Makes details scrollable if needed */
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    
+    .explore-details.visible { 
+      display: block; 
+    }
+    
+    /* FIXED: Video in explore details */
+    .explore-details .video-container {
+      margin-top: 12px;
+    }
+    
+    .explore-details iframe {
+      width: 100%;
+      height: auto;
+      min-height: 160px;
+      max-height: 200px;
+      border-radius: 6px;
+      aspect-ratio: 16/9;
+    }
     
     /* Background slideshow */
     .bg-slideshow {
@@ -307,6 +442,25 @@ body.light .language-dropdown-container::after {
     
     .bg-slide.active {
       opacity: 1;
+    }
+    
+    /* FIXED: Back button positioning */
+    #back-to-result {
+      margin-top: 15px;
+      position: sticky;
+      bottom: 0;
+      background: var(--card-bg);
+      z-index: 5;
+    }
+    
+    /* Scripture text formatting */
+    .scripture-box p {
+      margin: 8px 0;
+      line-height: 1.5;
+    }
+    
+    .scripture-box strong {
+      color: var(--btn-bg);
     }
   </style>
 </head>
@@ -1642,8 +1796,10 @@ jam: {
         
         html += `
         <div class="explore-item" data-idx="${idx}">
-          <div class="title">${dept}</div>
-          <div style="margin-left:12px;font-weight:600;color:var(--btn-bg);">+</div>
+          <div class="title">
+            <span>${dept}</span>
+            <span class="expand-icon">+</span>
+          </div>
           <div class="explore-details" id="explore-detail-${idx}">
             <p style="margin:0 0 6px 0">${info.desc}</p>
             <p style="margin:0;font-style:italic;font-size:0.95rem">${info.scripture}</p>
@@ -1663,36 +1819,78 @@ jam: {
 
       resultEl.innerHTML = html;
 
+      // Attach toggle listeners with improved toggle functionality
       const items = resultEl.querySelectorAll('.explore-item');
-      items.forEach((it) => {
-        const idx = it.getAttribute('data-idx');
+      items.forEach((item) => {
+        const idx = item.getAttribute('data-idx');
         const details = resultEl.querySelector(`#explore-detail-${idx}`);
+        const expandIcon = item.querySelector('.expand-icon');
+        
         if (details) {
           details.style.display = 'none';
           
-          it.addEventListener('click', () => {
+          item.addEventListener('click', (e) => {
+            // Toggle current item
             const isVisible = details.style.display === 'block';
+            
+            // Close all other items
+            items.forEach(otherItem => {
+              const otherIdx = otherItem.getAttribute('data-idx');
+              const otherDetails = resultEl.querySelector(`#explore-detail-${otherIdx}`);
+              const otherIcon = otherItem.querySelector('.expand-icon');
+              if (otherDetails && otherIdx !== idx) {
+                otherDetails.style.display = 'none';
+                otherItem.classList.remove('expanded');
+                if (otherIcon) otherIcon.textContent = '+';
+              }
+            });
+            
+            // Toggle current
             details.style.display = isVisible ? 'none' : 'block';
+            item.classList.toggle('expanded', !isVisible);
+            expandIcon.textContent = isVisible ? '+' : '×';
+            
+            // Scroll to keep item in view if expanded
+            if (!isVisible) {
+              setTimeout(() => {
+                item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              }, 100);
+            }
           });
         }
       });
 
-      document.getElementById('back-to-result').addEventListener('click', () => {
-        resultEl.innerHTML = lastResultHtml;
-        document.getElementById('explore-all-btn').addEventListener('click', renderExploreList);
-        document.getElementById('restart-btn').addEventListener('click', restartWithoutReload);
-        
-        setTimeout(() => {
-          lastSorted.forEach((_, i) => {
-            const el = document.getElementById(`dept-${i}`);
-            const sb = document.getElementById(`scripture-${i}`);
-            if (el) {
-              el.classList.add('show');
-              sb.classList.add('visible');
-            }
-          });
-        }, 100);
-      });
+      // Back button handler - FIXED to properly restore state
+      const backBtn = document.getElementById('back-to-result');
+      if (backBtn) {
+        backBtn.addEventListener('click', () => {
+          resultEl.innerHTML = lastResultHtml;
+          
+          // Re-attach event listeners
+          const exploreBtn = document.getElementById('explore-all-btn');
+          const restartBtn = document.getElementById('restart-btn');
+          
+          if (exploreBtn) {
+            exploreBtn.addEventListener('click', renderExploreList);
+          }
+          
+          if (restartBtn) {
+            restartBtn.addEventListener('click', restartWithoutReload);
+          }
+          
+          // Re-animate departments
+          setTimeout(() => {
+            lastSorted.forEach((_, i) => {
+              const el = document.getElementById(`dept-${i}`);
+              const sb = document.getElementById(`scripture-${i}`);
+              if (el) {
+                el.classList.add('show');
+                sb.classList.add('visible');
+              }
+            });
+          }, 100);
+        });
+      }
     }
 
     function restartWithoutReload() {
