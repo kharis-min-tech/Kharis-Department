@@ -1907,10 +1907,11 @@ jam: {
       progressBar.style.width = "0%";
       backBtn.style.display = "none";
     }
-
-              const ELEVENLABS_API_KEY = "sk_f96ac0de42036952d14375fdf02c0555ad911aa5c225804cb2452bc2eae774d3";
+    // Initialize ElevenLabs
+    const ELEVENLABS_API_KEY = "sk_f96ac0de42036952d14375fdf02c0555ad911aa5c225804cb2452bc2eae774d3";
+    
     const voiceMapping = {
-      'en': 'JBFqnCBsd6RMkjVDRZzb',
+      'en': 'JBFqnCBsd6RMkjVDRZzb', // Rachel
       'fr': 'odOFTFZU3DvAZ3EV3KHi', 
       'es': 'zl1Ut8dvwcVSuQSB9XkG',
       'de': 'TUKJhQmz3RPYBNAgC5A1',
@@ -1922,27 +1923,27 @@ jam: {
     };
 
     let currentAudio = null;
-    let audioContext = null;
 
-    // Initialize audio context on user interaction (required for mobile)
-    function initAudio() {
-      if (!audioContext && window.AudioContext) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        // Resume if suspended (required for mobile)
-        if (audioContext.state === 'suspended') {
-          audioContext.resume();
-        }
-        console.log('Audio context initialized:', audioContext.state);
+    // Initialize ElevenLabs on page load
+    let elevenLabsInitialized = false;
+    
+    function initElevenLabs() {
+      if (!elevenLabsInitialized && window.ElevenLabs) {
+        window.ElevenLabs.init({
+          apiKey: ELEVENLABS_API_KEY
+        });
+        elevenLabsInitialized = true;
+        console.log('✅ ElevenLabs initialized');
       }
     }
 
-    // Call this on any user interaction
+    // Call on any user interaction
     document.addEventListener('touchstart', function() {
-      initAudio();
+      initElevenLabs();
     }, { once: true });
 
     document.addEventListener('click', function() {
-      initAudio();
+      initElevenLabs();
     }, { once: true });
 
     async function speakText(text, langCode) {
@@ -1952,10 +1953,10 @@ jam: {
         currentAudio = null;
       }
 
-      // Initialize audio on first use (required for mobile)
-      initAudio();
+      // Initialize ElevenLabs if not already done
+      initElevenLabs();
 
-      // Visual feedback - show loading
+      // Visual feedback
       const voiceBtn = document.getElementById('voiceBtn');
       if (voiceBtn) {
         voiceBtn.style.opacity = '0.5';
@@ -1965,47 +1966,24 @@ jam: {
       try {
         const voiceId = voiceMapping[langCode] || voiceMapping['en'];
         
-        console.log("🎤 Generating ElevenLabs audio...");
+        console.log("🎤 Using ElevenLabs SDK...");
 
-        // Using a reliable CORS proxy that works on mobile
-        const proxyUrl = 'https://api.codetabs.com/v1/proxy?quest=';
-        const elevenLabsUrl = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`;
-        
-        const response = await fetch(proxyUrl + encodeURIComponent(elevenLabsUrl), {
-          method: 'POST',
-          headers: {
-            'Accept': 'audio/mpeg',
-            'Content-Type': 'application/json',
-            'xi-api-key': ELEVENLABS_API_KEY
-          },
-          body: JSON.stringify({
-            text: text,
-            model_id: "eleven_multilingual_v2",
-            voice_settings: { 
-              stability: 0.3,
-              similarity_boost: 0.75,
-              style: 0.5
-            }
-          })
+        // Use the ElevenLabs SDK
+        const audio = await window.ElevenLabs.generate({
+          voice: voiceId,
+          text: text,
+          model_id: "eleven_multilingual_v2",
+          voice_settings: {
+            stability: 0.3,
+            similarity_boost: 0.75,
+            style: 0.5
+          }
         });
 
-        if (!response.ok) {
-          throw new Error(`ElevenLabs error: ${response.status}`);
-        }
-
-        const audioBlob = await response.blob();
-        const audioUrl = URL.createObjectURL(audioBlob);
-
-        const audio = new Audio(audioUrl);
-        currentAudio = audio;
-
-        // Important: Play must be triggered by user interaction
-        // The voice button click counts as user interaction
-        audio.play().catch(e => {
-          console.error('Play failed:', e);
-          // If play fails, try again with a user gesture
-          alert('Tap the screen first to enable audio');
-        });
+        // Create audio element and play
+        const audioUrl = URL.createObjectURL(audio);
+        const audioElement = new Audio(audioUrl);
+        currentAudio = audioElement;
 
         // Reset button
         if (voiceBtn) {
@@ -2013,36 +1991,37 @@ jam: {
           voiceBtn.textContent = '🔊';
         }
 
+        await audioElement.play();
         console.log('✅ ElevenLabs audio playing!');
 
-        audio.onended = () => {
-          URL.revokeObjectURL(audioUrl);
-          currentAudio = null;
-          console.log('✅ Audio finished');
-          if (voiceBtn) {
-            voiceBtn.style.opacity = '1';
-            voiceBtn.textContent = '🔊';
-          }
-        };
-
-        audio.onerror = (e) => {
-          console.error('Audio playback error:', e);
+        audioElement.onended = () => {
           URL.revokeObjectURL(audioUrl);
           currentAudio = null;
           if (voiceBtn) {
             voiceBtn.style.opacity = '1';
             voiceBtn.textContent = '🔊';
           }
-          alert('Audio failed to play. Please try again.');
         };
 
       } catch (err) {
         console.error('❌ ElevenLabs error:', err);
+        
+        // Fallback to browser speech
         if (voiceBtn) {
           voiceBtn.style.opacity = '1';
           voiceBtn.textContent = '🔊';
         }
-        alert('Audio failed to load. Please check your internet connection.');
+        
+        // Use browser speech as fallback
+        if ('speechSynthesis' in window) {
+          console.log('🔊 Using browser speech fallback');
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = langCode === 'en' ? 'en-GB' : 'en-US';
+          utterance.rate = 0.9;
+          window.speechSynthesis.speak(utterance);
+        } else {
+          alert('Audio failed to play. Please check your internet connection.');
+        }
       }
     }
 
