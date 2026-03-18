@@ -1935,7 +1935,7 @@ jam: {
     console.log("🎤 Generating ElevenLabs audio...");
 
     // Use a CORS proxy to bypass browser restrictions
-    const proxyUrl = 'https://corsproxy.io/?';
+   const proxyUrl = 'https://api.allorigins.win/raw?url=';
     const elevenLabsUrl = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`;
     
     const audioResponse = await fetch(proxyUrl + encodeURIComponent(elevenLabsUrl), {
