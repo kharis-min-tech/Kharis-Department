@@ -1924,6 +1924,30 @@ jam: {
 
     let currentAudio = null;
 
+    // List of CORS proxies to try (in order of reliability)
+    const corsProxies = [
+      'https://corsproxy.io/?',
+      'https://api.allorigins.win/raw?url=',
+      'https://cors-anywhere.herokuapp.com/',
+      'https://thingproxy.freeboard.io/fetch/'
+    ];
+
+    async function tryFetchWithProxy(url, options) {
+      for (const proxy of corsProxies) {
+        try {
+          console.log(`Trying proxy: ${proxy}`);
+          const response = await fetch(proxy + encodeURIComponent(url), options);
+          if (response.ok) {
+            console.log(`✅ Proxy working: ${proxy}`);
+            return response;
+          }
+        } catch (e) {
+          console.log(`Proxy failed: ${proxy}`, e);
+        }
+      }
+      throw new Error('All proxies failed');
+    }
+
     // Simple speak function that uses ElevenLabs API directly
     async function speakText(text, langCode) {
       // Stop any current audio
@@ -1944,8 +1968,9 @@ jam: {
         
         console.log("🎤 Generating ElevenLabs audio...");
 
-        // Use a simple CORS proxy that works
-        const response = await fetch(`https://corsproxy.io/?${encodeURIComponent(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`)}`, {
+        const elevenLabsUrl = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`;
+        
+        const response = await tryFetchWithProxy(elevenLabsUrl, {
           method: 'POST',
           headers: {
             'Accept': 'audio/mpeg',
@@ -1962,10 +1987,6 @@ jam: {
             }
           })
         });
-
-        if (!response.ok) {
-          throw new Error(`ElevenLabs error: ${response.status}`);
-        }
 
         const audioBlob = await response.blob();
         const audioUrl = URL.createObjectURL(audioBlob);
@@ -1996,8 +2017,8 @@ jam: {
           voiceBtn.textContent = '🔊';
         }
         
-        // Show user-friendly message
-        alert('Audio failed to load. Please check your internet connection and try again.');
+        // Show more specific error message
+        alert('Audio failed to load. Please check:\n1. Your internet connection\n2. That your API key has enough credits\n3. Try again in a few minutes');
       }
     }
 
