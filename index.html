@@ -1433,7 +1433,255 @@ jam: {
   "Media": ["media", "camera", "live stream", "record", "video"]
 }
     };
-
+    // ============================================
+    // ENHANCED KEYWORDS - Paste this after departmentKeywords
+    // ============================================
+    
+       
+    
+       const enhancedKeywords = {
+      "Music": [
+        "harmonize", "melody", "rhythm", "choir", "worship leader", "pianist", "drummer", "guitarist", "harmony", "vocal", "singer", "singing", "voice", "instrumental", "band", "praise team", "cantor", "melodic", "songwriter", "vocalist", "acapella", "hymn", "psalm",
+        "harmoniser", "mélodie", "rythme", "chorale", "leader de louange", "pianiste", "batteur", "guitariste", "chant", "chanteur", "voix", "instrument", "groupe", "équipe de louange", "cantique", "psaume",
+        "armonizar", "melodía", "ritmo", "coro", "líder de adoración", "pianista", "baterista", "guitarrista", "cantar", "cantante", "voz", "instrumental", "banda", "equipo de alabanza", "himno", "salmo",
+        "harmonisieren", "melodie", "rhythmus", "chor", "anbetungsleiter", "pianist", "schlagzeuger", "gitarrist", "singen", "sänger", "stimme", "instrumental", "band", "lobpreisteam", "hymne", "psalm",
+        "dwom", "to", "dwomto", "akye", "nnwom", "nnwomto", "voice", "choir", "hwiren", "dwomtofo",
+        "sjunga", "sång", "kör", "tillbedjan", "röst", "instrument", "band", "psalm", "hymn",
+        "seinn", "ceòl", "còisir", "adhradh", "guth", "innealan", "ciùil", "laoidh", "salm",
+        "sing", "song", "worship", "choir", "music", "piano", "drums", "guitar", "keyboard", "organ", "trumpet", "violin", "flute"
+      ],
+      "K-Music": [
+        "produce", "beat", "rap", "recording", "studio", "write songs", "producer", "hip hop", "gospel rap", "track", "music production", "beats", "rhymes", "songwriter", "audio engineer", "mix", "master", "daw",
+        "produire", "beat", "rap", "enregistrement", "studio", "écrire des chansons", "producteur", "hip hop", "rap gospel", "piste", "production musicale", "ingénieur son", "mixage", "mastering",
+        "producir", "beat", "rap", "grabación", "estudio", "escribir canciones", "productor", "hip hop", "rap gospel", "pista", "producción musical", "ingeniero audio", "mezcla", "masterizacion",
+        "produzieren", "beat", "rap", "aufnahme", "studio", "songs schreiben", "produzent", "hip hop", "gospel rap", "track", "musikproduktion", "toningenieur", "mischen", "mastering",
+        "produce", "beat", "rap", "recording", "studio", "twerɛ dwom", "producer", "hip hop", "gospel rap", "track",
+        "producera", "beat", "rap", "inspelning", "studio", "skriva låtar", "producent", "hip hop", "gospel rap", "spår",
+        "dèanamh", "rap", "clàradh", "stiùidio", "sgrìobhadh òran", "riochdaire", "hip hop", "soisgeul rap"
+      ],
+      "Children's Department": [
+        "children", "kids", "child", "teaching", "children ministry", "toddler", "preschool", "youth", "baby", "nursery", "sunday school", "kindergarten", "elementary", "teen", "adolescent", "cradle roll", "children church",
+        "enfants", "enfance", "enseigner", "ministère des enfants", "tout-petit", "préscolaire", "jeunes", "bébé", "garderie", "école du dimanche", "maternelle", "adolescent",
+        "niños", "infantil", "enseñar", "ministerio infantil", "niño pequeño", "preescolar", "jóvenes", "bebé", "guardería", "escuela dominical", "jardín infantes", "adolescente",
+        "kinder", "kind", "unterrichten", "kinderministerium", "kleinkind", "vorschule", "jugend", "baby", "kindergarten", "sonntagsschule", "jugendlicher",
+        "mmofra", "akyiri", "kyerɛ", "mmofra asɔre", "toddler", "preschool", "baby", "nursery", "sunday school", "mmofra ntoaso",
+        "barn", "barnavdelning", "undervisa", "barnministeriet", "småbarn", "förskola", "ungdom", "baby", "söndagsskola", "dagis",
+        "clann", "pàiste", "teagasg", "ministrealachd cloinne", "pàisde", "ro-sgoil", "òigridh", "leanaibh", "sgoil na sàbaid", "leanabachd",
+        "pikin", "pickney", "teach", "children ministry", "toddler", "preschool", "youth", "baby", "sunday school", "nursery"
+      ],
+      "Hospitality": [
+        "coffee", "tea", "snacks", "meals", "cook", "serve food", "welcome", "refreshments", "baking", "kitchen", "prepare food", "catering", "drinks", "beverage", "breakfast", "lunch", "dinner", "potluck", "fellowship meal",
+        "café", "thé", "collations", "repas", "cuisiner", "servir", "accueillir", "rafraîchissements", "pâtisserie", "cuisine", "préparer", "cafétéria", "boissons", "petit déjeuner", "déjeuner", "dîner",
+        "café", "té", "bocadillos", "comidas", "cocinar", "servir comida", "bienvenida", "refrigerios", "hornear", "cocina", "preparar", "catering", "bebidas", "desayuno", "almuerzo", "cena",
+        "kaffee", "tee", "snacks", "mahlzeiten", "kochen", "essen servieren", "begrüßen", "erfrischungen", "backen", "küche", "vorbereiten", "catering", "getränke", "frühstück", "mittagessen", "abendessen",
+        "gye", "nipa", "adane", "ananmu", "ahohoɔ", "kuk", "sɛrv", "frɛshmɛnt", "kɔfi", "akwantuo", "ahem",
+        "välkomna", "hälsa", "mat", "laga mat", "servera", "förfriskningar", "kaffe", "baka", "kök", "frukost", "lunch", "middag",
+        "fàilte", "biadh", "còcaireachd", "frithealadh", "cofaidh", "còcaireachd", "bracaist", "lòn", "dinnear",
+        "welcome", "greet", "food", "cook", "serve", "refreshments", "coffee", "cooking", "baking", "kitchen", "meal", "snack", "drink"
+      ],
+      "Host Team": [
+        "usher", "guide", "direct", "show seats", "help people find", "hosting", "welcome team", "door greeter", "parking", "assist", "greet", "welcome", "attendant", "ambassador", "first impression",
+        "placeur", "guider", "diriger", "montrer les sièges", "aider", "accueil", "équipe d'accueil", "stationnement", "assister", "saluer", "hôte", "ambassadeur",
+        "acomodador", "guiar", "dirigir", "mostrar asientos", "ayudar", "anfitrión", "equipo de bienvenida", "estacionamiento", "asistir", "saludar", "anfitriona", "embajador",
+        "platzanweiser", "führen", "leiten", "plätze zeigen", "helfen", "gastgeber", "begrüßungsteam", "parken", "assistieren", "begrüßen", "botschafter",
+        "usher", "kyerɛ", "boa", "host", "welcome team", "door greeter", "parking", "assist", "agyapadeɛ",
+        "placera", "guida", "visa", "hjälpa", "värd", "välkomstteam", "parkering", "assistera", "ambassadör",
+        "suidheachadh", "stiùireadh", "sealltainn", "cuideachadh", "aoigheachd", "fàilte", "togail",
+        "osha", "gayd", "dairekt", "sho sit", "hɛlp", "host", "welcome", "greet", "assist"
+      ],
+      "Welfare": [
+        "broken", "lonely", "hurting", "sad", "depressed", "grieving", "struggling", "crisis", "needy", "poor", "homeless", "suffering", "pain", "heartache", "sick", "ill", "visiting", "counsel", "pray with", "comfort", "support", "burden", "weary", "troubled", "distressed", "afflicted", "miserable", "hopeless", "abandoned", "rejected",
+        "brisé", "seul", "blessé", "triste", "déprimé", "en deuil", "lutter", "crise", "dans le besoin", "pauvre", "sans abri", "souffrance", "douleur", "chagrin", "malade", "visiter", "conseiller", "prier avec", "réconforter", "soutenir", "fardeau", "fatigué", "inquiet",
+        "roto", "solitario", "herido", "triste", "deprimido", "afligido", "luchando", "crisis", "necesitado", "pobre", "sin hogar", "sufrimiento", "dolor", "pena", "enfermo", "visitar", "aconsejar", "orar con", "consolar", "apoyar", "carga", "cansado", "angustiado",
+        "gebrochen", "einsam", "verletzt", "traurig", "deprimiert", "trauernd", "kämpfend", "krise", "bedürftig", "arm", "obdachlos", "leid", "schmerz", "kummer", "krank", "besuchen", "beraten", "beten mit", "trösten", "unterstützen", "last", "müde", "beunruhigt",
+        "afutuo", "awerɛkyekye", "mmoa", "bɔ mpae", "hwɛ yarefo", "boa ahiafo", "comfort", "support", "awerɛho", "yafunu",
+        "råda", "trösta", "stödja", "be med", "besöka sjuka", "hjälpa behövande", "börda", "trött", "orolig",
+        "comhairle", "comhfhurtachd", "taic", "ùrnaigh le", "tadhal tinn", "cuideachadh feumach", "eallach", "sgìth", "dragh",
+        "kɔnsɛl", "kɔmfɔt", "sapɔt", "pre wit", "vizit sik", "hɛlp nidi", "burden", "sick", "suffering"
+      ],
+      "Follow Up": [
+        "check in", "call", "text", "message", "reach out", "connect", "follow-up", "stay in touch", "contact", "phone", "souls", "new person", "visitor followup", "discipleship", "mentor", "shepherd", "care", "check up", "follow up call", "welcome call",
+        "suivi", "appeler", "vérifier", "texte", "contacter", "rester en contact", "âmes", "nouvelle personne", "suivi des visiteurs", "formation de disciples", "mentor", "berger", "soins",
+        "seguimiento", "llamar", "contactar", "texto", "contactar", "mantener contacto", "almas", "persona nueva", "seguimiento visitantes", "discipulado", "mentor", "pastor", "cuidado",
+        "nachfassen", "anrufen", "kontaktieren", "text", "in kontakt bleiben", "seelen", "neue person", "besuchernachbereitung", "jüngerschaft", "mentor", "hirte", "pflege",
+        "di akyire", "frɛ", "hwɛ", "ka", "di nkitahodzi", "kra", "hwɛ", "kyerɛ", "hwɛso", "kyerɛkyerɛfo",
+        "följa upp", "ringa", "checka in", "sms", "kontakta", "hålla kontakten", "själlar", "ny person", "besökaruppföljning", "lärjungaskap", "mentor", "herde", "omsorg",
+        "leantainn", "gairm", "sgrùdadh", "teacs", "fios", "fuireach ann an conaltradh", "anaman", "neach ùr", "luchd-tadhail", "deisciobalachd", "comhairliche", "cùram",
+        "fɔlo ɔp", "kɔl", "chɛk in", "tɛkst", "kɔntakt", "stay in tɔch", "sɔl dɛm", "nyu pɔsin", "mentor", "discipleship"
+      ],
+      "New Believers": [
+        "new christian", "new believer", "new convert", "mentor", "teach basics", "preach", "gospel", "salvation", "baptism", "discipleship", "new creation", "born again", "faith foundation", "new life", "spiritual growth", "bible study",
+        "nouveau chrétien", "nouveau croyant", "converti", "mentor", "enseigner les bases", "prêcher", "évangile", "salut", "baptême", "formation de disciples", "nouvelle création", "né de nouveau", "croissance spirituelle",
+        "nuevo cristiano", "nuevo creyente", "nuevo convertido", "mentor", "enseñar básico", "predicar", "evangelio", "salvación", "bautismo", "discipulado", "nueva criatura", "nacido de nuevo", "crecimiento espiritual",
+        "neuer christ", "neuer gläubiger", "konvertit", "mentor", "grundlagen lehren", "predigen", "evangelium", "erlösung", "taufe", "jüngerschaft", "neue schöpfung", "wiedergeboren", "geistliches wachstum",
+        "kristofo foforo", "agyanom foforo", "nkwagye foforo", "kyerɛkyerɛfo", "kyerɛ nneɛma foforo", "ka asɛm", "asɛmpa", "nkwagye", "asubɔ",
+        "ny kristen", "ny troende", "ny omvänd", "mentor", "lära grunder", "predika", "evangelium", "frälsning", "dop", "lärjungaskap", "ny skapelse", "pånyttfödd",
+        "crìosdaidh ùr", "creidmheach ùr", "iompachadh ùr", "comhairliche", "teagasg bunaitean", "searmonachadh", "soisgeul", "saoradh", "baisteadh", "deisciobalachd",
+        "nyu kristian", "nyu biliva", "nyu kɔnvət", "mɛntɔ", "tich baziks", "prich", "gospel", "salvation"
+      ],
+      "Administration": [
+        "organize", "plan", "schedule", "paperwork", "admin", "coordinate", "order", "records", "database", "spreadsheet", "tracking", "manage", "lead", "direct", "secretary", "treasurer", "bookkeeping", "finance", "budget", "report", "document",
+        "organiser", "planifier", "programmer", "paperasse", "admin", "coordonner", "ordre", "dossiers", "base de données", "tableur", "suivi", "gérer", "diriger", "secrétaire", "trésorier", "comptabilité", "budget",
+        "organizar", "planificar", "programar", "papeleo", "admin", "coordinar", "orden", "registros", "base de datos", "hoja de cálculo", "seguimiento", "gestionar", "dirigir", "secretario", "tesorero", "contabilidad", "presupuesto",
+        "organisieren", "planen", "terminplanen", "papierkram", "admin", "koordinieren", "ordnung", "aufzeichnungen", "datenbank", "tabellenkalkulation", "verfolgung", "verwalten", "leiten", "sekretär", "kassenwart", "buchhaltung", "budget",
+        "hyehyɛ", "bɔ mpɔ", "yɛ nhyehyɛe", "di dwuma", "admin", "di dwuma", "yɛ nhyehyɛe", "gye", "twerɛto", "akonta",
+        "organisera", "planera", "schema", "pappersarbete", "admin", "samordna", "ordning", "register", "databas", "kalkylark", "spårning", "hantera", "leda", "sekreterare", "kassör", "bokföring", "budget",
+        "eagrachadh", "dealbhadh", "clàr", "pàipearan", "rianachd", "co-òrdanachadh", "òrdugh", "clàran", "stòr-dàta", "clàr-duilleige", "lorg", "riaghladh", "stiùireadh", "rùnaire", "neach-tasgaidh", "cunntasachd"
+      ],
+      "Production": [
+        "stream", "streaming", "record", "behind scenes", "media", "camera", "recording", "video", "live stream", "broadcast", "produce", "direct", "technical director", "stage manager", "backstage", "audio visual", "av", "lighting", "set up", "run show",
+        "diffusion", "enregistrer", "coulisses", "média", "caméra", "enregistrement", "vidéo", "diffusion en direct", "produire", "réaliser", "directeur technique", "régisseur", "lumière", "son et image",
+        "transmisión", "grabar", "detrás de escena", "medios", "cámara", "grabación", "video", "transmisión en vivo", "producir", "dirigir", "director técnico", "iluminación",
+        "stream", "aufnehmen", "hinter den kulissen", "medien", "kamera", "aufnahme", "video", "live-stream", "produzieren", "regie", "technischer direktor", "licht",
+        "stream", "streaming", "dinn", "gye", "akyiri", "media", "kamera", "video", "live", "awiei",
+        "strömning", "spela in", "bakom kulisserna", "media", "kamera", "inspelning", "video", "live stream", "producera", "regissera", "teknisk chef", "ljus",
+        "sruth", "sruthadh", "clàradh", "air cùl", "meadhanan", "camara", "video", "sruth beò", "riochdachadh", "stiùireadh", "solas"
+      ],
+      "Tech Team": [
+        "fix", "tech", "technology", "computer", "equipment", "troubleshoot", "repair", "setup tech", "projector", "screen", "cable", "wire", "network", "software", "hardware", "it", "technical support", "maintenance", "install", "configure", "server", "wifi",
+        "réparer", "technique", "technologie", "ordinateur", "équipement", "dépanner", "réparer", "installer", "projecteur", "écran", "câble", "réseau", "logiciel", "matériel", "support technique", "maintenance", "configurer",
+        "arreglar", "técnico", "tecnología", "computadora", "equipo", "solucionar problemas", "reparar", "configurar", "proyector", "pantalla", "cable", "red", "software", "hardware", "soporte técnico", "mantenimiento", "instalar",
+        "reparieren", "technik", "technologie", "computer", "ausrüstung", "fehlerbehebung", "reparieren", "einrichten", "projektor", "bildschirm", "kabel", "netzwerk", "software", "hardware", "technischer support", "wartung",
+        "di", "nté", "nté", "kɔmputa", "apɛde", "te ade", "fix", "tech", "computer",
+        "fixa", "teknik", "teknologi", "dator", "utrustning", "felsöka", "reparera", "installera", "projektor", "skärm", "kabel", "nätverk", "mjukvara", "hårdvara", "teknisk support", "underhåll",
+        "càradh", "teicneolas", "teicneòlas", "coimpiutair", "uidheam", "fuasgladh dhuilgheadasan", "càradh", "stèidheachadh", "proifeactair", "sgàilean", "càball", "lìonra", "bathar-bog", "bathar-cruaidh"
+      ],
+      "Sound": [
+        "audio", "sound", "mix", "microphone", "speakers", "volume", "soundboard", "mixing desk", "headphones", "monitor", "equalizer", "amplifier", "pa system", "monitor mix", "gain", "frequency", "db", "decibel", "audio engineer", "foh", "front of house",
+        "audio", "son", "mixer", "microphone", "enceintes", "volume", "table de mixage", "casque", "moniteur", "égaliseur", "amplificateur", "sonorisation", "ingénieur son",
+        "audio", "sonido", "mezclar", "micrófono", "altavoces", "volumen", "mesa de mezclas", "auriculares", "monitor", "ecualizador", "amplificador", "sistema de sonido", "ingeniero audio",
+        "audio", "ton", "mischen", "mikrofon", "lautsprecher", "lautstärke", "mischpult", "kopfhörer", "monitor", "entzerrer", "verstärker", "beschallungsanlage", "toningenieur",
+        "nté", "nyante", "gye", "mpɔ", "nsa", "volume", "audio", "sound", "mix",
+        "ljud", "ljud", "mixa", "mikrofon", "högtalare", "volym", "mixerbord", "hörlurar", "monitor", "equalizer", "förstärkare", "pa-system", "ljudtekniker",
+        "fuaim", "measgachadh", "micreofon", "luchd-labhairt", "meud", "bòrd-measgaidh", "headphones", "sgrùdair", "luaith"
+      ],
+      "Photography": [
+        "photo", "camera", "picture", "shoot", "capture", "photography", "pictures", "photographer", "lens", "edit photos", "snap", "portrait", "video", "photoshoot", "canon", "nikon", "sony", "dslr", "mirrorless", "aperture", "shutter", "iso", "lightroom", "photoshop",
+        "photo", "appareil photo", "image", "prendre", "capturer", "photographie", "photos", "photographe", "objectif", "éditer", "portrait", "vidéo", "séance photo",
+        "foto", "cámara", "imagen", "tomar", "capturar", "fotografía", "fotos", "fotógrafo", "lente", "editar fotos", "retrato", "video", "sesión de fotos",
+        "foto", "kamera", "bild", "aufnehmen", "fotografieren", "fotografie", "bilder", "fotograf", "linse", "fotos bearbeiten", "porträt", "video", "fotosession",
+        "mfonini", "kamera", "fa", "fa", "mfonini", "fotografi", "photo", "picture",
+        "foto", "kamera", "bild", "ta", "fånga", "fotografi", "bilder", "fotograf", "lins", "redigera", "porträtt", "video", "fotosession",
+        "dealbh", "camara", "ìomhaigh", "togail", "glacadh", "dealbh", "dealbhan", "dealbhadair", "lionsa", "deasachadh", "portrait"
+      ],
+      "Design": [
+        "design", "graphic", "poster", "create visuals", "artwork", "creative", "art", "painting", "photoshop", "illustrator", "canva", "flyer", "logo", "branding", "typography", "layout", "digital art", "illustration", "vector", "pixel", "color", "font",
+        "design", "graphique", "affiche", "créer des visuels", "œuvre d'art", "créatif", "art", "peinture", "photoshop", "illustrator", "canva", "logo", "image de marque", "typographie", "mise en page",
+        "diseño", "gráfico", "póster", "crear visuales", "obra de arte", "creativo", "arte", "pintura", "photoshop", "illustrator", "canva", "logotipo", "marca", "tipografía", "diseño digital",
+        "design", "grafik", "plakat", "visuelle gestaltung", "kunstwerk", "kreativ", "kunst", "malerei", "photoshop", "illustrator", "canva", "logo", "markenbildung", "typografie", "layout",
+        "design", "graphic", "poster", "yɛ ade", "artwork", "creative", "art", "painting", "design", "mfonini",
+        "design", "grafik", "affisch", "skapa visuellt", "konstverk", "kreativ", "konst", "målning", "typografi",
+        "dealbhadh", "grafaigeach", "postair", "cruthachadh lèirsinneach", "obair ealain", "cruthachail", "ealain", "peantadh"
+      ],
+      "Drama": [
+        "act", "drama", "skit", "theater", "perform", "role play", "performing", "express", "acting", "stage", "performance", "play", "character", "theatre", "actor", "actress", "scene", "monologue", "dialogue", "improv", "improvisation",
+        "jouer", "drame", "sketch", "théâtre", "interpréter", "jeu de rôle", "représenter", "exprimer", "jeu", "scène", "performance", "pièce", "personnage", "acteur", "actrice",
+        "actuar", "drama", "sketch", "teatro", "interpretar", "juego de roles", "actuación", "expresar", "actuando", "escena", "obra", "personaje", "actor", "actriz",
+        "spielen", "drama", "sketch", "theater", "aufführen", "rollenspiel", "aufführend", "ausdrücken", "schauspiel", "bühne", "aufführung", "stück", "charakter", "schauspieler",
+        "agoru", "drama", "yɛ agoru", "theater", "yɛ", "role play", "kyerɛ", "stage", "performing",
+        "agera", "drama", "sketch", "teater", "utföra", "rollspel", "uttrycka", "scen", "föreställning", "pjäs", "karaktär", "skådespelare",
+        "cluich", "dràma", "sgèids", "theatar", "coileanadh", "cluich pàirt", "cur an cèill", "àrd-ùrlar", "coileanadh", "dealbh-chluich", "actair"
+      ],
+      "Spoken Word": [
+        "poetry", "spoken word", "poem", "poems", "words", "rhyme", "rhyming", "slam poetry", "recite", "verse", "poet", "lyrics", "stanza", "metaphor", "expression", "storytelling", "narrative", "performance poetry",
+        "poésie", "parole", "poème", "poèmes", "mots", "rime", "rimer", "slam", "réciter", "vers", "poète", "paroles", "expression",
+        "poesía", "palabra hablada", "poema", "poemas", "palabras", "rima", "rimar", "poesía slam", "recitar", "verso", "poeta", "letras", "expresión",
+        "poesie", "wort", "gedicht", "gedichte", "wörter", "reim", "reimen", "slam poesie", "rezitieren", "vers", "dichter", "lyrik", "ausdruck",
+        "poetry", "kasa", "poem", "nsɛm", "rhyme", "rhyming", "performance", "spoken", "word",
+        "poesi", "ord", "dikt", "dikter", "ord", "rim", "rimma", "slam poetry", "recitera", "vers", "poet", "text",
+        "bàrdachd", "facal", "dàn", "dàin", "faclan", "rann", "cur an cèill", "bàrd"
+      ],
+      "Social Media": [
+        "social media", "instagram", "post", "content", "facebook", "tiktok", "online", "snapchat", "reels", "story", "hashtag", "influencer", "digital", "marketing", "social", "twitter", "linkedin", "youtube", "viral", "engagement", "followers", "likes", "comments", "share", "trending",
+        "réseaux sociaux", "instagram", "publier", "contenu", "facebook", "tiktok", "en ligne", "snapchat", "reels", "story", "hashtag", "influenceur", "digital", "marketing", "twitter", "youtube",
+        "redes sociales", "instagram", "publicar", "contenido", "facebook", "tiktok", "en línea", "snapchat", "reels", "historia", "hashtag", "influencer", "digital", "marketing", "twitter", "youtube",
+        "soziale medien", "instagram", "posten", "inhalt", "facebook", "tiktok", "online", "snapchat", "reels", "story", "hashtag", "influencer", "digital", "marketing", "twitter", "youtube",
+        "social media", "instagram", "post", "content", "facebook", "tiktok", "online", "snapchat", "social", "media",
+        "sociala medier", "instagram", "posta", "innehåll", "facebook", "tiktok", "online", "snapchat", "reels", "story", "hashtag", "influencer", "digital", "marketing",
+        "meadhanan sòisealta", "instagram", "post", "susbaint", "facebook", "tiktok", "air loidhne", "snapchat"
+      ],
+      "Evangelism": [
+        "share faith", "tell others", "outreach", "witness", "preach", "spread gospel", "mission", "evangelize", "invite", "street", "door to door", "share Jesus", "evangelical", "soul winning", "open air", "tract", "testimony", "proclaim", "declare", "gospel",
+        "partager la foi", "parler aux autres", "sensibilisation", "témoigner", "prêcher", "diffuser l'évangile", "mission", "évangéliser", "inviter", "rue", "porte à porte", "témoignage", "proclamer",
+        "compartir la fe", "decir a otros", "alcance", "testificar", "predicar", "difundir el evangelio", "misión", "evangelizar", "invitar", "calle", "puerta a puerta", "testimonio", "proclamar",
+        "glauben teilen", "anderen sagen", "reichweite", "zeugen", "predigen", "evangelium verbreiten", "mission", "evangelisieren", "einladen", "straße", "von haus zu haus", "zeugnis", "verkünden",
+        "kyɛ gyidi", "ka kyerɛ afoforo", "hwɛ afoforo", "di adanse", "ka asɛmpa", "ka asɛm", "outreach", "mission",
+        "dela tro", "berätta för andra", "uppsökande", "vittna", "predika", "sprid evangeliet", "mission", "evangelisera", "bjuda in", "gata", "dörr till dörr", "vittnesbörd", "förkunna",
+        "roinn creideamh", "innse do chàch", "ruighinn a-mach", "fianais", "searmonachadh", "soisgeul", "misean", "soisgeulachadh", "cuireadh", "fianuis"
+      ],
+      "Sanctuary Keepers": [
+        "vacuum", "dust", "wipe", "tidy up", "clean up", "organize sanctuary", "maintain", "cleaning", "sweep", "mop", "sanctuary", "orderly", "neat", "cleanliness", "polish", "arrange chairs", "straighten", "sanitize", "disinfect", "restroom", "floor", "window",
+        "aspirateur", "poussière", "essuyer", "ranger", "nettoyer", "organiser le sanctuaire", "entretenir", "nettoyage", "balayer", "serpillière", "sanctuaire", "ordonné", "propreté", "polir",
+        "aspirar", "polvo", "limpiar", "ordenar", "organizar el santuario", "mantener", "limpieza", "barrer", "trapear", "santuario", "ordenado", "limpieza", "pulir",
+        "staubsaugen", "staub", "wischen", "aufräumen", "heiligtum organisieren", "pflegen", "reinigung", "fegen", "wischen", "heiligtum", "ordentlich", "sauberkeit", "polieren",
+        "hohoro", "hyehyɛ", "hwɛ", "sanctuary", "hyehyɛ", "to nkongua", "clean", "tidy",
+        "dammsuga", "dammsuga", "torka", "städa", "organisera helgedom", "underhålla", "städning", "sopa", "moppa", "helgedom", "ordning", "renlighet", "putsa",
+        "glanadh", "òrdachadh", "cumail suas", "naomh-lann", "suidheachadh cathraichean", "glan", "sgiobalta"
+      ],
+      "Set-up": [
+        "chairs", "tables", "heavy lifting", "move equipment", "pack down", "unpack", "load in", "arrange", "setup", "prepare space", "organize room", "set chairs", "tear down", "de-rig", "build", "construct", "assemble", "disassemble", "stage", "platform", "risers", "altar",
+        "chaises", "tables", "port de charges lourdes", "déplacer l'équipement", "démonter", "décharger", "charger", "arranger", "installer", "préparer l'espace", "organiser la salle", "installer les chaises", "démonter", "construire", "assembler",
+        "sillas", "mesas", "levantar peso", "mover equipo", "desmontar", "descargar", "cargar", "arreglar", "configurar", "preparar espacio", "organizar habitación", "colocar sillas", "desmontar", "construir", "ensamblar",
+        "stühle", "tische", "schweres heben", "ausrüstung bewegen", "abbauen", "auspacken", "einladen", "anordnen", "einrichten", "raum vorbereiten", "raum organisieren", "stühle stellen", "abbauen", "aufbauen", "montieren",
+        "hyehyɛ", "setup", "arrange", "siesie baabi", "pia nneɛma", "screens", "de-rig", "chairs", "tables",
+        "förbereda", "setup", "arrangera", "förbereda utrymme", "flytta möbler", "skärmar", "montera ner", "bygga", "montera",
+        "ullachadh", "stèidheachadh", "rèiteachadh", "ullachadh àite", "gluasad àirneis", "sgrionaichean", "toirt sìos", "togail"
+      ],
+      "Uniform": [
+        "uniform", "appearance", "presentation", "dress", "professional", "fashion", "style", "clothes", "attire", "outfit", "wardrobe", "dress code", "grooming", "neatness", "color", "shirt", "pants", "skirt", "jacket", "vest", "tie", "badge", "name tag",
+        "uniforme", "apparence", "présentation", "s'habiller", "professionnel", "mode", "style", "vêtements", "tenue", "garde-robe", "code vestimentaire", "soin",
+        "uniforme", "apariencia", "presentación", "vestir", "profesional", "moda", "estilo", "ropa", "atuendo", "vestuario", "código de vestimenta", "aseo",
+        "uniform", "erscheinung", "präsentation", "kleiden", "professionell", "mode", "stil", "kleidung", "outfit", "garderobe", "kleiderordnung", "pflege",
+        "uniform", "anim", "presentation", "fira", "professional", "fashion", "style", "ntoma", "dress", "appearance",
+        "uniform", "utseende", "presentation", "klä", "professionell", "mode", "stil", "kläder", "outfit", "garderob", "klädsel", "vård",
+        "èideadh", "coltas", "taisbeanadh", "aodach", "proifeiseanta", "fasan", "stoidhle", "èideadh"
+      ],
+      "Ushers": [
+        "usher", "seat", "guide people", "direct", "help seating", "smile", "smiling", "offer", "assist", "escort", "show way", "welcoming", "greeting", "hand out", "bulletin", "program", "offering", "collection", "crowd control",
+        "placeur", "siège", "guider", "diriger", "aider à s'asseoir", "sourire", "offrir", "assister", "escorter", "montrer le chemin", "accueillir", "saluer", "bulletin", "offrande",
+        "acomodador", "asiento", "guiar", "dirigir", "ayudar a sentarse", "sonrisa", "ofrecer", "asistir", "acompañar", "mostrar el camino", "bienvenida", "saludo", "ofrenda",
+        "platzanweiser", "sitz", "führen", "leiten", "beim sitzen helfen", "lächeln", "anbieten", "assistieren", "begleiten", "weg zeigen", "begrüßen", "opfer",
+        "usher", "kongua", "kyerɛ nnipa", "kyerɛ", "boa ma wɔn tena", "sere", "guide", "welcome",
+        "placera", "säte", "guida folk", "dirigera", "hjälpa sittplatser", "leende", "erbjuda", "assistera", "eskortera", "visa vägen", "välkomnande", "insamling",
+        "suidheachadh", "suidheachan", "stiùireadh daoine", "stiùireadh", "cuideachadh suidheachain", "gàire", "fàilte"
+      ],
+      "Security": [
+        "security", "protect", "safe", "watch", "guard", "monitor", "secure", "safety", "emergency", "safety team", "protection", "crowd control", "patrol", "surveillance", "camera", "alarm", "lock", "unlock", "first aid", "evacuation", "fire",
+        "sécurité", "protéger", "sûr", "surveiller", "garder", "monitorer", "sécuriser", "sécurité", "urgence", "équipe de sécurité", "protection", "contrôle des foules", "patrouille", "alarme",
+        "seguridad", "proteger", "seguro", "vigilar", "guardia", "monitorear", "asegurar", "seguridad", "emergencia", "equipo de seguridad", "protección", "control de multitudes", "patrulla", "alarma",
+        "sicherheit", "schützen", "sicher", "bewachen", "wache", "überwachen", "sichern", "sicherheit", "notfall", "sicherheitsteam", "schutz", "menschenmengen", "patrouille", "alarm",
+        "security", "bɔ", "ban", "hwɛ", "guard", "monitor", "bɔ", "bɔfo", "protect", "safe",
+        "säkerhet", "skydda", "säker", "bevaka", "vakt", "övervaka", "säkra", "säkerhet", "nödläge", "säkerhetsteam", "skydd", "folkmassor", "patrull", "larm",
+        "tèarainteachd", "dìon", "sàbhailte", "coimhead", "geàrd", "sgrùdadh", "dìonadair", "rabhadh"
+      ],
+      "Guest Relations": [
+        "guest", "visitor", "first time", "new person", "welcome", "caring", "newcomer", "first-time guest", "visitor center", "guest services", "hospitality desk", "information", "help desk", "follow up", "connection card", "register", "check in",
+        "invité", "visiteur", "première fois", "nouvelle personne", "accueillir", "attentionné", "nouveau venu", "centre d'accueil", "services aux invités", "accueil", "information", "enregistrement",
+        "invitado", "visitante", "primera vez", "persona nueva", "bienvenida", "cariñoso", "recién llegado", "centro de visitantes", "servicios para invitados", "recepción", "información", "registro",
+        "gast", "besucher", "erstes mal", "neue person", "willkommen", "fürsorglich", "neuankömmling", "besucherzentrum", "gästeservice", "empfang", "information", "registrierung",
+        "guest", "visitor", "dabi a edi kan", "onipa foforo", "gye", "hwɛ", "yɛ ayeyi", "welcome", "new",
+        "gäst", "besökare", "första gången", "ny person", "välkomna", "omtänksam", "nykomling", "besökscenter", "gästservice", "reception", "information", "registrering",
+        "aoigh", "neach-tadhail", "ciad uair", "neach ùr", "fàilte", "cùramach", "ionad luchd-tadhail"
+      ],
+      "Audio": [
+        "audio", "record", "sound", "microphone", "speakers", "message", "messages", "podcast", "audio recording", "audio engineer", "edit audio", "voice over", "narration", "sound clip", "mp3", "wav", "recording booth",
+        "audio", "enregistrer", "son", "microphone", "enceintes", "message", "podcast", "enregistrement audio", "ingénieur son", "monter audio", "voix off",
+        "audio", "grabar", "sonido", "micrófono", "altavoces", "mensaje", "podcast", "grabación de audio", "ingeniero audio", "editar audio", "voz en off",
+        "audio", "aufnehmen", "ton", "mikrofon", "lautsprecher", "nachricht", "podcast", "audioaufnahme", "toningenieur", "audio bearbeiten", "voice over",
+        "audio", "gye", "nté", "microphone", "speakers", "nkra", "record", "sound",
+        "ljud", "spela in", "ljud", "mikrofon", "högtalare", "meddelande", "podcast", "ljudinspelning", "ljudtekniker", "redigera ljud",
+        "fuaim", "clàradh", "micreofon", "luchd-labhairt", "teachdaireachd", "podcast"
+      ],
+      "Media": [
+        "media", "camera", "live stream", "record", "video", "content creator", "videography", "editor", "video editing", "film", "movie", "documentary", "production", "director", "camera operator", "videographer", "edit", "cut", "render",
+        "médias", "caméra", "diffusion en direct", "enregistrer", "vidéo", "créateur de contenu", "vidéaste", "éditeur", "montage vidéo", "film", "documentaire", "production", "réalisateur",
+        "medios", "cámara", "transmisión en vivo", "grabar", "video", "creador de contenido", "videógrafo", "editor", "edición de video", "película", "documental", "producción", "director",
+        "medien", "kamera", "live-stream", "aufnehmen", "video", "content creator", "videograf", "editor", "videobearbeitung", "film", "dokumentarfilm", "produktion", "regisseur",
+        "media", "kamera", "live stream", "gye", "video", "record", "edit",
+        "media", "kamera", "live stream", "spela in", "video", "innehållsskapare", "videograf", "redigerare", "videoredigering", "film",
+        "meadhanan", "camara", "sruth beò", "clàradh", "video", "deasachadh"
+      ]
+    };
     // Helper function to get negation words for current language
     function getNegationWords(langCode) {
       return negationWords[langCode] || negationWords.en;
@@ -1644,7 +1892,7 @@ jam: {
     }
 
     // UPDATED: New scoreAnswer function with multi-language support
-    function scoreAnswer(input) {
+        function scoreAnswer(input) {
       const text = input.toLowerCase();
       const langCode = currentLanguage;
       const lang = translations[langCode] || translations.en;
@@ -1658,13 +1906,14 @@ jam: {
         "Ushers", "Security", "Guest Relations", "Audio", "Media"
       ];
       
-      // Check each department
+      // ============================================
+      // PART 1: Check original keywords
+      // ============================================
       for (let department of allDepartments) {
         
         // Skip departments that don't exist in current language
         let deptExists = false;
         for (let deptName in lang.departments) {
-          // Simple check - in production you'd want a proper mapping
           if (deptName.toLowerCase().includes(department.toLowerCase()) || 
               department.toLowerCase().includes(deptName.toLowerCase())) {
             deptExists = true;
@@ -1694,10 +1943,38 @@ jam: {
         }
       }
       
-      // REMOVED random scores - departments only get points if mentioned
-      // No more: deptScores[dept] = deptScores[dept] || Math.random() * 0.5;
+      // ============================================
+      // PART 2: Check enhanced keywords (NEW!)
+      // ============================================
+      for (let [department, enhancedWords] of Object.entries(enhancedKeywords)) {
+        // Skip if department not in current language or has branch restrictions
+        if (department === "K-Music" && !branch.includes('Kharis Phase 2')) continue;
+        if (department === "Children's Department" && branch !== 'Kharis Church London') continue;
+        
+        // Check if department exists in current language
+        let deptExists = false;
+        for (let deptName in lang.departments) {
+          if (deptName.toLowerCase().includes(department.toLowerCase()) || 
+              department.toLowerCase().includes(deptName.toLowerCase())) {
+            deptExists = true;
+            break;
+          }
+        }
+        if (!deptExists) continue;
+        
+        // Check for negation before enhanced matching
+        if (hasNegation(text, department, langCode)) {
+          continue;
+        }
+        
+        for (let keyword of enhancedWords) {
+          if (text.includes(keyword)) {
+            deptScores[department] = (deptScores[department] || 0) + 2;
+            break;
+          }
+        }
+      }
     }
-
     function collectAnswers() {
       const answers = [];
       const lang = translations[currentLanguage] || translations.en;
@@ -1766,7 +2043,7 @@ jam: {
       backBtn.style.display = currentQ > 0 ? "inline-block" : "none";
     }
 
-    function showResult() {
+       function showResult() {
       quizEl.classList.remove('show');
       resultEl.classList.add('show');
       backBtn.style.display = "none";
@@ -2000,7 +2277,7 @@ jam: {
     const ELEVENLABS_API_KEY = "sk_afe6ceb6ea3add2bc5f98f6e5720cf80e4a9052f551a95f2";
     
     const voiceMapping = {
-      'en': 'JBFqnCBsd6RMkjVDRZzb', // Rachel
+      'en': 'JBFqnCBsd6RMkjVDRZzb',
       'fr': 'odOFTFZU3DvAZ3EV3KHi', 
       'es': 'zl1Ut8dvwcVSuQSB9XkG',
       'de': 'TUKJhQmz3RPYBNAgC5A1',
@@ -2013,7 +2290,6 @@ jam: {
 
     let currentAudio = null;
 
-    // List of CORS proxies to try (in order of reliability)
     const corsProxies = [
       'https://corsproxy.io/?',
       'https://api.allorigins.win/raw?url=',
@@ -2037,15 +2313,12 @@ jam: {
       throw new Error('All proxies failed');
     }
 
-    // Simple speak function that uses ElevenLabs API directly
     async function speakText(text, langCode) {
-      // Stop any current audio
       if (currentAudio) {
         currentAudio.pause();
         currentAudio = null;
       }
 
-      // Visual feedback
       const voiceBtn = document.getElementById('voiceBtn');
       if (voiceBtn) {
         voiceBtn.style.opacity = '0.5';
@@ -2064,7 +2337,7 @@ jam: {
           headers: {
             'Accept': 'audio/mpeg',
             'Content-Type': 'application/json',
-            'xi-api-key': 'sk_afe6ceb6ea3add2bc5f98f6e5720cf80e4a9052f551a95f2'
+            'xi-api-key': ELEVENLABS_API_KEY
           },
           body: JSON.stringify({
             text: text,
@@ -2083,7 +2356,6 @@ jam: {
         const audio = new Audio(audioUrl);
         currentAudio = audio;
 
-        // Reset button
         if (voiceBtn) {
           voiceBtn.style.opacity = '1';
           voiceBtn.textContent = '🔊';
@@ -2100,13 +2372,11 @@ jam: {
       } catch (err) {
         console.error('❌ ElevenLabs error:', err);
         
-        // Reset button
         if (voiceBtn) {
           voiceBtn.style.opacity = '1';
           voiceBtn.textContent = '🔊';
         }
         
-        // Show more specific error message
         alert('Audio failed to load. Please check:\n1. Your internet connection\n2. That your API key has enough credits\n3. Try again in a few minutes');
       }
     }
@@ -2143,7 +2413,6 @@ jam: {
         "Media": "Media",
         "Spoken Word": "Spoken Word",
         
-        // French
         "Département des Enfants": "Children's Department",
         "Drame": "Drama",
         "Hospitalité": "Hospitality",
@@ -2161,7 +2430,6 @@ jam: {
         "Sécurité": "Security",
         "Parole Parlée": "Spoken Word",
         
-        // Spanish
         "Administración": "Administration",
         "Departamento Infantil": "Children's Department",
         "Diseño": "Design",
@@ -2181,7 +2449,6 @@ jam: {
         "Seguridad": "Security",
         "Palabra Hablada": "Spoken Word",
 
-        // German
         "Kinderdepartment": "Children's Department",
         "Gastfreundschaft": "Hospitality",
         "Gästebetreuung": "Guest Relations",
@@ -2198,18 +2465,13 @@ jam: {
         "Wohlfahrt": "Welfare",
         "Sicherheit": "Security",
 
-        // Twi
         "Nnipa Nkumaa Apam": "Children's Department",
         
-        // Swedish
         "Barnavdelning": "Children's Department",
         "Gästfrihet": "Hospitality",
         "Värdteam": "Host Team",
-        "Produktion": "Production",
-        "Musik": "Music",
         "Uppföljning": "Follow Up",
         "Nya Troende": "New Believers",
-        "Evangelisation": "Evangelism",
         "Uppbyggnad": "Set-up",
         "Sociala Medier": "Social Media",
         "Ljud": "Sound",
@@ -2217,7 +2479,6 @@ jam: {
         "Välfärd": "Welfare",
         "Säkerhet": "Security",
 
-        // Gaelic
         "Roinn nan Clann": "Children's Department",
         "Aoigheachd": "Hospitality",
         "Sgioba Fàilte": "Host Team",
@@ -2235,7 +2496,6 @@ jam: {
         "Tèarainteachd": "Security",
         "Facal Labhairte": "Spoken Word",
 
-        // Krio
         "Pikin Department": "Children's Department",
         "Fɔlo Ɔp": "Follow Up",
         "Nyū Bilivaz": "New Believers",
@@ -2251,7 +2511,6 @@ jam: {
         "Midia": "Media",
         "Spokɛn Wɔd": "Spoken Word",
 
-        // Jamaican
         "Pickney Dept": "Children's Department",
         "Ous Tim": "Host Team",
         "Pradokshan": "Production",
