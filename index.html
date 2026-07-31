@@ -2233,6 +2233,7 @@ jam: {
       if (backBtn) {
         backBtn.addEventListener('click', () => {
           resultEl.innerHTML = lastResultHtml;
+           e.preventDefault();
           
           // Re-attach event listeners
           const exploreBtn = document.getElementById('explore-all-btn');
