@@ -29,7 +29,20 @@
       flex-direction: column;
       min-height: 100vh;
     }
+        .video-container iframe {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
     
+    .explore-details iframe {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      border-radius: 6px;
+    }
     .header {
       background: rgba(60, 19, 97, 0.95);
       padding: 25px 0;
@@ -93,6 +106,8 @@
       color: #fff;
       cursor: pointer;
       outline: none;
+      width: 100%;
+      max-width: 200px; 
     }
     
     .language-select option {
@@ -291,7 +306,16 @@
         background: white;
         border: 1px solid #ddd;
       }
-      
+          @media (max-width: 768px) {
+      body { padding: 0.8rem; }
+      .card { padding: 1.2rem; max-height: 95vh; }
+      h1 { font-size: 1.6rem; }
+      .language-select { font-size: 14px; padding: 10px 35px 10px 15px; max-width: 160px; }
+      .btn { max-width: 100%; padding: 14px 20px; font-size: 0.95rem; }
+      .question { font-size: 1rem; }
+      .video-container iframe, .explore-details iframe { min-height: unset !important; max-height: unset !important; }
+      #back-to-result { width: 100%; }
+    }
       h1, h2, h3 {
         color: #333;
       }
