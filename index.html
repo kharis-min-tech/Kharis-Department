@@ -2231,9 +2231,9 @@ jam: {
       // Back button handler - FIXED to properly restore state
       const backBtn = document.getElementById('back-to-result');
       if (backBtn) {
-        backBtn.addEventListener('click', () => {
-          resultEl.innerHTML = lastResultHtml;
-           e.preventDefault();
+        backBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    resultEl.innerHTML = lastResultHtml;
           
           // Re-attach event listeners
           const exploreBtn = document.getElementById('explore-all-btn');
