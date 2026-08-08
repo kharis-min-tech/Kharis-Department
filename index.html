@@ -2223,7 +2223,6 @@ function renderExploreList() {
     }
   });
 
-  // FIXED: Back button with proper single event listener
   const backBtn = document.getElementById('back-to-result');
   if (backBtn) {
     // Remove any existing listeners by cloning
@@ -2270,40 +2269,7 @@ function renderExploreList() {
   }
 
 
-      // Back button handler - FIXED to properly restore state
-      const backBtn = document.getElementById('back-to-result');
-      if (backBtn) {
-        backBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    resultEl.innerHTML = lastResultHtml;
-          
-          // Re-attach event listeners
-          const exploreBtn = document.getElementById('explore-all-btn');
-          const restartBtn = document.getElementById('restart-btn');
-          
-          if (exploreBtn) {
-            exploreBtn.addEventListener('click', renderExploreList);
-          }
-          
-          if (restartBtn) {
-            restartBtn.addEventListener('click', restartWithoutReload);
-          }
-          
-          // Re-animate departments
-          setTimeout(() => {
-            lastSorted.forEach((_, i) => {
-              const el = document.getElementById(`dept-${i}`);
-              const sb = document.getElementById(`scripture-${i}`);
-              if (el) {
-                el.classList.add('show');
-                sb.classList.add('visible');
-              }
-            });
-          }, 100);
-        });
-      }
-    }
-
+   
     function restartWithoutReload() {
       stopSpeech();
      
