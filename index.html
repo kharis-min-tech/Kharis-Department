@@ -2134,7 +2134,7 @@ jam: {
       }, 100);
     }
 
-   function renderExploreList() {
+  function renderExploreList() {
   const lang = translations[currentLanguage] || translations.en;
   
   let html = `<h2>${lang.allDepartments}</h2><div class="explore-list">`;
@@ -2149,22 +2149,28 @@ jam: {
       return;
     }
     
+    // FIXED: Better video handling with data-src to prevent auto-loading
+    let videoHtml = '';
+    if (info.video) {
+      videoHtml = `
+        <div style="margin-top:12px; position:relative; width:100%; aspect-ratio:16/9; background:#000; border-radius:6px; overflow:hidden;">
+          <iframe width="100%" height="100%" data-src="${info.video}" 
+                  frameborder="0" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; border-radius:6px; background:#000;">
+          </iframe>
+        </div>
+      `;
+    }
+    
     html += `
     <div class="explore-item" data-idx="${idx}">
       <div class="title">
         <span>${dept}</span>
         <span class="expand-icon">+</span>
       </div>
-      <div class="explore-details" id="explore-detail-${idx}">
+      <div class="explore-details" id="explore-detail-${idx}" style="display:none; padding:15px 12px; margin-top:12px; background:rgba(0,0,0,0.2); border-radius:8px; text-align:left; max-height:600px; overflow-y:auto; font-size:0.95rem; line-height:1.5;">
         <p style="margin:0 0 6px 0">${info.desc}</p>
         <p style="margin:0;font-style:italic;font-size:0.95rem">${info.scripture}</p>
-      ${info.video ? `
-    <div style="margin-top:12px;">
-      <iframe width="100%" height="150" src="${info.video}" 
-              frameborder="0" allowfullscreen style="border-radius:6px;">
-      </iframe>
-    </div>
-  ` : ''}
+        ${videoHtml}
       </div>
     </div>
   `;
@@ -2172,18 +2178,16 @@ jam: {
   
   html += `</div><div style="margin-top:14px;"><button class="btn" id="back-to-result">${lang.backToResults}</button></div>`;
 
+  // FIXED: Prevent page reload by using innerHTML properly
   resultEl.innerHTML = html;
 
-  // Attach toggle listeners with proper event handling
+  // Attach toggle listeners with proper event handling - FIXED to prevent reloads
   const items = resultEl.querySelectorAll('.explore-item');
   items.forEach((item) => {
     const idx = item.getAttribute('data-idx');
     const details = resultEl.querySelector(`#explore-detail-${idx}`);
-    const expandIcon = item.querySelector('.expand-icon');
     
     if (details) {
-      details.style.display = 'none';
-      
       // Remove any existing listeners by cloning and replacing
       const newItem = item.cloneNode(true);
       item.parentNode.replaceChild(newItem, item);
@@ -2192,7 +2196,11 @@ jam: {
       const newDetails = newItem.querySelector(`#explore-detail-${idx}`);
       const newExpandIcon = newItem.querySelector('.expand-icon');
       
+      // FIXED: Use click handler with preventDefault to stop page reload
       newItem.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
         // Close all other items
         document.querySelectorAll('.explore-item').forEach(otherItem => {
           if (otherItem !== newItem) {
@@ -2213,7 +2221,12 @@ jam: {
         newItem.classList.toggle('expanded', !isVisible);
         newExpandIcon.textContent = isVisible ? '+' : '×';
         
+        // FIXED: Load iframe only when expanded
         if (!isVisible) {
+          const iframe = newDetails.querySelector('iframe');
+          if (iframe && iframe.dataset.src && !iframe.src) {
+            iframe.src = iframe.dataset.src;
+          }
           setTimeout(() => {
             newItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           }, 100);
@@ -2222,7 +2235,7 @@ jam: {
     }
   });
 
-  // SINGLE Back button handler - REMOVED DUPLICATE
+  // FIXED: Back button with preventDefault to stop page reload
   const backBtn = document.getElementById('back-to-result');
   if (backBtn) {
     const newBackBtn = backBtn.cloneNode(true);
@@ -2230,6 +2243,7 @@ jam: {
     
     newBackBtn.addEventListener('click', function(e) {
       e.preventDefault();
+      e.stopPropagation();
       resultEl.innerHTML = lastResultHtml;
       
       setTimeout(() => {
@@ -2239,7 +2253,10 @@ jam: {
         if (exploreBtn) {
           const newExploreBtn = exploreBtn.cloneNode(true);
           exploreBtn.parentNode.replaceChild(newExploreBtn, exploreBtn);
-          newExploreBtn.addEventListener('click', renderExploreList);
+          newExploreBtn.addEventListener('click', function(ev) {
+            ev.preventDefault();
+            renderExploreList();
+          });
         }
         
         if (restartBtn) {
