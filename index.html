@@ -2134,8 +2134,7 @@ jam: {
       }, 100);
     }
 
-   // 
-function renderExploreList() {
+   function renderExploreList() {
   const lang = translations[currentLanguage] || translations.en;
   
   let html = `<h2>${lang.allDepartments}</h2><div class="explore-list">`;
@@ -2223,27 +2222,21 @@ function renderExploreList() {
     }
   });
 
+  // SINGLE Back button handler - REMOVED DUPLICATE
   const backBtn = document.getElementById('back-to-result');
   if (backBtn) {
-    // Remove any existing listeners by cloning
     const newBackBtn = backBtn.cloneNode(true);
     backBtn.parentNode.replaceChild(newBackBtn, backBtn);
     
     newBackBtn.addEventListener('click', function(e) {
       e.preventDefault();
-      // Store the current HTML before clearing
-      const storedHtml = lastResultHtml;
+      resultEl.innerHTML = lastResultHtml;
       
-      // Clear and restore
-      resultEl.innerHTML = storedHtml;
-      
-      // Re-attach event listeners to the restored content
       setTimeout(() => {
         const exploreBtn = document.getElementById('explore-all-btn');
         const restartBtn = document.getElementById('restart-btn');
         
         if (exploreBtn) {
-          // Remove any existing listeners
           const newExploreBtn = exploreBtn.cloneNode(true);
           exploreBtn.parentNode.replaceChild(newExploreBtn, exploreBtn);
           newExploreBtn.addEventListener('click', renderExploreList);
@@ -2255,7 +2248,6 @@ function renderExploreList() {
           newRestartBtn.addEventListener('click', restartWithoutReload);
         }
         
-        // Re-animate departments
         lastSorted.forEach((_, i) => {
           const el = document.getElementById(`dept-${i}`);
           const sb = document.getElementById(`scripture-${i}`);
@@ -2267,7 +2259,7 @@ function renderExploreList() {
       }, 100);
     });
   }
-
+}
 
    
     function restartWithoutReload() {
