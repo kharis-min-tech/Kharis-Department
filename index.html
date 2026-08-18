@@ -33,15 +33,15 @@ charset="UTF-8">
       background: linear-gradient(180deg,#fff,#f4f4f4);
     }
     
-    /* Video container styles - FIXED for non-stretchy videos */
-    .video-container {
-      text-align: center;
-      margin: 15px 0;
-      width: 100%;
-      position: relative;
-      overflow: hidden;
-      border-radius: 10px;
-    }
+   .video-container {
+    width: 100%;
+    margin: 15px 0;
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #000;
+}
     .progress-bar {
       width: 100%;
       height: 12px;
@@ -54,18 +54,15 @@ charset="UTF-8">
       bottom: 14px;
     }    
     
-       .video-container iframe {
-      width: 100%;
-      height: 100%;
-      min-height: 250px;
-      max-height: 350px;
-      object-fit: cover;
-      border-radius: 8px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      aspect-ratio: 16/9;
-      pointer-events: auto;
-      -webkit-pointer-events: auto;
-    }
+       ..video-container iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 10px;
+    display: block;
+}
 
     /* Thumbnail style for videos */
     .video-thumbnail {
