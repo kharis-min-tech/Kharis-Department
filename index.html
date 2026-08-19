@@ -672,7 +672,7 @@ body.light .language-dropdown-container::after {
        'https://i1.sndcdn.com/artworks-vWh59zjaGOYB7RqW-Aewlyg-t240x240.jpg'
     ];
     
-// One global handler: swaps the poster for a clean tap-to-play video
+// One global handler: swaps the poster for a clean video without the timeline
 document.addEventListener('click', function (e) {
   const f = e.target.closest('.video-facade');
   if (!f) return;
@@ -681,11 +681,10 @@ document.addEventListener('click', function (e) {
   const box = f.parentElement;
   const src = f.dataset.src;
   
-  // Extract the Google Drive File ID from the URL
-  const fileIdMatch = src.match(/\/d\/(.+?)\//);
-  if (!fileIdMatch) {
-    // Fallback if it's not a Drive link
-    box.innerHTML = '<iframe src="' + src + '" allow="autoplay; fullscreen" allowfullscreen frameborder="0"></iframe>';
+  // Add controls=0 to hide the timeline bar on all devices
+  const cleanSrc = src.includes('?') ? src + '&controls=0' : src + '?controls=0';
+  
+  box.innerHTML = '<iframe src="' + cleanSrc + '" allow="autoplay; fullscreen" allowfullscreen frameborder="0"></iframe>';
     return;
   }
   
