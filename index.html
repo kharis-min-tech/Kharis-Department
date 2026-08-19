@@ -2117,7 +2117,7 @@ jam: {
               break;
             }
           }
-                   const deptInfo = lang.departments[localizedDept] || {desc: "Department information", scripture: "Scripture reference"};
+                             const deptInfo = lang.departments[localizedDept] || {desc: "Department information", scripture: "Scripture reference"};
           html += `
         <div class="department" id="dept-${idx}">
           <strong>${localizedDept}</strong>
@@ -2132,6 +2132,16 @@ jam: {
         </div>
       ` : ''}
           </div>
+        </div>
+      `;
+        });
+        html += `</div>`;
+      }
+
+      html += `
+        <div style="margin-top:16px;">
+          <button class="btn" id="explore-all-btn" type="button">${lang.exploreButton}</button>
+          <button class="btn" id="restart-btn" style="background:transparent;color:var(--btn-bg);border:2px solid var(--btn-bg);">${lang.restartButton}</button>
         </div>
       `;
 
