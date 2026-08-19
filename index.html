@@ -2117,7 +2117,7 @@ jam: {
               break;
             }
           }
-                             const deptInfo = lang.departments[localizedDept] || {desc: "Department information", scripture: "Scripture reference"};
+                                     const deptInfo = lang.departments[localizedDept] || {desc: "Department information", scripture: "Scripture reference"};
           html += `
         <div class="department" id="dept-${idx}">
           <strong>${localizedDept}</strong>
@@ -2125,7 +2125,14 @@ jam: {
             <p>${deptInfo.desc}</p>
             <p><strong>Scripture:</strong> ${deptInfo.scripture}</p>
            ${deptInfo.video ? `
-        <div style="margin-top:15px; text-align:center;">
+        <!-- EMBEDDED VIDEO (plays inside the app) -->
+        <div class="video-container" style="margin-top:15px;">
+          <iframe width="100%" height="200" src="${deptInfo.video}" 
+                  frameborder="0" allowfullscreen style="border-radius:8px;">
+          </iframe>
+        </div>
+        <!-- GOLD BUTTON (opens on Google Drive in a new tab) -->
+        <div style="margin-top:10px; text-align:center;">
           <a class="drive-link" href="${driveWatchUrl(deptInfo.video)}" target="_blank" rel="noopener">
             ▶ Watch on Google Drive
           </a>
@@ -2134,6 +2141,7 @@ jam: {
           </div>
         </div>
       `;
+          
         });
         html += `</div>`;
       }
@@ -2188,10 +2196,17 @@ jam: {
       return;
     }
     
-      let videoHtml = '';
+           let videoHtml = '';
     if (info.video) {
       videoHtml = `
-        <div style="margin-top:12px; text-align:center;">
+        <!-- EMBEDDED VIDEO -->
+        <div class="video-container" style="margin-top:12px;">
+          <iframe width="100%" height="200" src="${info.video}" 
+                  frameborder="0" allowfullscreen style="border-radius:6px;">
+          </iframe>
+        </div>
+        <!-- GOLD BUTTON -->
+        <div style="margin-top:8px; text-align:center;">
           <a class="drive-link" href="${driveWatchUrl(info.video)}" target="_blank" rel="noopener">
             ▶ Watch on Google Drive
           </a>
