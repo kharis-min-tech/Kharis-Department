@@ -2182,41 +2182,30 @@ jam: {
     }
 
     function renderExploreList() {
-    const lang = translations[currentLanguage] || translations.en;
-    
-    let html = `<h2>${lang.allDepartments}</h2><div class="explore-list">`;
-    
-    Object.entries(lang.departments).forEach(([dept, info], idx) => {
-      // Check branch restrictions
-      const englishDept = convertToEnglish(dept);
-      if (englishDept === "Children's Department" && branch !== 'Kharis Church London') {
-        return;
-      }
-      if (englishDept === "K-Music" && !branch.includes('Kharis Phase 2')) {
-        return;
-      }
-      
-      let videoHtml = '';
-      if (info.video) {
-        videoHtml = `
-          <!-- EMBEDDED VIDEO -->
-          <div class="video-container" style="margin-top:12px;">
-            <iframe width="100%" height="200" src="${info.video}" 
-                    frameborder="0" allowfullscreen style="border-radius:6px;">
-            </iframe>
-          </div>
-          <!-- GOLD BUTTON -->
-          <div style="margin-top:8px; text-align:center;">
-            <a class="drive-link" href="${driveWatchUrl(info.video)}" target="_blank" rel="noopener">
-              ▶ Watch on Google Drive
-            </a>
-          </div>
-        `;
-      }
-      
-      html += `
+  const lang = translations[currentLanguage] || translations.en;
+
+  let html = `<h2>${lang.allDepartments}</h2><div class="explore-list">`;
+
+  Object.entries(lang.departments).forEach(([dept, info], idx) => {
+    const englishDept = convertToEnglish(dept);
+    if (englishDept === "Children's Department" && branch !== 'Kharis Church London') return;
+    if (englishDept === "K-Music" && !branch.includes('Kharis Phase 2')) return;
+
+    const watch = driveWatchUrl(info.video);
+    const videoHtml = info.video ? `
+      <div class="video-container" style="margin-top:12px;">
+        <iframe data-src="${info.video}" width="100%" height="200"
+                frameborder="0" allowfullscreen style="border-radius:6px;"></iframe>
+      </div>
+      ${watch && watch !== '#' ? `
+      <div style="margin-top:8px; text-align:center;">
+        <a class="drive-link" href="${watch}" target="_blank" rel="noopener">▶ Watch on Google Drive</a>
+      </div>` : ''}
+    ` : '';
+
+    html += `
       <div class="explore-item" data-idx="${idx}">
-        <div class="title">
+        <div class="title" role="button" tabindex="0">
           <span>${dept}</span>
           <span class="expand-icon">+</span>
         </div>
@@ -2225,90 +2214,65 @@ jam: {
           <p style="margin:0;font-style:italic;font-size:0.95rem">${info.scripture}</p>
           ${videoHtml}
         </div>
-      </div>
-    `;
-    });
-    
-    html += `</div><div style="margin-top:14px;"><button class="btn" id="back-to-result">${lang.backToResults}</button></div>`;
+      </div>`;
+  });
 
-    // Display the list
-    resultEl.innerHTML = html;
+  html += `</div><div style="margin-top:14px;">
+    <button class="btn" type="button" id="back-to-result">${lang.backToResults}</button>
+  </div>`;
 
-    // Attach toggle listeners
-    const items = resultEl.querySelectorAll('.explore-item');
-    items.forEach((item) => {
-      const idx = item.getAttribute('data-idx');
-      const details = resultEl.querySelector(`#explore-detail-${idx}`);
-      
-      if (details) {
-        item.addEventListener('click', function() {
-          // Close all other items
-          document.querySelectorAll('.explore-item').forEach(otherItem => {
-            if (otherItem !== item) {
-              const otherIdx = otherItem.getAttribute('data-idx');
-              const otherDetails = document.querySelector(`#explore-detail-${otherIdx}`);
-              const otherIcon = otherItem.querySelector('.expand-icon');
-              if (otherDetails) {
-                otherDetails.style.display = 'none';
-                otherItem.classList.remove('expanded');
-                if (otherIcon) otherIcon.textContent = '+';
-              }
-            }
-          });
-          
-          // Toggle current
-          const isVisible = details.style.display === 'block';
-          details.style.display = isVisible ? 'none' : 'block';
-          item.classList.toggle('expanded', !isVisible);
-          const expandIcon = item.querySelector('.expand-icon');
-          expandIcon.textContent = isVisible ? '+' : '×';
-          
-          // Load iframe only when expanded
-          if (!isVisible) {
-            const iframe = details.querySelector('iframe');
-            if (iframe && iframe.dataset.src && !iframe.src) {
-              iframe.src = iframe.dataset.src;
-            }
-            setTimeout(() => {
-              item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }, 100);
-          }
-        });
-      }
-    });
+  resultEl.innerHTML = html;
 
-    // Back button
-    const backBtn = document.getElementById('back-to-result');
-    if (backBtn) {
-      backBtn.addEventListener('click', function() {
-        resultEl.innerHTML = lastResultHtml;
-        
-        setTimeout(() => {
-          const exploreBtn = document.getElementById('explore-all-btn');
-          const restartBtn = document.getElementById('restart-btn');
-          
-          if (exploreBtn) {
-            exploreBtn.addEventListener('click', function() {
-              renderExploreList();
-            });
-          }
-          
-          if (restartBtn) {
-            restartBtn.addEventListener('click', restartWithoutReload);
-          }
-          
-          lastSorted.forEach((_, i) => {
-            const el = document.getElementById(`dept-${i}`);
-            const sb = document.getElementById(`scripture-${i}`);
-            if (el) {
-              el.classList.add('show');
-              if (sb) sb.classList.add('visible');
-            }
-          });
-        }, 100);
-      });
+  // ONE delegated handler — only the title row toggles, clicks inside details are ignored
+  resultEl.onclick = function (e) {
+    if (e.target.closest('#back-to-result')) {
+      e.preventDefault();
+      showLastResult();
+      return;
     }
-  }
+    if (e.target.closest('.explore-details')) return; // video / link clicks pass through
+
+    const title = e.target.closest('.title');
+    if (!title) return;
+    const item = title.closest('.explore-item');
+    const details = item.querySelector('.explore-details');
+    const open = details.style.display === 'block';
+
+    resultEl.querySelectorAll('.explore-item').forEach(other => {
+      if (other === item) return;
+      other.classList.remove('expanded');
+      other.querySelector('.explore-details').style.display = 'none';
+      other.querySelector('.expand-icon').textContent = '+';
+    });
+
+    details.style.display = open ? 'none' : 'block';
+    item.classList.toggle('expanded', !open);
+    item.querySelector('.expand-icon').textContent = open ? '+' : '×';
+
+    if (!open) {
+      const iframe = details.querySelector('iframe');
+      if (iframe && iframe.dataset.src && !iframe.src) iframe.src = iframe.dataset.src;
+      setTimeout(() => item.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+    }
+  };
+}
+
+// Restores the results screen without stacking duplicate listeners
+function showLastResult() {
+  resultEl.onclick = null;
+  resultEl.innerHTML = lastResultHtml;
+
+  const exploreBtn = document.getElementById('explore-all-btn');
+  const restartBtn = document.getElementById('restart-btn');
+  if (exploreBtn) exploreBtn.onclick = (e) => { e.preventDefault(); renderExploreList(); };
+  if (restartBtn) restartBtn.onclick = (e) => { e.preventDefault(); restartWithoutReload(); };
+
+  lastSorted.forEach((_, i) => {
+    document.getElementById(`dept-${i}`)?.classList.add('show');
+    document.getElementById(`scripture-${i}`)?.classList.add('visible');
+  });
+}
+
    
     function restartWithoutReload() {
       stopSpeech();
