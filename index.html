@@ -685,39 +685,8 @@ document.addEventListener('click', function (e) {
   const cleanSrc = src.includes('?') ? src + '&controls=0' : src + '?controls=0';
   
   box.innerHTML = '<iframe src="' + cleanSrc + '" allow="autoplay; fullscreen" allowfullscreen frameborder="0"></iframe>';
-    return;
-  }
-  
-  // Build the direct .mp4 download link
-  const fileId = fileIdMatch[1];
-  const directUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-  
-  // Inject the native video element (no controls, no ugly timeline)
-  box.innerHTML = `
-    <video 
-      src="${directUrl}" 
-      playsinline 
-      style="width:100%; height:100%; object-fit:cover; cursor:pointer; background:#000;"
-    ></video>
-  `;
-  
-  // Get the video and add the tap-to-play/pause logic
-  const video = box.querySelector('video');
-  if (video) {
-    // Auto-play when clicked to open
-    video.addEventListener('loadeddata', () => video.play());
-    
-    // Tap to pause / tap to play
-    video.addEventListener('click', function(e) {
-      e.stopPropagation(); // Prevent bubbling
-      if (this.paused) {
-        this.play();
-      } else {
-        this.pause();
-      }
-    });
-  }
 });
+    
     // Initialize background slideshow
     function initSlideshow() {
       const slideshow = document.getElementById('bgSlideshow');
