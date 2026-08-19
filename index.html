@@ -1174,6 +1174,10 @@ jam: {
   }
 }
 };
+    function driveWatchUrl(previewUrl) {
+  if (!previewUrl) return '#';
+  return previewUrl.replace(/\/preview(\?.*)?$/, '/view$1');
+}
 
     /* --------------- DOM refs ------------------ */
     const startScreenEl = document.getElementById('start-screen');
