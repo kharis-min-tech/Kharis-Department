@@ -33,12 +33,14 @@ charset="UTF-8">
       background: linear-gradient(180deg,#fff,#f4f4f4);
     }
     
-   .video-container { /* unchanged wrapper */
-position: relative;
-aspect-ratio: 16 / 9;
-overflow: hidden; /* this is what clips Drive's bars */
-border-radius: 10px;
-background: #000;
+ .video-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
 }
     .progress-bar {
       width: 100%;
@@ -65,14 +67,12 @@ background: #000;
 }
 .drive-link:hover { filter: brightness(1.1); }
 
-     .video-container iframe {
-position: absolute;
-left: 0;
-top: -56px; /* pulls the black title/popout bar out of view */
-width: 100%;
-height: calc(100% + 56px + 46px); /* +56 top, +46 pushes the bottom control bar below the crop */
-border: 0;
-display: block;
+   .video-container iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 
