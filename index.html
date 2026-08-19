@@ -2274,11 +2274,13 @@ jam: {
     item.classList.toggle('expanded', !open);
     item.querySelector('.expand-icon').textContent = open ? '+' : '×';
 
-    
-      setTimeout(() => item.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
-    }
+    setTimeout(() => item.scrollIntoView({
+  behavior: 'smooth',
+  block: 'nearest'
+}), 100);
   };
 }
+
 
 // Restores the results screen without stacking duplicate listeners
 function showLastResult() {
