@@ -35,9 +35,9 @@
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: rgba(0,0,0,0.25);
+  overflow: hidden;      
   border-radius: 12px;
-  overflow: hidden;
+  background: #000;
 }
     .progress-bar {
   position: fixed;
@@ -69,11 +69,11 @@
 
   .video-container iframe {
   position: absolute;
-  inset: 0;
+  top: -60px;            
+  left: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% + 60px);
   border: 0;
-  display: block;
 }
 
 
