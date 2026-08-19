@@ -672,7 +672,7 @@ body.light .language-dropdown-container::after {
        'https://i1.sndcdn.com/artworks-vWh59zjaGOYB7RqW-Aewlyg-t240x240.jpg'
     ];
     
-// One global handler: swaps the poster for a clean video without the timeline
+// One global handler: swaps the poster and hides the timeline bar using CSS
 document.addEventListener('click', function (e) {
   const f = e.target.closest('.video-facade');
   if (!f) return;
@@ -681,10 +681,28 @@ document.addEventListener('click', function (e) {
   const box = f.parentElement;
   const src = f.dataset.src;
   
-  // Add controls=0 to hide the timeline bar on all devices
-  const cleanSrc = src.includes('?') ? src + '&controls=0' : src + '?controls=0';
-  
-  box.innerHTML = '<iframe src="' + cleanSrc + '" allow="autoplay; fullscreen" allowfullscreen frameborder="0"></iframe>';
+  // Hide the entire control bar with CSS
+  box.innerHTML = `
+    <style>
+      .video-container-hide-controls video::-webkit-media-controls,
+      .video-container-hide-controls video::-webkit-media-controls-panel,
+      .video-container-hide-controls video::-webkit-media-controls-enclosure {
+        display: none !important;
+      }
+      .video-container-hide-controls video {
+        pointer-events: none !important;
+      }
+    </style>
+    <div class="video-container-hide-controls" style="width:100%; height:100%; position:relative;">
+      <iframe 
+        src="${src}" 
+        allow="autoplay; fullscreen" 
+        allowfullscreen 
+        frameborder="0" 
+        style="width:100%; height:100%; position:absolute; top:0; left:0;"
+      ></iframe>
+    </div>
+  `;
 });
     
     // Initialize background slideshow
