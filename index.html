@@ -39,19 +39,25 @@
   border-radius: 12px;
   background: #000;
 }
-    .progress-bar {
-  position: fixed;
-  left: 50%;
-  bottom: 16px;
-  transform: translateX(-50%);
-  width: min(90%, 600px);
-  height: 12px;
-  background: #ddd;
-  border-radius: 999px;
-  overflow: hidden;
-  z-index: 50;
-  margin: 0;
-}
+        .progress-bar {
+      display: none; 
+      position: fixed;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      width: min(90%, 600px);
+      height: 12px;
+      background: #ddd;
+      border-radius: 999px;
+      overflow: hidden;
+      z-index: 50;
+      margin: 0;
+    }
+
+    /* Only show when the quiz is active */
+    #quiz.show ~ .progress-bar {
+      display: block;
+    }
 
     .drive-link {
   display: inline-block;
