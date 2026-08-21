@@ -711,6 +711,13 @@ document.addEventListener('click', function (e) {
   width: 100%;
   margin: 0 auto;
 }
+@media (min-width: 601px) and (max-width: 1024px) and (orientation: landscape) {
+  .video-container {
+    aspect-ratio: 16 / 9;   /* or keep 9/16 but limit width */
+    max-height: 85vh;
+    max-width: 480px;
+  }
+}
 
       /* let the video box get taller on phones instead of cropping */
 @media (max-width: 600px) {
