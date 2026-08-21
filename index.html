@@ -696,7 +696,22 @@ document.addEventListener('click', function (e) {
       .video-container-hide-controls video {
         pointer-events: none !important;
       }
-      
+      /* Phone: taller box instead of cropping */
+@media (max-width: 600px) {
+  .video-container { aspect-ratio: 9 / 16; }
+}
+
+/* iPad portrait / most iPad sizes */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .video-container { aspect-ratio: 9 / 16; }   /* or 3/4 if it feels too tall */
+}
+
+.video-container {
+  max-height: 70vh;   /* never taller than the screen */
+  width: 100%;
+  margin: 0 auto;
+}
+
       /* let the video box get taller on phones instead of cropping */
 @media (max-width: 600px) {
   .video-container { aspect-ratio: 9 / 16; }   /* use 4/5 if clips are less tall */
