@@ -696,6 +696,13 @@ document.addEventListener('click', function (e) {
       .video-container-hide-controls video {
         pointer-events: none !important;
       }
+      
+      /* let the video box get taller on phones instead of cropping */
+@media (max-width: 600px) {
+  .video-container { aspect-ratio: 9 / 16; }   /* use 4/5 if clips are less tall */
+}
+.video-container { max-height: 70vh; }          /* never taller than the screen */
+
     </style>
     <div class="video-container-hide-controls" style="width:100%; height:100%; position:relative;">
       <iframe 
